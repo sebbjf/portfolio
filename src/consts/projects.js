@@ -19,7 +19,7 @@ const projects = [
     description: "Concept webpage for a music festival. Made with Astro.",
     state: 2,
     built_with: ["Astro", "Web"],
-    url: "https://xxixiio.github.io/waves-festival/",
+    url: "https://sebbjf.github.io/waves-festival/",
     image: "waves-festival.jpg",
     translation: {
       es: {
@@ -34,7 +34,7 @@ const projects = [
       "Responsive web page with café theme using React and Tailwind.",
     state: 2,
     built_with: ["React", "Vite", "TypeScript", "Tailwind", "Web"],
-    url: "https://xxixiio-morning-cafe.netlify.app/",
+    url: "https://sebbjf-morning-cafe.netlify.app/",
     image: "morning-cafe.webp",
     translation: {
       es: {
@@ -49,7 +49,7 @@ const projects = [
   //     "Fast food restaurant web page, done with no frameworks.",
   //   state: 2,
   //   built_with: ["Web"],
-  //   url: "https://xxixiio.github.io/burguers-web/",
+  //   url: "https://sebbjf.github.io/burguers-web/",
   //   image: "fast-food.png",
   //   translation: {
   //     es: {
@@ -64,7 +64,7 @@ const projects = [
       "Verified Discord bot including a variety of commands!",
     state: 3,
     built_with: ["Node.js", "Discord.js", "Bot"],
-    url: "https://github.com/xxixiio/kuma",
+    url: "https://github.com/sebbjf/kuma",
     image: "kuma.jpg",
     translation: {
       es: {
@@ -78,7 +78,7 @@ const projects = [
     description: "Terminal based text editor for Unix-like systems.",
     state: 1,
     built_with: ["Rust", "CLI"],
-    url: "https://github.com/xxixiio/wtxted",
+    url: "https://github.com/sebbjf/wtxted",
     image: "wtxted.jpg",
     translation: {
       es: {

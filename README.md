@@ -40,7 +40,7 @@ http://localhost:4321/admin/index.html
 - `npm run i18next` - Generate i18next files.
 ## Authors
 
-- [@xxixiio](https://www.github.com/xxixiio)
+- [@sebbjf](https://www.github.com/sebbjf)
 
 
 ## License

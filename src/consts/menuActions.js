@@ -53,7 +53,7 @@ const menuActions = [
     shortcut: ["g", "h"],
     keywords: "repo",
     section: "links",
-    perform: () => window.open("https://github.com/xxixiio/", "_blank"),
+    perform: () => window.open("https://github.com/sebbjf/", "_blank"),
   },
 ];
 
