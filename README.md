@@ -1,28 +1,93 @@
+# Portfolio
 
-# 🐷🦀 Seb's porfolio 
+Personal portfolio website built to showcase my projects, skills, and experience as a Front-end Developer.
 
-My personal portfolio. Made with Astro Build.
+## ✨ About
 
+A clean and minimal portfolio focused on presenting selected projects, technical skills, and professional experience.
 
+The goal of this project is not only to serve as a portfolio, but also as a reflection of my approach to development: performance, simplicity, and attention to detail.
 
+## ⚡ Features
 
-## Environment Variables
+* Responsive design for desktop and mobile
+* Smooth navigation and clean UI
+* Project showcase section
+* Skills and technologies overview
+* Experience timeline
+* Contact section
+* SEO-friendly structure
+* Fast and lightweight performance
 
-To run this project, you will need to add the following environment variables to your .env file, follow `.env.template`
+## 🛠 Tech Stack
 
-`SPOTIFY_CLIENT_ID`
+* HTML5
+* CSS3
+* JavaScript
+* TypeScript
+* Astro
+* React
+* Tailwind CSS
 
-`SPOTIFY_CLIENT_SECRET`
+## 📁 Project Structure
 
-`SPOTIFY_REFRESH_TOKEN`
-## CMS Integration
+```text
+portfolio/
+├── public/
+├── src/
+│   ├── components/
+│   ├── consts/
+│   ├── icons/
+│   ├── layouts/
+│   ├── pages/
+│   ├── sections/
+│   ├── styles/
+│   └── utils/
+├── package.json
+└── README.md
+```
 
-To create blog posts I use [TinaCMS](https://tina.io/). It only runs locally. See [the docs](https://tina.io/docs/).
+## 📦 Installation
 
-- Run the app.
-```sh
+Clone the repository:
+
+```bash
+git clone https://github.com/xxixiio/portfolio.git
+```
+
+Move into the project folder:
+
+```bash
+cd portfolio
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development server:
+
+```bash
 npm run dev
 ```
+
+## 🔨 Build
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview production build:
+
+```bash
+npm run preview
+```
+
+## 📄 License
 - Enter the following URL.
 ```
 http://localhost:4321/admin/index.html
