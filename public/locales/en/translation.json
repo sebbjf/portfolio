@@ -35,7 +35,6 @@
     "copyError": "Couldn’t copy"
   },
   "footer": "Made with <0>Astro</0>, deployed with <1>Vercel</1>.",
-  "shortcutMenuMessage": "Press <0>⌘</0> + <1>K</1> to open the command menu 🠖",
   "meta": {
     "home": {
       "title": "Sebastian JF · Web developer",

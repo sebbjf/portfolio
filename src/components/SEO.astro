@@ -20,13 +20,22 @@ const locale = i18next.language === "es" ? "es_ES" : "en_US";
 <meta name="theme-color" content="#121211" />
 
 <link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
 <link rel="sitemap" href="/sitemap-index.xml" />
+<!-- Both weights render above the fold: Regular for body text, Bold for the name in the hero. -->
 <link
   rel="preload"
-  href="/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf"
+  href="/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.woff2"
   as="font"
-  type="font/ttf"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.woff2"
+  as="font"
+  type="font/woff2"
   crossorigin
 />
 
