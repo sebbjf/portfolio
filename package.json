@@ -8,7 +8,7 @@
     "dev:tina": "tinacms dev -c \"astro dev\"",
     "dev:tinahost": "tinacms dev -c \"astro dev --host\"",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/fix-vercel-runtime.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "i18n": "npx astro-i18next generate"
