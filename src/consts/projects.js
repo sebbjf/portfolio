@@ -3,7 +3,6 @@ const projects = [
   //   name: "white---noise",
   //   description:
   //     "Search for albums and artists. See the tracklist and play some previews. Used Spotify API.",
-  //   state: 0,
   //   built_with: ["Astro", "Api", "Web"],
   //   url: "https://white-noise.vercel.app/",
   //   image: "white---noise.jpg",
@@ -17,7 +16,6 @@ const projects = [
   {
     name: "Waves Festival",
     description: "Concept webpage for a music festival. Made with Astro.",
-    state: 2,
     built_with: ["Astro", "Web"],
     url: "https://sebbjf.github.io/waves-festival/",
     image: "waves-festival.jpg",
@@ -32,14 +30,13 @@ const projects = [
     name: "Morning Cafe",
     description:
       "Responsive web page with café theme using React and Tailwind.",
-    state: 2,
     built_with: ["React", "Vite", "TypeScript", "Tailwind", "Web"],
     url: "https://sebbjf-morning-cafe.netlify.app/",
     image: "morning-cafe.webp",
     translation: {
       es: {
         description:
-          "Página web de responsiva con temática de cafetería hecha con React y Tailwind.",
+          "Página web responsiva con temática de cafetería, hecha con React y Tailwind.",
       },
     },
   },
@@ -47,7 +44,6 @@ const projects = [
   //   name: "Fast Food Restaurant",
   //   description:
   //     "Fast food restaurant web page, done with no frameworks.",
-  //   state: 2,
   //   built_with: ["Web"],
   //   url: "https://sebbjf.github.io/burguers-web/",
   //   image: "fast-food.png",
@@ -62,21 +58,19 @@ const projects = [
     name: "Kuma",
     description:
       "Verified Discord bot including a variety of commands!",
-    state: 3,
     built_with: ["Node.js", "Discord.js", "Bot"],
     url: "https://github.com/sebbjf/kuma",
     image: "kuma.jpg",
     translation: {
       es: {
         description:
-          "Bot verificado de Discord multipropósito que incluye una varidad de comandos.",
+          "Bot verificado de Discord multipropósito que incluye una variedad de comandos.",
       },
     },
   },
   {
     name: "wtxted",
     description: "Terminal based text editor for Unix-like systems.",
-    state: 1,
     built_with: ["Rust", "CLI"],
     url: "https://github.com/sebbjf/wtxted",
     image: "wtxted.jpg",

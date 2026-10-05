@@ -23,12 +23,6 @@
     "title": "Proyectos",
     "repositoryButton": "Repositorio",
     "websiteButton": "Web",
-    "states": {
-      "building": "Construyendo",
-      "finished": "Finalizado",
-      "inProduction": "En producción",
-      "down": "Caído / Sin soporte"
-    },
     "viewProject": "Ver proyecto"
   },
   "contact": {

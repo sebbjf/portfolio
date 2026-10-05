@@ -23,12 +23,6 @@
     "title": "Projects",
     "repositoryButton": "Repository",
     "websiteButton": "Website",
-    "states": {
-      "building": "Building",
-      "finished": "Finished",
-      "inProduction": "In Production",
-      "down": "Down"
-    },
     "viewProject": "View project"
   },
   "contact": {

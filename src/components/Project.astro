@@ -1,11 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import { t } from "i18next";
 
 interface Project {
   name: string;
   description: string;
-  state: number;
   built_with: string[];
   url: string;
   image: string;
@@ -18,152 +16,145 @@ interface Props {
 const { projectData } = Astro.props;
 ---
 
-<a
-  class="project"
-  href={projectData.url}
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <div class="project__image-wrapper">
-    <Image
-      class="project__image"
-      src={"/img/projects/" + projectData.image}
-      alt={`${projectData.name} project preview`}
-      width={600}
-      height={400}
-      loading="lazy"
-    />
-    <div class="project__overlay" aria-hidden="true">
-      <span class="project__button">{t("projects.viewProject")} ↗</span>
-    </div>
-  </div>
-
-  <div class="project__details">
-    <div class="project__info">
+<li class="project">
+  <a class="project__link" href={projectData.url} target="_blank" rel="noopener noreferrer">
+    <span class="project__media">
+      <Image
+        class="project__thumb"
+        src={"/img/projects/" + projectData.image}
+        alt=""
+        width={400}
+        height={250}
+        loading="lazy"
+        decoding="async"
+      />
+    </span>
+    <div class="project__body">
       <h3 class="project__title">{projectData.name}</h3>
       <p class="project__description">{projectData.description}</p>
+      <ul class="project__tags">
+        {projectData.built_with.map((tech) => <li>{tech}</li>)}
+      </ul>
     </div>
-    <div class="project__tags">
-      {
-        projectData.built_with.map((tech) => (
-          <span class="project__tag">#{tech.toLowerCase()}</span>
-        ))
-      }
-    </div>
-  </div>
-</a>
+    <svg class="project__arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </a>
+</li>
 
 <style>
   .project {
-    background: rgba(59, 59, 59, 0.075);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.25),
-      0 1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: var(--radius-lg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project__link {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) auto;
+    gap: 28px;
+    align-items: start;
+    padding: 28px 4px;
+    color: inherit;
+    border-radius: var(--radius-sm);
+  }
+
+  .project__media {
+    display: block;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition:
-      transform 0.25s var(--ease-out),
-      border-color 0.25s var(--ease-out);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    transition: border-color 0.3s var(--ease-out);
   }
 
-  .project:hover {
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .project:active {
-    transform: translateY(0);
-  }
-
-  .project__image-wrapper {
-    position: relative;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-  }
-
-  .project__image {
+  .project__thumb {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .project__overlay {
-    position: absolute;
-    inset: 0;
-    background: rgb(15 15 15 / 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s var(--ease-out);
-  }
-
-  .project__button {
-    color: white;
-    font-weight: 500;
-    transform: translateY(1rem);
-    transition: transform 0.25s var(--ease-out);
-  }
-
-  .project:hover .project__overlay {
-    opacity: 1;
-  }
-
-  .project:hover .project__button {
-    transform: translateY(0);
-  }
-
-  .project:hover .project__image {
-    transform: scale(1.05);
-  }
-
-  .project__details {
-    flex: 1;
-    justify-content: space-between;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    object-position: top center;
+    transition: transform 0.6s var(--ease-out);
   }
 
   .project__title {
     margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.6rem;
     letter-spacing: -0.025em;
+    color: var(--text-strong);
+    transition:
+      color 0.3s var(--ease-out),
+      transform 0.45s var(--ease-out);
   }
 
   .project__description {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0.75rem 0 0;
+    max-width: 52ch;
+    margin: 6px 0 0;
+    color: var(--text-muted);
   }
 
   .project__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .project__tag {
-    color: rgba(255, 255, 255, 0.55);
+    gap: 4px 14px;
+    margin: 14px 0 0;
     font-size: 0.85rem;
+    color: var(--text-subtle);
+
+    & > li {
+      text-transform: lowercase;
+    }
   }
 
-  @media (hover: none) {
-    .project__overlay {
+  .project__arrow {
+    margin-top: 8px;
+    color: var(--text-subtle);
+    transition:
+      color 0.3s var(--ease-out),
+      transform 0.45s var(--ease-out);
+  }
+
+  .project__link:hover,
+  .project__link:focus-visible {
+    .project__title {
+      color: var(--accent);
+      transform: translateX(6px);
+    }
+
+    .project__arrow {
+      color: var(--accent);
+      transform: translate(3px, -3px);
+    }
+
+    .project__media {
+      border-color: var(--border-strong);
+    }
+
+    .project__thumb {
+      transform: scale(1.05);
+    }
+  }
+
+  .project__link:active .project__title {
+    transform: translateX(4px);
+  }
+
+  @media only screen and (max-width: 768px) {
+    .project__link {
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 16px;
+      padding: 22px 0;
+    }
+
+    .project__media {
+      border-radius: var(--radius-sm);
+    }
+
+    .project__title {
+      font-size: 1.35rem;
+    }
+
+    .project__arrow {
       display: none;
     }
-
-    .project:hover {
-      transform: none;
-    }
   }
-
 </style>

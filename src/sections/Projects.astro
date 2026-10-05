@@ -12,27 +12,20 @@ const currentLanguage = i18next.language;
 
 <section>
   <h2 id="projects">{t("projects.title")}</h2>
-  <div class="projects__content">
-    {projects.map((projectData) => {
-      const translatedProjectData = {
-        ...projectData,
-        description: getProjectDescription(projectData, currentLanguage),
-      };
-      return <Project projectData={translatedProjectData} />;
-    })}
-  </div>
+  <ol class="projects__list">
+    {
+      projects.map((projectData) => (
+        <Project projectData={{ ...projectData, description: getProjectDescription(projectData, currentLanguage) }} />
+      ))
+    }
+  </ol>
 </section>
 
 <style>
-  .projects__content {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  @media only screen and (max-width: 768px) {
-    .projects__content {
-      grid-template-columns: 1fr;
-    }
+  .projects__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
   }
 </style>
