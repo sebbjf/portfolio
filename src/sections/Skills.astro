@@ -4,8 +4,8 @@ import skills from "../consts/skills.js";
 import Skill from "../components/Skill.astro";
 ---
 
-<section>
-  <h2>{t("skills.title")}</h2>
+<section aria-labelledby="skills">
+  <h2 id="skills">{t("skills.title")}</h2>
   <ul class="skills__grid">
     {
       skills.map((s) => (
@@ -18,22 +18,24 @@ import Skill from "../components/Skill.astro";
 </section>
 
 <style>
+  /* 12 skills fill even rows at every width: 6 × 2, then 4 × 3, then 3 × 4. */
   .skills__grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
     margin: 0;
   }
 
   @media (max-width: 768px) {
     .skills__grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 480px) {
     .skills__grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
     }
   }
 </style>
