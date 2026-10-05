@@ -1,0 +1,91 @@
+---
+import i18next, { t } from "i18next";
+import awards from "../consts/awards.js";
+
+const currentLanguage = i18next.language;
+
+const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[key]) || a[key];
+---
+
+<section aria-labelledby="awards">
+  <h2 id="awards">{t("awards.title")}</h2>
+  <ul class="entries">
+    {
+      awards.map((a) => (
+        <li class="entry">
+          <div class="entry__head">
+            <h3 class="entry__title">
+              {localize(a, "title")},
+              <em class="entry__org">
+                {a.url ? (
+                  <a class="entry__link" href={a.url} target="_blank" rel="noopener noreferrer">
+                    {a.event}
+                  </a>
+                ) : (
+                  a.event
+                )}
+              </em>
+            </h3>
+            <p class="entry__date">{a.date}</p>
+          </div>
+          <p class="entry__description">{localize(a, "description")}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .entries {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0;
+  }
+
+  .entry__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    column-gap: 24px;
+  }
+
+  .entry__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .entry__org {
+    font-weight: 400;
+  }
+
+  .entry__link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s var(--ease-out);
+
+    &:hover {
+      text-decoration-color: currentColor;
+    }
+
+    &:active {
+      color: var(--text-muted);
+    }
+  }
+
+  .entry__date {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .entry__description {
+    margin: 2px 0 0;
+    color: var(--text-muted);
+  }
+</style>

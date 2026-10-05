@@ -1,5 +1,5 @@
 ---
-import { t } from "i18next"; 
+import { t } from "i18next";
 import { localizePath } from "astro-i18next";
 import LanguageSelector from "../components/LanguageSelector.astro";
 import MenuIcon from "../icons/hamburguer-menu.astro";
@@ -7,135 +7,132 @@ import CloseIcon from "../icons/close.astro";
 ---
 
 <header class="header__container" id="header">
-  <p>
-    <a href={localizePath("/")} class="header__title">
-      <img class="header__logo" src="/img/logo/seb-white.png" alt="seb logo">
-    </a>
-  </p>
-  <MenuIcon class:list={"header__icon header__icon--menu"} id="header-menu-icon" />
-  <CloseIcon class:list={"header__icon header__icon--close"} id="header-close-icon" style="display: none;" />
-  <ul class="header__list" id="header-navbar">
-    <li><a class="header__anchor" href={localizePath("/#")} title="About me">{t("hero.title")}</a></li>
-    <li><a class="header__anchor" href={localizePath("/#experience")} title="Experience">{t("experience.title")}</a></li>
-    <li><a class="header__anchor" href={localizePath("/#projects")} title="Projects">{t("projects.title")}</a></li>
-    <li><a class="header__anchor" href={localizePath("/#contact")} title="Contact">{t("contact.title")}</a></li>
-    <!-- <li><a href={localizePath("/blog")} title="Blog">Blog</a></li> -->
-    <li><LanguageSelector /></li>
-  </ul>
+  <a href={localizePath("/")} class="header__title" aria-label="Sebastian JF">
+    <img class="header__logo" src="/img/logo/seb-white.png" alt="" width="32" height="32" />
+  </a>
+  <button
+    class="header__toggle"
+    id="header-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="header-navbar"
+    aria-label={t("a11y.openMenu")}
+    data-label-open={t("a11y.openMenu")}
+    data-label-close={t("a11y.closeMenu")}
+  >
+    <MenuIcon class:list={"header__icon header__icon--menu"} aria-hidden="true" />
+    <CloseIcon class:list={"header__icon header__icon--close"} aria-hidden="true" />
+  </button>
+  <nav aria-label={t("a11y.mainNav")}>
+    <ul class="header__list" id="header-navbar">
+      <li><a class="header__anchor" href={localizePath("/#")}>{t("hero.title")}</a></li>
+      <li><a class="header__anchor" href={localizePath("/#experience")}>{t("experience.title")}</a></li>
+      <li><a class="header__anchor" href={localizePath("/#projects")}>{t("projects.title")}</a></li>
+      <li><a class="header__anchor" href={localizePath("/#contact")}>{t("contact.title")}</a></li>
+      <li><LanguageSelector /></li>
+    </ul>
+  </nav>
 </header>
 
 <script>
-  const $menuIcon = document.getElementById("header-menu-icon");
-  const $closeIcon = document.getElementById("header-close-icon");
+  const $header = document.getElementById("header");
+  const $toggle = document.getElementById("header-toggle");
   const $navbar = document.getElementById("header-navbar");
+  const headerAnchors = document.querySelectorAll<HTMLElement>(".header__anchor");
 
-  const toggleMenu = (event) => {
-    event.stopPropagation();
-    $navbar.classList.toggle("header__list--show");
-    $menuIcon.style.display = $menuIcon.style.display === 'none' ? 'inline' : 'none';
-    $closeIcon.style.display = $closeIcon.style.display === 'none' ? 'inline' : 'none';
+  const setMenuOpen = (open: boolean) => {
+    $navbar.classList.toggle("header__list--show", open);
+    $toggle.setAttribute("aria-expanded", String(open));
+    $toggle.setAttribute("aria-label", open ? $toggle.dataset.labelClose : $toggle.dataset.labelOpen);
   };
 
-  $menuIcon.addEventListener("click", toggleMenu);
-  $closeIcon.addEventListener("click", toggleMenu);
+  const isMenuOpen = () => $navbar.classList.contains("header__list--show");
+
+  $toggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    setMenuOpen(!isMenuOpen());
+  });
 
   document.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
-    if (!target.closest("#header-navbar") && $navbar.classList.contains("header__list--show")) {
-      $navbar.classList.remove("header__list--show");
-      $menuIcon.style.display = 'inline';
-      $closeIcon.style.display = 'none';
+    if (isMenuOpen() && !target.closest("#header-navbar")) setMenuOpen(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isMenuOpen()) {
+      setMenuOpen(false);
+      $toggle.focus();
     }
   });
 
-  window.addEventListener("scroll", () => {
-    if ($navbar.classList.contains("header__list--show")) {
-      $navbar.classList.remove("header__list--show");
-      $menuIcon.style.display = 'inline';
-      $closeIcon.style.display = 'none';
-    }
-  });
-</script>
-
-<script>
-  const $header = document.getElementById("header");
-  const headerAnchors = document.querySelectorAll<HTMLElement>(".header__anchor");
-
+  // Hide the header while scrolling down, show it again when scrolling up.
   let prevY = window.scrollY;
   let isNavigating = false;
-  let scrollTimeout;
+  let scrollTimeout: ReturnType<typeof setTimeout>;
 
-  window.addEventListener("scroll", () => {
-    if (isNavigating) {
-      clearTimeout(scrollTimeout);
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (isMenuOpen()) setMenuOpen(false);
 
-      scrollTimeout = setTimeout(() => {
-        isNavigating = false;
-        prevY = window.scrollY;
-      }, 150);
+      if (isNavigating) {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          isNavigating = false;
+          prevY = window.scrollY;
+        }, 150);
+        return;
+      }
 
-      return;
-    }
+      $header.classList.toggle("header__hide", window.scrollY > prevY && window.scrollY > 80);
+      prevY = window.scrollY;
+    },
+    { passive: true },
+  );
 
-    if (window.scrollY > prevY) {
-      $header.classList.add("header__hide");
-    } else {
-      $header.classList.remove("header__hide");
-    }
-
-    prevY = window.scrollY;
-  });
+  // Never leave a keyboard user with focus inside a hidden header.
+  $header.addEventListener("focusin", () => $header.classList.remove("header__hide"));
 
   headerAnchors.forEach((element) => {
     element.addEventListener("click", () => {
       isNavigating = true;
       $header.classList.remove("header__hide");
+      setMenuOpen(false);
     });
   });
 </script>
 
 <style>
-  a {
-    text-decoration: none;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
   .header__container {
-    width: calc(100% - 32px);
     display: flex;
     justify-content: space-between;
-    background-color: #574f753a;
-    padding: 12px 16px;
-    border-radius: 20px;
-    margin-top: 15px;
     align-items: center;
     position: sticky;
     top: 15px;
-    z-index: 1000;
+    z-index: var(--z-header);
+    margin-top: 15px;
+    padding: 10px 16px;
+    border: 1px solid rgb(255 255 255 / 0.06);
+    border-radius: 20px;
+    background-color: rgb(22 22 22 / 0.6);
     white-space: nowrap;
-    transition: transform .5s ease;
-    transform: translateY(0);
+    transition: transform 0.5s var(--ease-out);
 
-    > * {
-      margin: 0;
-    }
-
-    /* Quick Fix to Chrome Bug (#40835530). Backdrop doesn't work properly on nested elements. */
+    /* Quick fix for Chrome bug #40835530: backdrop-filter doesn't work on nested elements. */
     &::before {
-      content: '';
+      content: "";
       position: absolute;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      inset: 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index: -1;
-      margin-left: -16px;
-      border-radius: 20px;
+      border-radius: inherit;
     }
+  }
+
+  .header__title {
+    display: block;
+    border-radius: var(--radius-sm);
   }
 
   .header__logo {
@@ -149,61 +146,111 @@ import CloseIcon from "../icons/close.astro";
 
   .header__list {
     display: flex;
-    gap: 15px;
+    gap: 6px;
     align-items: center;
+    margin: 0;
   }
 
-  .header__title,
-  .header__list > li > a {
-    color: #fff;
-    transition: all 0.2s ease-in-out;
+  .header__anchor {
+    display: block;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--text-strong);
+    transition: background-color 0.2s var(--ease-out);
+
+    &:hover {
+      background-color: rgb(255 255 255 / 0.08);
+    }
+
+    &:active {
+      background-color: rgb(255 255 255 / 0.12);
+    }
   }
 
-  .header__list > li > a:hover {
-    text-decoration: underline;
-  }
-
-  .header__icon {
+  .header__toggle {
     display: none;
-    color: #fff;
-    cursor: pointer;
+    color: var(--text-strong);
+    line-height: 0;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  .header__icon--close,
+  .header__toggle[aria-expanded="true"] .header__icon--menu {
+    display: none;
+  }
+
+  .header__toggle[aria-expanded="true"] .header__icon--close {
+    display: inline;
+  }
+
+  /* Touch: every control in the bar gets a full-size hit area without changing the bar's look. */
+  @media (pointer: coarse) {
+    .header__title {
+      padding: calc((var(--tap) - 32px) / 2);
+      margin: calc((var(--tap) - 32px) / -2);
+    }
+
+    .header__anchor {
+      display: flex;
+      align-items: center;
+      min-height: var(--tap);
+      box-sizing: border-box;
+    }
+
+    .header__toggle {
+      padding: calc((var(--tap) - 25px) / 2);
+      margin: calc((var(--tap) - 25px) / -2);
+    }
   }
 
   @media only screen and (max-width: 768px) {
+    /* The <nav> stays in the flex row (its list is absolutely positioned), so push the toggle to the end. */
+    .header__toggle {
+      display: block;
+      order: 1;
+    }
+
     .header__list {
       position: absolute;
-      top: 60px;
+      top: calc(100% + 8px);
       left: 0;
       width: 100%;
-      background-color: #131313af;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2px;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 1px solid rgb(255 255 255 / 0.06);
+      border-radius: 20px;
+      background-color: rgb(19 19 19 / 0.92);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      flex-direction: column;
-      align-items: center;
-      z-index: 500;
-      padding: 20px 0;
-      border-radius: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transform: translateY(-500px);
-      transition: transform 0.25s ease;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.2s var(--ease-out),
+        transform 0.2s var(--ease-out),
+        visibility 0.2s;
     }
 
     .header__list--show {
-      transform: translateY(0%);
+      visibility: visible;
+      opacity: 1;
+      transform: none;
     }
 
-    .header__list > li > a {
-      font-size: 18px;
-      padding: 12px 0;
-      width: 100%;
+    .header__anchor {
+      font-size: 1.15rem;
+      padding: 12px;
       text-align: center;
-      color: #fff;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
     }
 
-    .header__icon {
-      display: inline;
+    .header__list > li:last-child {
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
     }
   }
 </style>

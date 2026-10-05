@@ -1,45 +1,53 @@
 {
   "hero": {
-    "hey": "Hola!",
     "title": "Sobre mí",
-    "aboutme1": "Bienvenido a mi portfolio.",
     "aboutme2": "Construyo <0>experiencias web</0> centradas en la claridad, el rendimiento y la precisión. Con base en Barcelona y formación en Sistemas Microinformáticos y Redes.",
     "aboutme3": "En este portfolio encontrarás una selección de mis trabajos y mi desarrollo continuo.",
     "projectsText": "Mira",
     "projectsButton": "mis proyectos",
     "contactText": "Hablemos,",
     "contactButton": "contáctame",
-    "availableForWork": "Disponible para trabajar"
+    "availableForWork": "Disponible para trabajar",
+    "role": "Desarrollador web",
+    "location": "Barcelona, España"
   },
   "skills": {
     "title": "Habilidades"
   },
   "experience": {
     "title": "Experiencia",
-    "as": "como"
+    "currently": "Actualmente"
+  },
+  "awards": {
+    "title": "Reconocimientos"
   },
   "projects": {
-    "title": "Proyectos",
-    "repositoryButton": "Repositorio",
-    "websiteButton": "Web",
-    "states": {
-        "building": "Construyendo",
-        "finished": "Finalizado",
-        "inProduction": "En producción",
-        "down": "Caído / Sin soporte"
-    }
+    "title": "Proyectos"
   },
   "contact": {
     "title": "Contacto",
-    "title2": "Ponte En Contacto.",
-    "text1": "¡Gracias por visitar mi portafolio! Si tienes una idea de proyecto, una pregunta o simplemente deseas conversar, no dudes en ponerte en contacto.",
-    "text2": "Puedes comunicarte a través de",
-    "text3": "si deseas conectarte. Además, estoy disponible en",
-    "text4": "si te resulta más conveniente.",
-    "toCopy": "Clica para copiar",
+    "text": "Estoy disponible para trabajar. Si tienes un puesto, un proyecto o simplemente una pregunta, el email es la mejor forma de contactarme.",
+    "email": "Email",
+    "resume": "Currículum",
+    "copy": "Copiar",
+    "copyLabel": "Copiar dirección de email",
     "copied": "Copiado",
-    "copyError": "Error al copiar"
+    "copyError": "No se pudo copiar"
   },
-  "footer": "Hecho con <0>Astro</0>, desplegado con <1>Vercel</1> .",
-  "shortcutMenuMessage": "Presiona <0>⌘</0> + <1>K</1> para abrir el menú de comandos 🠖"
+  "footer": "Hecho con <0>Astro</0>, desplegado con <1>Vercel</1>.",
+  "meta": {
+    "home": {
+      "title": "Sebastian JF · Desarrollador web",
+      "description": "Portfolio de Sebastian JF, desarrollador front-end en Barcelona que crea experiencias web rápidas y claras."
+    },
+    "notFound": {
+      "title": "Página no encontrada · Sebastian JF",
+      "description": "No se ha podido encontrar esta página."
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "text": "No se ha podido encontrar esta página.",
+    "back": "Volver al inicio"
+  }
 }

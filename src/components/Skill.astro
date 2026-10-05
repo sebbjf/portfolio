@@ -1,5 +1,4 @@
 ---
-// import { Image } from "astro:assets";
 import Svg from "./Svg.astro";
 
 interface Props {
@@ -8,58 +7,101 @@ interface Props {
   color: string;
 }
 
-
-
 const { name, icon, color } = Astro.props;
-// const { default: innerHTML } = await import(`/src/icons/technologies/${icon}?raw`);
 ---
 
-<div class="skill__container">
-  <Svg src={icon} class="skill__image" style={{ color: color }} />
+<div class="skill" style={{ "--brand": color }}>
+  <span class="skill__logo" aria-hidden="true">
+    <Svg src={icon} class="skill__icon skill__icon--ink" />
+    <Svg src={icon} class="skill__icon skill__icon--brand" />
+  </span>
   <span class="skill__name">{name}</span>
 </div>
 
 <style>
-  .skill__container {
+  .skill {
     display: flex;
     flex-direction: column;
-    text-align: center;
     align-items: center;
-    gap: 8px;
-    color: white;
-    border: #303030 1px solid;
-    border-radius: 6px;
-    width: 125px;
-    padding: 12px 0;
-    transition: background 0.1s ease-in;
+    gap: 10px;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 18px 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: center;
+
+    /* Exit: slower than the entrance, so sweeping across the grid leaves a soft trail. */
+    --fade: 320ms;
+    transition:
+      background-color var(--fade) var(--ease-out),
+      border-color var(--fade) var(--ease-out);
   }
 
-  .skill__image {
-    /* filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg); */
+  /* Two copies of the logo share one cell: plain ink on top, brand color underneath.
+     Crossfading their opacity avoids the muddy gray an animated filter passes through. */
+  .skill__logo {
+    display: grid;
+    width: 26px;
+    height: 26px;
+    transition: transform var(--fade) var(--ease-out);
+  }
+
+  .skill__icon {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    transition: opacity var(--fade) var(--ease-out);
+  }
+
+  /* Every logo at rest is the same bright ink, whatever colors its source file uses. */
+  .skill__icon--ink {
     filter: brightness(0) invert(1);
-    width: 25px;
-    height: 25px;
-    /* transition: transform 0.2s ease-in; */
-    transition: all 0.3s ease-out;
+    opacity: 0.85;
   }
 
-  .skill__container:hover {
-    background-color: var(--hover-gray);
-  }
-
-  .skill__container:hover .skill__image {
-    transform: translateY(-3px);
-    filter: brightness(1) invert(0);
+  .skill__icon--brand {
+    color: var(--brand);
+    opacity: 0;
   }
 
   .skill__name {
-    color: #d3d3d3;
-    font-size: 13px;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    color: var(--text-muted);
+    overflow-wrap: anywhere;
+    transition: color var(--fade) var(--ease-out);
   }
 
-  /* @media (max-width: 768px) {
-    .skill__name {
-      display: none;
+  /* Mouse only, so the effect never sticks after a tap. Entrance is quick: 180ms. */
+  @media (hover: hover) {
+    .skill:hover {
+      --fade: 180ms;
+      background-color: var(--surface-hover);
+      border-color: var(--border-strong);
+
+      .skill__logo {
+        transform: translateY(-2px);
+      }
+
+      .skill__icon--ink {
+        opacity: 0;
+      }
+
+      .skill__icon--brand {
+        opacity: 1;
+      }
+
+      .skill__name {
+        color: var(--text);
+      }
     }
-  } */
+  }
+
+  /* Reduced motion keeps the color reveal but drops the lift. */
+  @media (prefers-reduced-motion: reduce) {
+    .skill:hover .skill__logo {
+      transform: none;
+    }
+  }
 </style>

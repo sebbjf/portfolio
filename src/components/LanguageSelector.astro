@@ -1,97 +1,173 @@
 ---
+import i18next, { t } from "i18next";
 import { localizePath } from "astro-i18next";
 import LanguageIcon from "../icons/language.astro";
 import ArrowDown from "../icons/arrow-down.astro";
 
 const { pathname } = Astro.url;
+const languages = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Español" },
+];
 ---
+
 <div class="lang__container">
-    <div class="lang__button" id="lang-button">
-        <LanguageIcon class:list={"lang__icon"}/>
-        <ArrowDown />
-    </div>
-    <ul class:list={"lang__options"} id="lang-menu">
+  <button
+    class="lang__button"
+    id="lang-button"
+    type="button"
+    aria-label={t("a11y.changeLanguage")}
+    aria-expanded="false"
+    aria-controls="lang-menu"
+  >
+    <LanguageIcon />
+    <ArrowDown />
+  </button>
+  <ul class="lang__options" id="lang-menu">
+    {
+      languages.map(({ code, label }) => (
         <li>
-            <a href={localizePath(pathname, "en")}>English</a>
-            <a href={localizePath(pathname, "es")}>Español</a>
+          <a
+            href={localizePath(pathname, code)}
+            hreflang={code}
+            lang={code}
+            aria-current={i18next.language === code ? "true" : undefined}
+          >
+            {label}
+          </a>
         </li>
-    </ul>
+      ))
+    }
+  </ul>
 </div>
 
 <style>
-.lang__container {
+  .lang__container {
     position: relative;
-}
+  }
 
-.lang__button {
+  .lang__button {
     display: flex;
     align-items: center;
-    color: #fff;
-    border-radius: 6px;
-    transition: background .2s ease-in-out;
-    cursor: pointer;
-}
+    padding: 4px 6px;
+    color: var(--text-strong);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s var(--ease-out);
 
-.lang__button:hover {
-    background-color: #ffffff1a;
-}
+    &:hover,
+    &[aria-expanded="true"] {
+      background-color: rgb(255 255 255 / 0.08);
+    }
 
-.lang__options {
+    &:active {
+      background-color: rgb(255 255 255 / 0.12);
+    }
+  }
+
+  .lang__options {
     position: absolute;
-    top: calc(100% + 5px);
-    left: -40px;
-    background-color: #141414;
-    border: 1px solid #cccccc3d;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    list-style-type: none;
-    padding: 8px 0;
-    min-width: 120px;
-    display: none;
-    z-index: 1000;
-}
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: var(--z-dropdown);
+    min-width: 140px;
+    margin: 0;
+    padding: 6px;
+    background-color: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.45);
 
-.lang__options.lang__show {
+    /* Grows out of the button it belongs to. It closes faster than it opens, and stays
+       hidden from focus and clicks (visibility) once the fade-out ends. */
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.96);
+    transform-origin: top right;
+    transition:
+      opacity 120ms var(--ease-out),
+      transform 120ms var(--ease-out),
+      visibility 0s linear 120ms;
+  }
+
+  /* "inherit", not "visible": inside the closed mobile menu the dropdown must hide with its parent. */
+  .lang__options.lang__show {
+    visibility: inherit;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 180ms var(--ease-out),
+      transform 180ms var(--ease-out),
+      visibility 0s;
+  }
+
+  .lang__options a {
     display: block;
-}
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--text-strong);
+    transition: background-color 0.2s var(--ease-out);
 
-.lang__options a {
-    display: block;
-    color: #ffffff;
-    text-dergb(255, 255, 255)tion: none;
-    padding: 8px 16px;
-    transition: background .2s ease-in-out;
-    text-decoration: none;
-}
+    &:hover,
+    &:active {
+      background-color: var(--surface-hover);
+    }
 
-.lang__options a:hover {
-    background-color: #31313171;
-}
+    &[aria-current="true"] {
+      color: var(--accent);
+    }
+  }
+
+  @media (pointer: coarse) {
+    .lang__button {
+      min-height: var(--tap);
+      padding-inline: 10px;
+    }
+
+    .lang__options a {
+      display: flex;
+      align-items: center;
+      min-height: var(--tap);
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    /* Centered under the button in the mobile menu, so it grows from the top center. */
+    .lang__options {
+      right: 50%;
+      transform: translateX(50%) scale(0.96);
+      transform-origin: top center;
+    }
+
+    .lang__options.lang__show {
+      transform: translateX(50%);
+    }
+  }
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    let button = document.getElementById("lang-button");
-    let menu = document.getElementById("lang-menu");
+  const button = document.getElementById("lang-button");
+  const menu = document.getElementById("lang-menu");
 
-    button.addEventListener("click", (e) => {
-        e.stopPropagation(); 
-        menu.classList.toggle("lang__show");
-    });
+  const setOpen = (open: boolean) => {
+    menu.classList.toggle("lang__show", open);
+    button.setAttribute("aria-expanded", String(open));
+  };
 
-    
-    document.addEventListener("click", (e) => {
-    if (!menu.contains(e.target as Node) && e.target !== button) {
-        menu.classList.remove("lang__show");
-        }
-    });
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setOpen(!menu.classList.contains("lang__show"));
+  });
 
-    
-    window.addEventListener("scroll", () => {
-        if (menu.classList.contains("lang__show")) {
-            menu.classList.remove("lang__show");
-        }
-    });
-});
+  document.addEventListener("click", (e) => {
+    if (!menu.contains(e.target as Node)) setOpen(false);
+  });
 
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu.classList.contains("lang__show")) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+
+  window.addEventListener("scroll", () => setOpen(false), { passive: true });
 </script>

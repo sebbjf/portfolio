@@ -1,40 +1,56 @@
 ---
 import { HeadHrefLangs } from "astro-i18next/components";
+import i18next from "i18next";
 
 interface Props {
   title: string;
   description: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const locale = i18next.language === "es" ? "es_ES" : "en_US";
 ---
 
-<title>{title}</title>
-
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
 <meta name="description" content={description} />
+<meta name="theme-color" content="#121211" />
 
-<link rel="icon" type="image/svg+xml" href="/favicon.png" />
-<meta name="viewport" content="width=device-width" />
-<meta name="HandheldFriendly" content="true" />
-<meta name="MobileOptimized" content="320" />
-
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
 <link rel="sitemap" href="/sitemap-index.xml" />
-
-<meta
-  name="keywords"
-  content="sebastian jf, seb, sebastian, sebbjf, portfolio, developer, web developer, projects, creations, web applications"
+<!-- Both weights render above the fold: Regular for body text, Bold for the name in the hero. -->
+<link
+  rel="preload"
+  href="/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
 />
+<link
+  rel="preload"
+  href="/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={locale} />
+<meta property="og:site_name" content="Sebastian JF" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+<meta name="author" content="Sebastian JF" />
 <meta name="generator" content={Astro.generator} />
-
-<meta name="author" content="sebbjf" />
-<meta name="copyright" content="sebbjf" />
-<meta name="publisher" content="sebbjf" />
-
-<meta name="robots" content="index, follow" />
-<meta name="googlebot" content="index, follow" />
-
-<link rel="canonical" href="https://www.sebastianjf.com" />
 
 <script
   type="text/partytown"

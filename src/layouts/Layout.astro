@@ -1,24 +1,25 @@
 ---
 import "../styles/normalize.css";
-import "../styles/animations.css";
 import "../styles/styles.css";
 import SEO from "../components/SEO.astro";
-import i18next from "i18next";
+import i18next, { t } from "i18next";
 
 interface Props {
   title: string;
   description: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={i18next.language}>
   <head>
-    <SEO title={title} description={description} />
+    <SEO title={title} description={description} noindex={noindex} />
   </head>
   <body>
+    <a class="skip-link" href="#main">{t("a11y.skipToContent")}</a>
     <slot />
   </body>
 </html>

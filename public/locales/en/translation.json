@@ -1,45 +1,53 @@
 {
   "hero": {
-    "hey": "Hello!",
     "title": "About me",
-    "aboutme1": "Welcome to my portfolio.",
     "aboutme2": "I build <0>web experiences</0> focused on clarity, performance, and precision. Based in Barcelona, with a background in Microcomputer Systems and Networks.",
     "aboutme3": "In this portfolio, you'll find a selection of my work and ongoing development.",
     "projectsText": "Take a look into",
     "projectsButton": "my projects",
     "contactText": "Let's talk,",
     "contactButton": "contact me",
-    "availableForWork": "Available for work"
+    "availableForWork": "Available for work",
+    "role": "Web developer",
+    "location": "Barcelona, Spain"
   },
   "skills": {
     "title": "Skills"
   },
   "experience": {
     "title": "Experience",
-    "as": "as"
+    "currently": "Currently"
+  },
+  "awards": {
+    "title": "Awards"
   },
   "projects": {
-    "title": "Projects",
-    "repositoryButton": "Repositiory",
-    "websiteButton": "Website",
-    "states": {
-        "building": "Building",
-        "finished": "Finished",
-        "inProduction": "In Production",
-        "down": "Down"
-    }
+    "title": "Projects"
   },
   "contact": {
     "title": "Contact",
-    "title2": "Get In Touch.",
-    "text1": "Thank you for visiting my portfolio! Whether you have a project idea, a question, or just want to chat, feel free to get in touch.",
-    "text2": "You can reach out via",
-    "text3": "if you'd like to connect. Additionally, I'm available on",
-    "text4": "if that's more convenient for you.",
-    "toCopy": "Click to copy",
+    "text": "I’m available for work. If you have a role, a project or just a question, email is the best way to reach me.",
+    "email": "Email",
+    "resume": "Résumé",
+    "copy": "Copy",
+    "copyLabel": "Copy email address",
     "copied": "Copied",
-    "copyError": "Failed to copy"
+    "copyError": "Couldn’t copy"
   },
-  "footer": "Made with <0>Astro</0>, deployed with <1>Vercel</1> .",
-  "shortcutMenuMessage": "Press <0>⌘</0> + <1>K</1> to open the command menu 🠖"
+  "footer": "Made with <0>Astro</0>, deployed with <1>Vercel</1>.",
+  "meta": {
+    "home": {
+      "title": "Sebastian JF · Web developer",
+      "description": "Portfolio of Sebastian JF, a front-end developer based in Barcelona building fast, clear web experiences."
+    },
+    "notFound": {
+      "title": "Page not found · Sebastian JF",
+      "description": "This page could not be found."
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "text": "This page could not be found.",
+    "back": "Back to home"
+  }
 }

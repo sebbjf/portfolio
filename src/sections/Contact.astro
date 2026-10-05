@@ -1,190 +1,223 @@
 ---
 import { t } from "i18next";
-import { Trans } from "astro-i18next/components";
-import LinkAnchor from "../components/LinkAnchor.astro";
-import Tooltip from "../components/Tooltip.astro";
-import EmailIcon from "../icons/email.astro";
+import { localizePath } from "astro-i18next";
+
+const email = "hi@sebastianjf.com";
+
+const channels = [
+  // { label: "LinkedIn", value: "in/sebastian-jf", href: "https://www.linkedin.com/in/sebastian-jf/", external: true },
+  { label: "GitHub", value: "sebbjf", href: "https://github.com/sebbjf/", external: true },
+  { label: t("contact.resume"), value: "PDF", href: localizePath("/resume"), external: true },
+];
 ---
 
-<section class="contact__container">
-  <h2 class="contact__badge">{t("contact.title")}</h2>
-  <h2 class="contact__title" id="contact">{t("contact.title2")}</h2>
-  <div class="contact__main">
-    <div class="contact__text-container">
-      <p>
-        {t("contact.text1")}
-        <br>
-        <br>
-        {t("contact.text2")} 
-        <LinkAnchor to="mailto:hi@sebastianjf.com" content="email" /> 
-        {t("contact.text3")} 
-        <LinkAnchor to="https://www.linkedin.com/in/sebastian-jf/" content="LinkedIn" target="_blank" /> 
-        {t("contact.text4")} 
-      </p>
-    </div>
-    <div class="contact__links">
-      <Tooltip content={"Click to copy"} id="email-tooltip">
-        <button class="contact__email" id="email-button">
-          <EmailIcon class:list={"contact__email-icon"} />
-          hi@sebastianjf.com
+<section aria-labelledby="contact">
+  <h2 id="contact">{t("contact.title")}</h2>
+  <p class="contact__text">{t("contact.text")}</p>
+  <dl class="contact__list">
+    <div class="contact__row">
+      <dt>{t("contact.email")}</dt>
+      <dd>
+        <a class="contact__link" href={`mailto:${email}`}>{email}</a>
+        <button
+          class="contact__copy"
+          id="email-copy"
+          type="button"
+          aria-label={t("contact.copyLabel")}
+          data-email={email}
+          data-copy={t("contact.copy")}
+          data-copied={t("contact.copied")}
+          data-copy-error={t("contact.copyError")}
+        >
+          {t("contact.copy")}
         </button>
-      </Tooltip>
-      <LinkAnchor to="https://www.linkedin.com/in/sebastian-jf/" content="LinkedIn" target="_blank" />
+        <span class="contact__status" id="email-copy-status" role="status"></span>
+      </dd>
     </div>
-  </div>
+    {
+      channels.map(({ label, value, href, external }) => (
+        <div class="contact__row">
+          <dt>{label}</dt>
+          <dd>
+            <a class="contact__link" href={href} {...(external && { target: "_blank", rel: "noopener noreferrer" })}>
+              {value}
+              <span class="contact__arrow" aria-hidden="true">↗</span>
+            </a>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
 </section>
 
-<!-- <script>
-  const startAnimation = (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("shake-lr");
-        observer.unobserve(entry.target);
-      }
-    });
+<script>
+  const $copy = document.getElementById("email-copy");
+  const $status = document.getElementById("email-copy-status");
+  const { email, copy, copied, copyError } = $copy.dataset;
+  let resetTimeout: ReturnType<typeof setTimeout>;
+
+  const showResult = (message: string) => {
+    $copy.textContent = message;
+    $status.textContent = message;
+    clearTimeout(resetTimeout);
+    resetTimeout = setTimeout(() => {
+      $copy.textContent = copy;
+      $status.textContent = "";
+    }, 2000);
   };
 
-  const observer = new IntersectionObserver(startAnimation);
-  const elements = document.querySelectorAll('#contact');
-  
-  elements.forEach(el => {
-    observer.observe(el);
-  });
-</script> -->
-
-<script>
-  const emailButton = document.getElementById("email-button");
-  const emailTooltip = document.getElementById("email-tooltip");
-
-  emailButton.addEventListener("click", () => {
+  $copy.addEventListener("click", () => {
     navigator.clipboard
-      .writeText("hi@sebastianjf.com")
-      .then(() => {
-        emailTooltip.textContent = "Copied"
-        setTimeout(() => {
-            emailTooltip.textContent = "Click to copy"
-        }, 5000)
-      })
-      .catch((err) => {
-        emailTooltip.textContent = "Failed to copy"
-        setTimeout(() => {
-            emailTooltip.textContent = "Click to copy"
-        }, 5000)
-      });
+      .writeText(email)
+      .then(() => showResult(copied))
+      .catch(() => showResult(copyError));
   });
 </script>
 
 <style>
-  .contact__container {
-    margin: 115px 0;
+  .contact__text {
+    margin: 0 0 24px;
   }
 
-  .contact__badge {
-    text-align: center;
-    font-size: 20px;
+  .contact__list {
     margin: 0;
+    border-top: 1px solid var(--border);
   }
 
-  .contact__title {
-    text-align: center;
-    margin: 0;
-    margin-bottom: 40px;
-    font-size: 50px;
-    color: #fff;
-    position: relative;
-    z-index: 1;
-  }
+  .contact__row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    align-items: baseline;
+    column-gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
 
-  .contact__title::before {
-    content: '';
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: -200px;
-    background: linear-gradient(45deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff6700);
-    background-size: 300%;
-    filter: blur(100px);
-    opacity: .1;
-    animation: glow-anim 12s ease-in-out infinite;
-    will-change: background-position;
-    z-index: -5;
-}
-
-  @keyframes glow-anim {
-    0% {
-        background-position: 0% 50%;
+    & > dt {
+      font-weight: 700;
+      color: var(--text-strong);
     }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
-  .contact__main {
-    display: flex;
-    flex-direction: column;
-    padding: 0 50px;
-    gap: 50px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .contact__email {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    gap: 5px;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 8px;
-    transition: background .1s ease-in;
-    margin-top: -10px;
-
-    &:hover {
-        background-color: var(--hover-gray);
-    }
-  }
-
-  .contact__text-container {
-    & > p {
+    & > dd {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 14px;
       margin: 0;
+      min-width: 0;
     }
   }
 
-  .contact__links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .contact__link {
+    color: var(--text);
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
 
-  .contact__email-icon {
-    width: 25px;
-    height: auto;
-  }
-
-  .link, .contact__email {
     &:hover {
-      background-color: #ececec31;
+      color: var(--text-strong);
+      text-decoration-color: currentColor;
+    }
+
+    &:active {
+      color: var(--text-muted);
+    }
+  }
+
+  .contact__arrow {
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--text-subtle);
+    transition: transform 0.2s var(--ease-out), color 0.2s var(--ease-out);
+  }
+
+  .contact__link:hover .contact__arrow {
+    color: currentColor;
+    transform: translate(2px, -2px);
+  }
+
+  .contact__copy {
+    padding: 1px 8px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
+
+    &:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-strong);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  /* The button text already changes visibly; this region only announces it to screen readers. */
+  .contact__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Touch: the row keeps its height, but the link and the copy button fill it. */
+  @media (pointer: coarse) {
+    .contact__row {
+      padding: 0;
+      min-height: calc(var(--tap) + 8px);
+      align-items: center;
+    }
+
+    .contact__row > dd {
+      align-items: center;
+      column-gap: 8px;
+    }
+
+    .contact__link {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+    }
+
+    .contact__copy {
+      position: relative;
+      min-height: 36px;
+      min-width: var(--tap);
+      padding-inline: 12px;
+
+      /* Grow the hit area to the full tap size without making the button look heavier. */
+      &::after {
+        content: "";
+        position: absolute;
+        inset: calc((var(--tap) - 36px) / -2) 0;
+      }
     }
   }
 
   @media only screen and (max-width: 768px) {
-    .contact__main {
-      padding: 0 18px;
+    .contact__row {
+      grid-template-columns: 6.5rem 1fr;
     }
+  }
 
-    .contact__title {
-      font-size: 42px;
-    }
+  /* Narrow phones: the label sits above its value so the email address never wraps mid-word. */
+  @media only screen and (max-width: 420px) {
+    .contact__row {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 10px;
 
-    .contact__title::before {
-      background-size: 100%;
+      & > dt {
+        font-size: 0.85rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text-muted);
+      }
     }
   }
 </style>

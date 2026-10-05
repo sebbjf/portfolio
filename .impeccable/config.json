@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "atkinsonhyperlegible",
+        "createdAt": "2026-10-05T21:00:16.157Z",
+        "reason": "user confirmed: asked to revert the site font to Atkinson Hyperlegible; DESIGN.md is an apple.com analysis, not this site's system"
+      }
+    ]
+  }
+}

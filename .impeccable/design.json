@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-05T22:28:23.890Z",
+  "title": "Design System: Sebastian JF Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "bright-ink": {
+        "role": "primary",
+        "displayName": "Bright Ink",
+        "canonical": "oklch(97.0% 0.0070 88.6)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#252420",
+          "#41403c",
+          "#5f5d59",
+          "#82807c",
+          "#a6a4a0",
+          "#cccac5",
+          "#f0eee9"
+        ]
+      },
+      "warm-ink": {
+        "role": "neutral",
+        "displayName": "Warm Ink",
+        "canonical": "oklch(92.5% 0.0099 87.5)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#26241f",
+          "#423f3a",
+          "#605d57",
+          "#83807a",
+          "#a7a49e",
+          "#cdcac3",
+          "#f1eee7"
+        ]
+      },
+      "faded-ink": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "oklch(76.1% 0.0134 86.8)",
+        "tonalRamp": [
+          "#0e0b05",
+          "#27241d",
+          "#433f38",
+          "#615d55",
+          "#848077",
+          "#a8a49b",
+          "#cecac1",
+          "#f2eee5"
+        ]
+      },
+      "pencil-gray": {
+        "role": "neutral",
+        "displayName": "Pencil Gray",
+        "canonical": "oklch(62.8% 0.0141 86.9)",
+        "tonalRamp": [
+          "#0e0b05",
+          "#27241c",
+          "#433f37",
+          "#615d55",
+          "#848077",
+          "#a8a49b",
+          "#cecac0",
+          "#f2eee4"
+        ]
+      },
+      "night-paper": {
+        "role": "neutral",
+        "displayName": "Night Paper",
+        "canonical": "oklch(18.2% 0.0020 106.6)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242423",
+          "#40403f",
+          "#5e5e5c",
+          "#80807f",
+          "#a5a5a3",
+          "#cacac9",
+          "#eeeeed"
+        ]
+      },
+      "raised-paper": {
+        "role": "neutral",
+        "displayName": "Raised Paper",
+        "canonical": "oklch(21.7% 0.0038 106.7)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#242422",
+          "#40403e",
+          "#5e5e5b",
+          "#80807e",
+          "#a5a5a2",
+          "#cbcbc8",
+          "#efefec"
+        ]
+      },
+      "pressed-paper": {
+        "role": "neutral",
+        "displayName": "Pressed Paper",
+        "canonical": "oklch(25.1% 0.0055 106.8)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#242421",
+          "#40403d",
+          "#5e5e5a",
+          "#80807d",
+          "#a5a5a1",
+          "#cbcbc7",
+          "#efefeb"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(29.7% 0.0055 91.6)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#252421",
+          "#41403c",
+          "#5f5d5a",
+          "#81807c",
+          "#a6a4a1",
+          "#cccac6",
+          "#f0eeea"
+        ]
+      },
+      "rule-line": {
+        "role": "neutral",
+        "displayName": "Rule Line",
+        "canonical": "oklch(40.2% 0.0086 88.7)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#26241f",
+          "#41403b",
+          "#5f5d58",
+          "#82807a",
+          "#a7a49f",
+          "#cdcac4",
+          "#f1eee8"
+        ]
+      },
+      "available-green": {
+        "role": "secondary",
+        "displayName": "Available Green",
+        "canonical": "oklch(73.9% 0.1494 135.3)",
+        "tonalRamp": [
+          "#001400",
+          "#003000",
+          "#104f00",
+          "#326f00",
+          "#55932c",
+          "#79b954",
+          "#9ee07a",
+          "#c2ff9e"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The full name at the top of the home page. Once per page."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings, left-aligned."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "The italic role under the name."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Résumé entry titles and project names; weight alone separates them from body."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs and descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Italic secondary lines: availability, footer, narrow-screen row labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "dropdown-lift",
+        "value": "0 12px 32px rgb(0 0 0 / 0.45)",
+        "purpose": "Only the language menu, the one element that truly floats."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "All state transitions, usually at 0.2s; longer (0.4–0.6s) for the project screenshot zoom."
+      },
+      {
+        "name": "status-pulse",
+        "value": "1800ms infinite",
+        "purpose": "The availability dot. Stopped by prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow-phone",
+        "value": "420px"
+      },
+      {
+        "name": "phone",
+        "value": "480px"
+      },
+      {
+        "name": "tablet",
+        "value": "768px"
+      },
+      {
+        "name": "touch",
+        "value": "(pointer: coarse)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Résumé Entry",
+      "kind": "custom",
+      "refersTo": "resume-entry",
+      "description": "The signature block for Experience and Awards: bold title, italic organization, date on the right, muted description.",
+      "html": "<div class=\"ds-entry\"><div class=\"ds-entry__head\"><h3 class=\"ds-entry__title\">First Place – Programame Catalonia Regional, <em class=\"ds-entry__org\"><a href=\"#\">Programame Terrassa</a></em></h3><p class=\"ds-entry__date\">2026</p></div><p class=\"ds-entry__desc\">Algorithmic programming competition (Java).</p></div>",
+      "css": ".ds-entry { font-family: AtkinsonHyperlegible, system-ui, sans-serif; line-height: 1.6; color: var(--text); } .ds-entry__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; column-gap: 24px; } .ds-entry__title { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-strong); line-height: 1.2; } .ds-entry__org { font-weight: 400; } .ds-entry__org a { color: inherit; text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 3px; transition: text-decoration-color 0.2s var(--ease-out); } .ds-entry__org a:hover { text-decoration-color: currentColor; } .ds-entry__org a:active { color: var(--text-muted); } .ds-entry__org a:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; border-radius: var(--radius-sm); } .ds-entry__date { margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-entry__desc { margin: 2px 0 0; color: var(--text-muted); }"
+    },
+    {
+      "name": "Inline Text Link",
+      "kind": "custom",
+      "refersTo": "text-link",
+      "description": "Links inside paragraphs: bright ink over a quiet rule-line underline that fills on hover.",
+      "html": "<p class=\"ds-p\">Take a look into <a class=\"ds-link\" href=\"#\">my projects</a>.</p>",
+      "css": ".ds-p { font-family: AtkinsonHyperlegible, system-ui, sans-serif; color: var(--text); line-height: 1.6; } .ds-link { color: var(--text-strong); text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 3px; transition: text-decoration-color 0.2s var(--ease-out); } .ds-link:hover { text-decoration-color: currentColor; } .ds-link:active { color: var(--text-muted); } .ds-link:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; border-radius: var(--radius-sm); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "The only small button style: a hairline-outlined italic label, used for Copy.",
+      "html": "<button class=\"ds-btn-ghost\" type=\"button\">Copy</button>",
+      "css": ".ds-btn-ghost { font-family: AtkinsonHyperlegible, system-ui, sans-serif; background: none; padding: 1px 8px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); font-size: 0.85rem; font-style: italic; color: var(--text-muted); cursor: pointer; transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out); } .ds-btn-ghost:hover { background-color: var(--surface-hover); color: var(--text-strong); } .ds-btn-ghost:active { transform: translateY(1px); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; border-radius: var(--radius-sm); }"
+    },
+    {
+      "name": "Outlined Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The single larger action, e.g. Back to home on the 404 page.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">← Back to home</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; font-family: AtkinsonHyperlegible, system-ui, sans-serif; padding: 8px 16px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); color: var(--text); text-decoration: none; transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out); } .ds-btn-outline:hover { background-color: var(--surface-hover); border-color: var(--accent); } .ds-btn-outline:active { transform: translateY(1px); } .ds-btn-outline:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; border-radius: var(--radius-sm); }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Sticky translucent bar with the logo, section links and language menu.",
+      "html": "<nav class=\"ds-nav\"><strong class=\"ds-nav__logo\">seb</strong><ul class=\"ds-nav__list\"><li><a class=\"ds-nav__link\" href=\"#\">About me</a></li><li><a class=\"ds-nav__link\" href=\"#\">Experience</a></li><li><a class=\"ds-nav__link\" href=\"#\">Projects</a></li><li><a class=\"ds-nav__link\" href=\"#\">Contact</a></li></ul></nav>",
+      "css": ".ds-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border: 1px solid rgb(255 255 255 / 0.06); border-radius: 20px; background-color: rgb(22 22 22 / 0.6); backdrop-filter: blur(10px); font-family: AtkinsonHyperlegible, system-ui, sans-serif; } .ds-nav__logo { color: var(--text-strong); } .ds-nav__list { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; } .ds-nav__link { display: block; padding: 4px 10px; border-radius: var(--radius-sm); color: var(--text-strong); text-decoration: none; transition: background-color 0.2s var(--ease-out); } .ds-nav__link:hover { background-color: rgb(255 255 255 / 0.08); } .ds-nav__link:active { background-color: rgb(255 255 255 / 0.12); } .ds-nav__link:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; border-radius: var(--radius-sm); }"
+    },
+    {
+      "name": "Contact List",
+      "kind": "custom",
+      "refersTo": "contact-list",
+      "description": "A definition list set as a hairline-ruled table of channels.",
+      "html": "<dl class=\"ds-contact\"><div class=\"ds-contact__row\"><dt>Email</dt><dd><a class=\"ds-contact__link\" href=\"#\">hi@sebastianjf.com</a></dd></div><div class=\"ds-contact__row\"><dt>GitHub</dt><dd><a class=\"ds-contact__link\" href=\"#\">sebbjf <span class=\"ds-contact__arrow\" aria-hidden=\"true\">↗</span></a></dd></div></dl>",
+      "css": ".ds-contact { margin: 0; border-top: 1px solid var(--border); font-family: AtkinsonHyperlegible, system-ui, sans-serif; line-height: 1.6; } .ds-contact__row { display: grid; grid-template-columns: 8rem 1fr; column-gap: 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--border); } .ds-contact__row dt { font-weight: 700; color: var(--text-strong); } .ds-contact__row dd { margin: 0; } .ds-contact__link { color: var(--text); text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 3px; transition: color 0.2s var(--ease-out), text-decoration-color 0.2s var(--ease-out); } .ds-contact__link:hover { color: var(--text-strong); text-decoration-color: currentColor; } .ds-contact__link:active { color: var(--text-muted); } .ds-contact__link:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; border-radius: var(--radius-sm); } .ds-contact__arrow { display: inline-block; color: var(--text-subtle); transition: transform 0.2s var(--ease-out), color 0.2s var(--ease-out); } .ds-contact__link:hover .ds-contact__arrow { color: currentColor; transform: translate(2px, -2px); }"
+    },
+    {
+      "name": "Skill Tile",
+      "kind": "card",
+      "refersTo": "skill-tile",
+      "description": "Hairline tile with a monochrome logo above a muted name; on mouse hover the logo reveals its brand color.",
+      "html": "<div class=\"ds-skill\" style=\"--brand:#E34F26\"><svg class=\"ds-skill__icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M4 3h16l-1.5 17L12 22l-6.5-2z\"></path></svg><span class=\"ds-skill__name\">HTML5</span></div>",
+      "css": ".ds-skill { display: inline-flex; flex-direction: column; align-items: center; gap: 10px; width: 112px; padding: 18px 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: AtkinsonHyperlegible, system-ui, sans-serif; text-align: center; transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out); } .ds-skill__icon { width: 26px; height: 26px; color: var(--text-strong); opacity: 0.85; transition: color 0.3s var(--ease-out), opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out); } .ds-skill__name { font-size: 0.85rem; line-height: 1.3; color: var(--text-muted); transition: color 0.25s var(--ease-out); } @media (hover: hover) { .ds-skill:hover { background-color: var(--surface-hover); border-color: var(--border-strong); } .ds-skill:hover .ds-skill__icon { color: var(--brand); opacity: 1; transform: translateY(-2px); } .ds-skill:hover .ds-skill__name { color: var(--text); } }"
+    },
+    {
+      "name": "Availability Status",
+      "kind": "custom",
+      "refersTo": "status",
+      "description": "The only green on the site: a pulsing dot beside an italic label.",
+      "html": "<a class=\"ds-status\" href=\"#\"><span class=\"ds-status__dot\" aria-hidden=\"true\"></span>Available for work</a>",
+      "css": ".ds-status { display: inline-flex; align-items: center; gap: 9px; font-family: AtkinsonHyperlegible, system-ui, sans-serif; font-size: 0.9rem; font-style: italic; color: var(--text-muted); text-decoration: none; } .ds-status:hover { color: var(--text-strong); } .ds-status:active { color: var(--text); } .ds-status:focus-visible { outline: 2px solid var(--text-strong); outline-offset: 3px; border-radius: var(--radius-sm); } .ds-status__dot { width: 7px; height: 7px; border-radius: 50%; background-color: var(--status); animation: ds-pulse 1800ms infinite; } @keyframes ds-pulse { 0% { box-shadow: 0 0 0 0 var(--status); } 75% { box-shadow: 0 0 0 6px transparent; } } @media (prefers-reduced-motion: reduce) { .ds-status__dot { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Printed Résumé",
+    "overview": "",
+    "keyCharacteristics": [
+      "A single reading column in résumé order: name, contact, entries, sections.",
+      "Monochrome warm ink on near-black, with five steps of ink brightness carrying all the hierarchy.",
+      "Bold titles, italic organizations and stacks, dates right-aligned with tabular numerals.",
+      "One typeface (Atkinson Hyperlegible) in four styles, no display face.",
+      "Flat surfaces separated by hairlines, not cards or shadows.",
+      "Underlines and brightness as the interaction language."
+    ],
+    "rules": [
+      {
+        "name": "The Ink-Only Rule",
+        "body": "Emphasis is made with weight, italics or brighter ink, never with a hue. If something needs to stand out, make it bolder or brighter.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Green Dot Rule",
+        "body": "Available Green marks availability and nothing else. Don't reuse it for success states, links or tags.",
+        "section": "colors"
+      },
+      {
+        "name": "The Résumé Entry Rule",
+        "body": "Every dated item is set the same way: **bold title**, *italic organization*, date at the far right with tabular numerals, then the description in Faded Ink. Experience, Awards and future Education entries all share it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Italic Means Context Rule",
+        "body": "Italics carry secondary context (the role, organizations, tech stacks, the footer), never emphasis. For emphasis use bold or Bright Ink.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Page Rule",
+        "body": "Nothing on the page casts a shadow except things that truly float (the dropdown). Separate content with hairlines and space.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** set every dated item as a Résumé Entry: bold title, italic organization, date on the right.",
+      "**Do** use the color tokens on `:root` (`--text-strong`, `--text`, `--text-muted`, `--text-subtle`, `--surface`, `--border`, …) instead of literal colors.",
+      "**Do** give every interactive element a hover state, an `:active` state and the global focus ring (2px Bright Ink outline, 3px offset).",
+      "**Do** keep every link and button at least 44px tall on touch screens (`--tap`).",
+      "**Do** use `--ease-out` (`cubic-bezier(0.22, 1, 0.36, 1)`) at around 0.2s for state changes, and respect the `prefers-reduced-motion` rule.",
+      "**Do** keep every user-facing string in the translation files, in both English and Spanish."
+    ],
+    "donts": [
+      "**Don't** introduce an accent hue. Emphasis is brighter ink or bold weight.",
+      "**Don't** use Available Green for anything except the availability dot.",
+      "**Don't** put content in cards with shadows; separate content with hairlines and space.",
+      "**Don't** add a second typeface or a display face.",
+      "**Don't** put a small uppercase label or kicker above a section heading; the heading stands alone.",
+      "**Don't** use italics for emphasis; italics mean secondary context."
+    ]
+  }
+}

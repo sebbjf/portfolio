@@ -1,5 +1,6 @@
 ---
-import { changeLanguage } from "i18next";
+import { changeLanguage, t } from "i18next";
+import { localizePath } from "astro-i18next";
 import Layout from "../../layouts/Layout.astro";
 import AuraLight from "../../components/AuraLight.astro";
 import Header from "../../sections/Header.astro";
@@ -8,15 +9,14 @@ import Footer from "../../sections/Footer.astro";
 changeLanguage("es");
 ---
 
-<Layout
-  title="Page not found | Sebastian JF"
-  description="Welcome to my personal portfolio, where I showcase my latest projects and creations."
->
+<Layout title={t("meta.notFound.title")} description={t("meta.notFound.description")} noindex>
   <AuraLight />
   <div class="content">
     <Header />
-    <main>
-      <h2 class="not-found"><span>404</span> | <span class="not-found-text">This page could not be found.</span></h2>
+    <main id="main" class="not-found">
+      <h1 class="not-found__code accent">{t("notFound.code")}</h1>
+      <p class="not-found__text">{t("notFound.text")}</p>
+      <a class="not-found__back" href={localizePath("/")}>← {t("notFound.back")}</a>
     </main>
     <Footer />
   </div>
@@ -24,12 +24,45 @@ changeLanguage("es");
 
 <style>
   .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 65dvh;
     text-align: center;
-    align-content: center;
-    height: 65vh;
   }
 
-  .not-found-text {
-    font-size: 1.6rem;
+  .not-found__code {
+    margin: 0;
+    font-size: 4.5rem;
+    letter-spacing: -0.04em;
+  }
+
+  .not-found__text {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+  }
+
+  .not-found__back {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    box-sizing: border-box;
+    margin-top: 16px;
+    padding: 8px 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+
+    &:hover {
+      background-color: var(--surface-hover);
+      border-color: var(--accent);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
   }
 </style>
