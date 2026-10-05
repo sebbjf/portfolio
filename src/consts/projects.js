@@ -31,7 +31,7 @@ const projects = [
     description:
       "Responsive web page with café theme using React and Tailwind.",
     built_with: ["React", "Vite", "TypeScript", "Tailwind", "Web"],
-    url: "https://sebbjf-morning-cafe.netlify.app/",
+    url: "https://xxixiio-morning-cafe.netlify.app/",
     image: "morning-cafe.webp",
     translation: {
       es: {
