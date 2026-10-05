@@ -1,15 +1,17 @@
+// Dates are "YYYY-MM" and are formatted per language in Experience.astro.
+// endDate: null for a single month, "present" for a current role.
 const experience = [
   {
-    name: "Freelance",
-    position: "Front-end Developer",
-    description:
-      "Independently design, build, and maintain responsive websites for various clients, ensuring high-quality user experiences and adherence to modern web standards.",
-    startDate: "Currently",
-    endDate: null,
+    name: "Institut Baix Empordà",
+    position: "IT Technician (Internship)",
+    description: "Resolving technical issues for teaching staff and students, writing documentation and inventory tasks.",
+    startDate: "2025-01",
+    endDate: "2025-04",
     translation: {
       es: {
+        position: "Técnico Informático (Prácticas)",
         description:
-          "Diseñar, construir y mantener de manera independiente sitios web responsivos para varios clientes, garantizando experiencias de usuario de alta calidad y cumpliendo con los estándares web modernos.",
+          "Resolución de incidencias técnicas para profesorado y alumnado, redacción de documentación y tareas de inventario.",
       },
     },
   },
@@ -18,7 +20,7 @@ const experience = [
     position: "IT Assistant (Internship)",
     description:
       "Erasmus+ Experience. Tasks such as support and maintenance of computer equipment, Server management and Web development.",
-    startDate: "May 2024",
+    startDate: "2024-05",
     endDate: null,
     translation: {
       es: {

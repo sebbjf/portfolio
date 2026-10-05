@@ -201,6 +201,26 @@ img {
   }
 }
 
+/* When the system asks for more contrast, borders and secondary ink step up; text already passes. */
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: #d4d0c8;
+    --text-subtle: #b5b1a8;
+    --border: #4a4843;
+    --border-strong: #6e6b64;
+  }
+}
+
+/* Visible only to screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

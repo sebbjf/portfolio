@@ -17,7 +17,7 @@ const { projectData } = Astro.props;
 ---
 
 <li class="project">
-  <a class="project__link" href={projectData.url} target="_blank" rel="noopener noreferrer">
+  <a class="project__link" href={projectData.url} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
     <span class="project__media">
       <Image
         class="project__thumb"

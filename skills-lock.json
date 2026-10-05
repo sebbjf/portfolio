@@ -121,6 +121,12 @@
       "skillPath": "skills/soft-skill/SKILL.md",
       "computedHash": "f730e4132775f13eea19e3dc39afc6bb453cfc0498872b127ad8f0d47cfd802d"
     },
+    "humanizer": {
+      "source": "blader/humanizer",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f17e3360d6ad1a9f93774fbe89347376968c4060137ac04872baa49b3a4a4175"
+    },
     "improve-codebase-architecture": {
       "source": "mattpocock/skills",
       "sourceType": "github",

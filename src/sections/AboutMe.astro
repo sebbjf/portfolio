@@ -17,13 +17,13 @@ import EmailIcon from "../icons/email.astro";
       </a>
     </li>
     <li>
-      <a href="https://github.com/sebbjf/" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/sebbjf/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
         <GithubIcon class:list={"hero__icon"} viewBox="0 0 30 30" aria-hidden="true" />
         sebbjf
       </a>
     </li>
     {/* <li>
-      <a href="https://www.linkedin.com/in/sebastian-jf/" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/sebastian-jf/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
         <LinkedinIcon class:list={"hero__icon"} aria-hidden="true" />
         sebastian-jf
       </a>
@@ -49,7 +49,6 @@ import EmailIcon from "../icons/email.astro";
         and precision.
       </Trans>
     </p>
-    <p>{t("hero.aboutme3")}</p>
     <p>
       {t("hero.projectsText")} <a class="profile__link" href="#projects">{t("hero.projectsButton")}</a>.
       {t("hero.contactText")} <a class="profile__link" href="#contact">{t("hero.contactButton")}</a>.
@@ -94,7 +93,7 @@ import EmailIcon from "../icons/email.astro";
 
     & a {
       text-decoration: underline;
-      text-decoration-color: transparent;
+      text-decoration-color: var(--border-strong);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s var(--ease-out);
 
