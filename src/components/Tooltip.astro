@@ -19,21 +19,21 @@ const { content, ...props } = Astro.props;
       opacity: 1;
     }
 
-    &:focus > .tooltip__message {
-      display: block;
-      opacity: 1;
-    }
-
-    &:active > .tooltip__message {
+    &:focus-within > .tooltip__message {
       display: block;
       opacity: 1;
     }
   }
 
+  .tooltip__message--visible {
+    display: block;
+    opacity: 1;
+  }
+
   .tooltip__message {
     display: none;
-    font-size: 15px;
-    color: #fff;
+    font-size: 0.875rem;
+    color: var(--text-strong);
     background-color: #252525;
     border-radius: 6px;
     padding: 6px 8px;

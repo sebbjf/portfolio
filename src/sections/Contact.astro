@@ -6,71 +6,60 @@ import Tooltip from "../components/Tooltip.astro";
 import EmailIcon from "../icons/email.astro";
 ---
 
-<section class="contact__container">
-  <h2 class="contact__badge">{t("contact.title")}</h2>
+<section class="contact__container" aria-labelledby="contact">
+  <p class="contact__badge">{t("contact.title")}</p>
   <h2 class="contact__title" id="contact">{t("contact.title2")}</h2>
   <div class="contact__main">
     <div class="contact__text-container">
+      <p>{t("contact.text1")}</p>
       <p>
-        {t("contact.text1")}
-        <br>
-        <br>
-        {t("contact.text2")} 
-        <LinkAnchor to="mailto:hi@sebastianjf.com" content="email" /> 
-        {t("contact.text3")} 
-        <LinkAnchor to="https://www.linkedin.com/in/sebastian-jf/" content="LinkedIn" target="_blank" /> 
-        {t("contact.text4")} 
+        {t("contact.text2")}
+        <LinkAnchor to="mailto:hi@sebastianjf.com" content="email" />
+        {t("contact.text3")}
+        <LinkAnchor to="https://www.linkedin.com/in/sebastian-jf/" content="LinkedIn" target="_blank" rel="noopener noreferrer" />
+        {t("contact.text4")}
       </p>
     </div>
     <div class="contact__links">
-      <Tooltip content={"Click to copy"} id="email-tooltip">
-        <button class="contact__email" id="email-button">
-          <EmailIcon class:list={"contact__email-icon"} />
+      <Tooltip content={t("contact.toCopy")} id="email-tooltip" role="status">
+        <button
+          class="contact__email"
+          id="email-button"
+          type="button"
+          data-copy={t("contact.toCopy")}
+          data-copied={t("contact.copied")}
+          data-copy-error={t("contact.copyError")}
+        >
+          <EmailIcon class:list={"contact__email-icon"} aria-hidden="true" />
           hi@sebastianjf.com
         </button>
       </Tooltip>
-      <LinkAnchor to="https://www.linkedin.com/in/sebastian-jf/" content="LinkedIn" target="_blank" />
+      <LinkAnchor to="https://www.linkedin.com/in/sebastian-jf/" content="LinkedIn" target="_blank" rel="noopener noreferrer" />
     </div>
   </div>
 </section>
 
-<!-- <script>
-  const startAnimation = (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("shake-lr");
-        observer.unobserve(entry.target);
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(startAnimation);
-  const elements = document.querySelectorAll('#contact');
-  
-  elements.forEach(el => {
-    observer.observe(el);
-  });
-</script> -->
-
 <script>
   const emailButton = document.getElementById("email-button");
   const emailTooltip = document.getElementById("email-tooltip");
+  const { copy, copied, copyError } = emailButton.dataset;
+  let resetTimeout: ReturnType<typeof setTimeout>;
+
+  const showMessage = (message: string) => {
+    emailTooltip.textContent = message;
+    emailTooltip.classList.add("tooltip__message--visible");
+    clearTimeout(resetTimeout);
+    resetTimeout = setTimeout(() => {
+      emailTooltip.textContent = copy;
+      emailTooltip.classList.remove("tooltip__message--visible");
+    }, 3000);
+  };
 
   emailButton.addEventListener("click", () => {
     navigator.clipboard
       .writeText("hi@sebastianjf.com")
-      .then(() => {
-        emailTooltip.textContent = "Copied"
-        setTimeout(() => {
-            emailTooltip.textContent = "Click to copy"
-        }, 5000)
-      })
-      .catch((err) => {
-        emailTooltip.textContent = "Failed to copy"
-        setTimeout(() => {
-            emailTooltip.textContent = "Click to copy"
-        }, 5000)
-      });
+      .then(() => showMessage(copied))
+      .catch(() => showMessage(copyError));
   });
 </script>
 
@@ -81,47 +70,35 @@ import EmailIcon from "../icons/email.astro";
 
   .contact__badge {
     text-align: center;
-    font-size: 20px;
-    margin: 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
   }
 
   .contact__title {
     text-align: center;
     margin: 0;
     margin-bottom: 40px;
-    font-size: 50px;
-    color: #fff;
+    font-size: 3.125rem;
+    letter-spacing: -0.03em;
+    color: var(--text-strong);
     position: relative;
     z-index: 1;
   }
 
   .contact__title::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: -200px;
-    background: linear-gradient(45deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff6700);
-    background-size: 300%;
-    filter: blur(100px);
-    opacity: .1;
-    animation: glow-anim 12s ease-in-out infinite;
-    will-change: background-position;
+    inset: -40px 10% -160px;
+    background: radial-gradient(ellipse at center, var(--accent), transparent 70%);
+    filter: blur(60px);
+    opacity: 0.12;
     z-index: -5;
-}
-
-  @keyframes glow-anim {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+    pointer-events: none;
+  }
 
   .contact__main {
     display: flex;
@@ -138,20 +115,27 @@ import EmailIcon from "../icons/email.astro";
     justify-content: center;
     padding: 0;
     gap: 5px;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 8px;
-    transition: background .1s ease-in;
-    margin-top: -10px;
+    color: var(--text-strong);
+    padding: 4px 10px;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s var(--ease-out);
 
     &:hover {
-        background-color: var(--hover-gray);
+      background-color: var(--surface-hover);
+    }
+
+    &:active {
+      transform: translateY(1px);
     }
   }
 
   .contact__text-container {
     & > p {
-      margin: 0;
+      margin: 0 0 1.2em;
+    }
+
+    & > p:last-child {
+      margin-bottom: 0;
     }
   }
 
@@ -168,23 +152,13 @@ import EmailIcon from "../icons/email.astro";
     height: auto;
   }
 
-  .link, .contact__email {
-    &:hover {
-      background-color: #ececec31;
-    }
-  }
-
   @media only screen and (max-width: 768px) {
     .contact__main {
       padding: 0 18px;
     }
 
     .contact__title {
-      font-size: 42px;
-    }
-
-    .contact__title::before {
-      background-size: 100%;
+      font-size: 2.6rem;
     }
   }
 </style>

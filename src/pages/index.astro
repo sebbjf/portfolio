@@ -1,5 +1,5 @@
 ---
-import { changeLanguage } from "i18next";
+import { changeLanguage, t } from "i18next";
 import Layout from "../layouts/Layout.astro";
 import AuraLight from "../components/AuraLight.astro";
 import AboutMe from "../sections/AboutMe.astro";
@@ -9,18 +9,16 @@ import Skills from "../sections/Skills.astro";
 import Experience from "../sections/Experience.astro";
 import Projects from "../sections/Projects.astro";
 import Contact from "../sections/Contact.astro";
-import Bento from "../sections/Bento.astro";
 
 changeLanguage("en");
 ---
 
-<Layout title="Portfolio | Sebastian JF" description="Welcome to my personal portfolio, where I showcase my latest projects and creations.">
+<Layout title={t("meta.home.title")} description={t("meta.home.description")}>
   <AuraLight />
   <div class="content">
     <Header />
-    <main>
+    <main id="main">
       <AboutMe />
-      <!-- <Bento /> -->
       <Skills />
       <Experience />
       <Projects />

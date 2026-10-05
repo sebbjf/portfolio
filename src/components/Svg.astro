@@ -22,6 +22,9 @@ const getSVG = async (src: string) => {
     const { default: file } = await files[filePath]() as unknown as { default: string };
     const root = parse(file);
 
+    // Source files carry editor titles (e.g. "javascript [#155]") that show up as tooltips.
+    root.querySelectorAll("title").forEach((title) => title.remove());
+
     const svg = root.querySelector("svg") as unknown as SVGElement;
     const { attributes, innerHTML } = svg;
 

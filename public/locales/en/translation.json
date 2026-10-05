@@ -16,22 +16,24 @@
   },
   "experience": {
     "title": "Experience",
-    "as": "as"
+    "as": "as",
+    "currently": "Currently"
   },
   "projects": {
     "title": "Projects",
-    "repositoryButton": "Repositiory",
+    "repositoryButton": "Repository",
     "websiteButton": "Website",
     "states": {
-        "building": "Building",
-        "finished": "Finished",
-        "inProduction": "In Production",
-        "down": "Down"
-    }
+      "building": "Building",
+      "finished": "Finished",
+      "inProduction": "In Production",
+      "down": "Down"
+    },
+    "viewProject": "View project"
   },
   "contact": {
     "title": "Contact",
-    "title2": "Get In Touch.",
+    "title2": "Get in touch.",
     "text1": "Thank you for visiting my portfolio! Whether you have a project idea, a question, or just want to chat, feel free to get in touch.",
     "text2": "You can reach out via",
     "text3": "if you'd like to connect. Additionally, I'm available on",
@@ -40,6 +42,28 @@
     "copied": "Copied",
     "copyError": "Failed to copy"
   },
-  "footer": "Made with <0>Astro</0>, deployed with <1>Vercel</1> .",
-  "shortcutMenuMessage": "Press <0>⌘</0> + <1>K</1> to open the command menu 🠖"
+  "footer": "Made with <0>Astro</0>, deployed with <1>Vercel</1>.",
+  "shortcutMenuMessage": "Press <0>⌘</0> + <1>K</1> to open the command menu 🠖",
+  "meta": {
+    "home": {
+      "title": "Sebastian JF · Front-end developer",
+      "description": "Portfolio of Sebastian JF, a front-end developer based in Barcelona building fast, clear web experiences."
+    },
+    "notFound": {
+      "title": "Page not found · Sebastian JF",
+      "description": "This page could not be found."
+    }
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main",
+    "changeLanguage": "Change language"
+  },
+  "notFound": {
+    "code": "404",
+    "text": "This page could not be found.",
+    "back": "Back to home"
+  }
 }

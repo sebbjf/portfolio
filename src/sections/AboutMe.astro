@@ -2,93 +2,70 @@
 import { Image } from "astro:assets";
 import { t } from "i18next";
 import { Trans } from "astro-i18next/components";
-import { localizePath } from "astro-i18next";
 import LinkAnchor from "../components/LinkAnchor.astro";
 import GithubIcon from "../icons/github.astro";
 import LinkedinIcon from "../icons/linkedin.astro";
 import EmailIcon from "../icons/email.astro";
-import ShortcutMenu from "../components/ShortcutMenu.astro";
 ---
 
-<section style="margin-top: 0;">
+<section class="hero">
   <div id="aboutme" class="hero__name-container">
     <Image
       class="hero__avatar"
       src="https://avatars.githubusercontent.com/u/108923627?v=4"
-      alt="sebbjf"
-      title="sebbjf's avatar"
-      width="1200"
-      height="1200"
+      alt="Sebastian JF"
+      width="120"
+      height="120"
       loading="eager"
     />
     <div>
       <h1 class="hero__name accent">seb</h1>
-      <!-- <p class="hero__username">@sebbjf</p> -->
       <a class="hero__undername" href="#contact"
-        ><span class="pulse_dot"></span> {t("hero.availableForWork")}</a
+        ><span class="pulse_dot" aria-hidden="true"></span> {t("hero.availableForWork")}</a
       >
     </div>
   </div>
   <h2 class="hero__hey accent">
-    <span class="wave">👋</span> {t("hero.hey")}
+    <span class="wave" aria-hidden="true">👋</span> {t("hero.hey")}
   </h2>
 
-  <p>
-    {t("hero.aboutme1")}
-    <br /><br />
-
-    <Trans i18nKey="hero.aboutme2">
-      I build <span class="highlight">web experiences</span> focused on clarity, performance,
-      and precision.
-    </Trans>
-    <br /><br />
-
-    {t("hero.aboutme3")}
-    <br /><br />
-
-    {t("hero.projectsText")}
-    <LinkAnchor content={t("hero.projectsButton")} to="#projects" />.
-    <br />
-
-    {t("hero.contactText")}
-    <LinkAnchor content={t("hero.contactButton")} to="#contact" />!
-  </p>
-  <div class="hero__links">
-    <a
-      class="hero__link"
-      href="https://github.com/sebbjf/"
-      title="seb's Github page"
-      target="__blank"
-    >
-      <span class="hero__link_icon">
-        <GithubIcon />
-      </span>
-      Github
-    </a>
-    <a
-      class="hero__link"
-      href="mailto:hi@sebastianjf.com"
-      title="seb's email"
-      target="__blank"
-    >
-      <span class="hero__link_icon mail">
-        <EmailIcon />
-      </span>
-      hi@sebastianjf.com
-    </a>
-    <a
-      class="hero__link"
-      href="https://wwww.linkedin.com/in/sebastian-jf/"
-      title="seb's Linkedin page"
-      target="__blank"
-    >
-      <span class="hero__link_icon">
-        <LinkedinIcon />
-      </span>
-      LinkedIn
-    </a>
+  <div class="hero__bio">
+    <p>{t("hero.aboutme1")}</p>
+    <p>
+      <Trans i18nKey="hero.aboutme2">
+        I build <span class="highlight">web experiences</span> focused on clarity, performance,
+        and precision.
+      </Trans>
+    </p>
+    <p>{t("hero.aboutme3")}</p>
+    <p>
+      {t("hero.projectsText")}
+      <LinkAnchor content={t("hero.projectsButton")} to="#projects" />.
+      <br />
+      {t("hero.contactText")}
+      <LinkAnchor content={t("hero.contactButton")} to="#contact" />!
+    </p>
   </div>
-  <!-- <ShortcutMenu /> -->
+  <ul class="hero__links">
+    <li>
+      <a class="hero__link" href="https://github.com/sebbjf/" target="_blank" rel="noopener noreferrer">
+        <span class="hero__link_icon" aria-hidden="true"><GithubIcon /></span>
+        GitHub
+      </a>
+    </li>
+    <li>
+      <a class="hero__link" href="mailto:hi@sebastianjf.com">
+        <span class="hero__link_icon" aria-hidden="true"><EmailIcon /></span>
+        hi@sebastianjf.com
+      </a>
+    </li>
+    <li>
+      <a class="hero__link" href="https://www.linkedin.com/in/sebastian-jf/" target="_blank" rel="noopener noreferrer">
+        <span class="hero__link_icon" aria-hidden="true"><LinkedinIcon /></span>
+        LinkedIn
+      </a>
+    </li>
+  </ul>
 </section>
 
 <style>
@@ -142,33 +119,37 @@ import ShortcutMenu from "../components/ShortcutMenu.astro";
 
   .hero__avatar {
     border-radius: 100%;
-    height: 60%;
-    width: auto;
+    width: 120px;
+    height: 120px;
   }
 
   .hero__name {
     margin-bottom: -3px;
   }
 
-  .hero__username {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    gap: 8px;
-    margin-top: 3px;
-    color: var(--gray);
+  .hero {
+    margin-top: 0;
+  }
+
+  .hero__bio > p {
+    margin: 0 0 1.2em;
   }
 
   .hero__link {
     display: flex;
     align-items: center;
-    justify-items: center;
     gap: 8px;
-    margin-top: 3px;
-    color: #fff;
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    color: var(--text-strong);
+    transition: background-color 0.2s var(--ease-out);
 
     &:hover {
-      text-decoration: underline;
+      background-color: var(--surface-hover);
+    }
+
+    &:active {
+      transform: translateY(1px);
     }
   }
 
@@ -179,20 +160,20 @@ import ShortcutMenu from "../components/ShortcutMenu.astro";
   .hero__links {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin-top: 50px;
+    gap: 24px;
+    margin: 40px 0 0;
     flex-wrap: wrap;
   }
 
   .hero__hey {
     font-size: 28px;
-    margin-bottom: -8px;
+    margin-bottom: 8px;
   }
 
   .hero__undername {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #c5e0ae;
     gap: 12px;
     text-wrap: nowrap;
@@ -203,22 +184,23 @@ import ShortcutMenu from "../components/ShortcutMenu.astro";
     width: 8px;
     display: block;
     border-radius: 50%;
-    background-color: #62bd19;
+    background-color: var(--status);
     animation: pulse 1500ms infinite;
   }
 
   @keyframes pulse {
     0% {
-      box-shadow: #62bd19 0 0 0 0;
+      box-shadow: var(--status) 0 0 0 0;
     }
     75% {
-      box-shadow: #ff69b400 0 0 0 6px;
+      box-shadow: transparent 0 0 0 6px;
     }
   }
 
   @media only screen and (max-width: 768px) {
     .hero__links {
-      gap: 10px;
+      gap: 4px;
+      justify-content: flex-start;
     }
   }
 </style>

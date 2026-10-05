@@ -1,42 +1,14 @@
-<div class="aura-light"></div>
+<div class="aura-light" aria-hidden="true"></div>
 
 <style>
-    .aura-light {
-        position: absolute;
-        margin-top: -15px;
-        padding: 0;
-        width: 100%;
-        height: 100vh;
-        opacity: .3;
-        top: 0;
-        bottom: 0;
-        z-index: -2;
-        background-image: radial-gradient(ellipse 80% 80% at 50% -20%, #a482e24d, #fff0);
-        /* animation: aura-light 12s linear infinite alternate;
-        -webkit-animation: aura-light 12s linear infinite alternate;
-        -z-animation: aura-light 12s linear infinite alternate;
-        -o-animation: aura-light 12s linear infinite alternate; */
-    }
-
-    /* @keyframes aura-light {
-        0% {
-            background-image: radial-gradient(ellipse 80% 80% at 50% -20%, #aaa9dd4d, #fff0);
-        }
-
-        25% {
-            background-image: radial-gradient(ellipse 80% 80% at 50% -20%, #bba9dd4d, #fff0);
-        }
-
-        50% {
-            background-image: radial-gradient(ellipse 80% 80% at 50% -20%, #ffffff4d, #fff0);
-        }
-
-        75% {
-            background-image: radial-gradient(ellipse 80% 80% at 50% -20%, #cba9dd4d, #fff0);
-        }
-
-        100% {
-            background-image: radial-gradient(ellipse 80% 80% at 50% -20%, #aaa9dd4d, #fff0);
-        } */
-    }
+  .aura-light {
+    position: absolute;
+    inset: 0 0 auto;
+    margin-top: -15px;
+    height: 100dvh;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.3;
+    background-image: radial-gradient(ellipse 80% 80% at 50% -20%, rgb(155 228 228 / 0.3), transparent);
+  }
 </style>

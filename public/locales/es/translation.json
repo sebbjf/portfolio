@@ -1,8 +1,8 @@
 {
   "hero": {
-    "hey": "Hola!",
+    "hey": "¡Hola!",
     "title": "Sobre mí",
-    "aboutme1": "Bienvenido a mi portfolio.",
+    "aboutme1": "Bienvenido/a a mi portfolio.",
     "aboutme2": "Construyo <0>experiencias web</0> centradas en la claridad, el rendimiento y la precisión. Con base en Barcelona y formación en Sistemas Microinformáticos y Redes.",
     "aboutme3": "En este portfolio encontrarás una selección de mis trabajos y mi desarrollo continuo.",
     "projectsText": "Mira",
@@ -16,30 +16,54 @@
   },
   "experience": {
     "title": "Experiencia",
-    "as": "como"
+    "as": "como",
+    "currently": "Actualmente"
   },
   "projects": {
     "title": "Proyectos",
     "repositoryButton": "Repositorio",
     "websiteButton": "Web",
     "states": {
-        "building": "Construyendo",
-        "finished": "Finalizado",
-        "inProduction": "En producción",
-        "down": "Caído / Sin soporte"
-    }
+      "building": "Construyendo",
+      "finished": "Finalizado",
+      "inProduction": "En producción",
+      "down": "Caído / Sin soporte"
+    },
+    "viewProject": "Ver proyecto"
   },
   "contact": {
     "title": "Contacto",
-    "title2": "Ponte En Contacto.",
-    "text1": "¡Gracias por visitar mi portafolio! Si tienes una idea de proyecto, una pregunta o simplemente deseas conversar, no dudes en ponerte en contacto.",
+    "title2": "Ponte en contacto.",
+    "text1": "¡Gracias por visitar mi portfolio! Si tienes una idea de proyecto, una pregunta o simplemente quieres charlar, no dudes en escribirme.",
     "text2": "Puedes comunicarte a través de",
     "text3": "si deseas conectarte. Además, estoy disponible en",
     "text4": "si te resulta más conveniente.",
-    "toCopy": "Clica para copiar",
+    "toCopy": "Haz clic para copiar",
     "copied": "Copiado",
     "copyError": "Error al copiar"
   },
-  "footer": "Hecho con <0>Astro</0>, desplegado con <1>Vercel</1> .",
-  "shortcutMenuMessage": "Presiona <0>⌘</0> + <1>K</1> para abrir el menú de comandos 🠖"
+  "footer": "Hecho con <0>Astro</0>, desplegado con <1>Vercel</1>.",
+  "shortcutMenuMessage": "Presiona <0>⌘</0> + <1>K</1> para abrir el menú de comandos 🠖",
+  "meta": {
+    "home": {
+      "title": "Sebastian JF · Desarrollador front-end",
+      "description": "Portfolio de Sebastian JF, desarrollador front-end en Barcelona que crea experiencias web rápidas y claras."
+    },
+    "notFound": {
+      "title": "Página no encontrada · Sebastian JF",
+      "description": "No se ha podido encontrar esta página."
+    }
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "mainNav": "Principal",
+    "changeLanguage": "Cambiar idioma"
+  },
+  "notFound": {
+    "code": "404",
+    "text": "No se ha podido encontrar esta página.",
+    "back": "Volver al inicio"
+  }
 }

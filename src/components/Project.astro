@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { t } from "i18next";
 
 interface Project {
   name: string;
@@ -8,7 +9,6 @@ interface Project {
   built_with: string[];
   url: string;
   image: string;
-  github: string;
 }
 
 interface Props {
@@ -33,8 +33,8 @@ const { projectData } = Astro.props;
       height={400}
       loading="lazy"
     />
-    <div class="project__overlay">
-      <span class="project__button">View Project</span>
+    <div class="project__overlay" aria-hidden="true">
+      <span class="project__button">{t("projects.viewProject")} ↗</span>
     </div>
   </div>
 
@@ -60,18 +60,22 @@ const { projectData } = Astro.props;
     box-shadow:
       0 2px 4px rgba(0, 0, 0, 0.25),
       0 1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all 0.2s ease-out;
-    width: 49%;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.25s var(--ease-out),
+      border-color 0.25s var(--ease-out);
   }
 
   .project:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     border-color: rgba(255, 255, 255, 0.2);
-    /* box-shadow: 
-      0 10px 30px -15px rgba(0, 0, 0, 0.3),
-      0 0 30px -15px rgba(255, 255, 255, 0.1); */
+  }
+
+  .project:active {
+    transform: translateY(0);
   }
 
   .project__image-wrapper {
@@ -90,19 +94,19 @@ const { projectData } = Astro.props;
   .project__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgb(15 15 15 / 0.75);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: all 0.2s ease-out;
+    transition: opacity 0.2s var(--ease-out);
   }
 
   .project__button {
     color: white;
     font-weight: 500;
     transform: translateY(1rem);
-    transition: transform 0.1s ease-out;
+    transition: transform 0.25s var(--ease-out);
   }
 
   .project:hover .project__overlay {
@@ -118,6 +122,8 @@ const { projectData } = Astro.props;
   }
 
   .project__details {
+    flex: 1;
+    justify-content: space-between;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -146,13 +152,8 @@ const { projectData } = Astro.props;
   }
 
   .project__tag {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.55);
     font-size: 0.85rem;
-    transition: color 0.08s ease-out;
-  }
-
-  .project__tag:hover {
-    color: rgba(255, 255, 255, 0.8);
   }
 
   @media (hover: none) {
@@ -165,9 +166,4 @@ const { projectData } = Astro.props;
     }
   }
 
-  @media only screen and (max-width: 768px) {
-    .project {
-      width: 100%;
-    }
-  }
 </style>
