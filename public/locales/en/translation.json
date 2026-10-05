@@ -2,8 +2,7 @@
   "hero": {
     "title": "About me",
     "aboutme2": "I build <0>web experiences</0> focused on clarity, performance, and precision. Based in Barcelona, with a background in Microcomputer Systems and Networks.",
-    "aboutme3": "In this portfolio, you'll find a selection of my work and ongoing development.",
-    "projectsText": "Take a look into",
+    "projectsText": "Take a look at",
     "projectsButton": "my projects",
     "contactText": "Let's talk,",
     "contactButton": "contact me",
@@ -16,7 +15,7 @@
   },
   "experience": {
     "title": "Experience",
-    "currently": "Currently"
+    "currently": "Present"
   },
   "awards": {
     "title": "Awards"
@@ -44,6 +43,14 @@
       "title": "Page not found · Sebastian JF",
       "description": "This page could not be found."
     }
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main",
+    "changeLanguage": "Change language",
+    "newTab": "(opens in a new tab)"
   },
   "notFound": {
     "code": "404",

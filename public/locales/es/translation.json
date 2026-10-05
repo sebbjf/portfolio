@@ -2,7 +2,6 @@
   "hero": {
     "title": "Sobre mí",
     "aboutme2": "Construyo <0>experiencias web</0> centradas en la claridad, el rendimiento y la precisión. Con base en Barcelona y formación en Sistemas Microinformáticos y Redes.",
-    "aboutme3": "En este portfolio encontrarás una selección de mis trabajos y mi desarrollo continuo.",
     "projectsText": "Mira",
     "projectsButton": "mis proyectos",
     "contactText": "Hablemos,",
@@ -44,6 +43,14 @@
       "title": "Página no encontrada · Sebastian JF",
       "description": "No se ha podido encontrar esta página."
     }
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "mainNav": "Principal",
+    "changeLanguage": "Cambiar idioma",
+    "newTab": "(se abre en una pestaña nueva)"
   },
   "notFound": {
     "code": "404",

@@ -39,7 +39,7 @@ const channels = [
         <div class="contact__row">
           <dt>{label}</dt>
           <dd>
-            <a class="contact__link" href={href} {...(external && { target: "_blank", rel: "noopener noreferrer" })}>
+            <a class="contact__link" href={href} {...(external && { target: "_blank", rel: "noopener noreferrer", "aria-describedby": "new-tab-hint" })}>
               {value}
               <span class="contact__arrow" aria-hidden="true">↗</span>
             </a>

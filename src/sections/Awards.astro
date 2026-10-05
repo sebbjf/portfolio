@@ -18,7 +18,7 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
               {localize(a, "title")},
               <em class="entry__org">
                 {a.url ? (
-                  <a class="entry__link" href={a.url} target="_blank" rel="noopener noreferrer">
+                  <a class="entry__link" href={a.url} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
                     {a.event}
                   </a>
                 ) : (

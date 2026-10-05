@@ -20,6 +20,8 @@ const { title, description, noindex = false } = Astro.props;
   </head>
   <body>
     <a class="skip-link" href="#main">{t("a11y.skipToContent")}</a>
+    <!-- Announced after the name of every link that opens a new tab (aria-describedby). -->
+    <span id="new-tab-hint" class="visually-hidden">{t("a11y.newTab")}</span>
     <slot />
   </body>
 </html>
