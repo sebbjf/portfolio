@@ -111,7 +111,6 @@ const { projectData } = Astro.props;
       transform 0.4s var(--ease-out);
   }
 
-  .project__link:hover,
   .project__link:focus-visible {
     .project__title {
       text-decoration-color: currentColor;
@@ -128,7 +127,41 @@ const { projectData } = Astro.props;
 
     .project__thumb {
       filter: none;
-      transform: scale(1.04);
+    }
+  }
+
+  .project__link:active .project__thumb {
+    filter: none;
+    transform: scale(1.02);
+  }
+
+  /* Only devices that can hover get the hover reveal; on touch it would stick after a tap. */
+  @media (hover: hover) {
+    .project__link:hover {
+      .project__title {
+        text-decoration-color: currentColor;
+      }
+
+      .project__arrow {
+        color: var(--text-strong);
+        transform: translate(2px, -2px);
+      }
+
+      .project__media {
+        border-color: var(--border-strong);
+      }
+
+      .project__thumb {
+        filter: none;
+        transform: scale(1.04);
+      }
+    }
+  }
+
+  /* Touch screens never trigger the hover reveal, so show the screenshots in full color. */
+  @media (hover: none) {
+    .project__thumb {
+      filter: none;
     }
   }
 

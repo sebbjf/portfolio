@@ -161,6 +161,10 @@ import CloseIcon from "../icons/close.astro";
     &:hover {
       background-color: rgb(255 255 255 / 0.08);
     }
+
+    &:active {
+      background-color: rgb(255 255 255 / 0.12);
+    }
   }
 
   .header__toggle {
@@ -178,6 +182,26 @@ import CloseIcon from "../icons/close.astro";
 
   .header__toggle[aria-expanded="true"] .header__icon--close {
     display: inline;
+  }
+
+  /* Touch: every control in the bar gets a full-size hit area without changing the bar's look. */
+  @media (pointer: coarse) {
+    .header__title {
+      padding: calc((var(--tap) - 32px) / 2);
+      margin: calc((var(--tap) - 32px) / -2);
+    }
+
+    .header__anchor {
+      display: flex;
+      align-items: center;
+      min-height: var(--tap);
+      box-sizing: border-box;
+    }
+
+    .header__toggle {
+      padding: calc((var(--tap) - 25px) / 2);
+      margin: calc((var(--tap) - 25px) / -2);
+    }
   }
 
   @media only screen and (max-width: 768px) {

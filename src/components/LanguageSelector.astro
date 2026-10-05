@@ -58,6 +58,10 @@ const languages = [
     &[aria-expanded="true"] {
       background-color: rgb(255 255 255 / 0.08);
     }
+
+    &:active {
+      background-color: rgb(255 255 255 / 0.12);
+    }
   }
 
   .lang__options {
@@ -86,12 +90,26 @@ const languages = [
     color: var(--text-strong);
     transition: background-color 0.2s var(--ease-out);
 
-    &:hover {
+    &:hover,
+    &:active {
       background-color: var(--surface-hover);
     }
 
     &[aria-current="true"] {
       color: var(--accent);
+    }
+  }
+
+  @media (pointer: coarse) {
+    .lang__button {
+      min-height: var(--tap);
+      padding-inline: 10px;
+    }
+
+    .lang__options a {
+      display: flex;
+      align-items: center;
+      min-height: var(--tap);
     }
   }
 

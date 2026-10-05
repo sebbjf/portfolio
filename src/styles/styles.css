@@ -24,6 +24,8 @@
 
   --max-w: 46rem;
   --gutter: 24px;
+  /* Minimum hit area for touch input (WCAG 2.5.5). */
+  --tap: 44px;
 
   --z-dropdown: 10;
   --z-header: 100;
@@ -190,10 +192,6 @@ img {
 }
 
 @media only screen and (max-width: 768px) {
-  html {
-    font-size: 15px;
-  }
-
   .content {
     padding: var(--gutter);
   }

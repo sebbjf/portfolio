@@ -101,6 +101,10 @@ import EmailIcon from "../icons/email.astro";
       &:hover {
         text-decoration-color: currentColor;
       }
+
+      &:active {
+        color: var(--text-muted);
+      }
     }
   }
 
@@ -122,6 +126,10 @@ import EmailIcon from "../icons/email.astro";
     &:hover {
       color: var(--text-strong);
     }
+
+    &:active {
+      color: var(--text);
+    }
   }
 
   .hero__status-dot {
@@ -138,6 +146,22 @@ import EmailIcon from "../icons/email.astro";
     }
     75% {
       box-shadow: 0 0 0 6px transparent;
+    }
+  }
+
+  @media (pointer: coarse) {
+    /* Rows of links stay visually tight, but each one is a full-height target. */
+    .hero__contact {
+      row-gap: 0;
+
+      & a {
+        min-height: var(--tap);
+      }
+    }
+
+    .hero__status {
+      min-height: var(--tap);
+      margin-top: 4px;
     }
   }
 

@@ -166,9 +166,58 @@ const channels = [
     white-space: nowrap;
   }
 
+  /* Touch: the row keeps its height, but the link and the copy button fill it. */
+  @media (pointer: coarse) {
+    .contact__row {
+      padding: 0;
+      min-height: calc(var(--tap) + 8px);
+      align-items: center;
+    }
+
+    .contact__row > dd {
+      align-items: center;
+      column-gap: 8px;
+    }
+
+    .contact__link {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+    }
+
+    .contact__copy {
+      position: relative;
+      min-height: 36px;
+      min-width: var(--tap);
+      padding-inline: 12px;
+
+      /* Grow the hit area to the full tap size without making the button look heavier. */
+      &::after {
+        content: "";
+        position: absolute;
+        inset: calc((var(--tap) - 36px) / -2) 0;
+      }
+    }
+  }
+
   @media only screen and (max-width: 768px) {
     .contact__row {
       grid-template-columns: 6.5rem 1fr;
+    }
+  }
+
+  /* Narrow phones: the label sits above its value so the email address never wraps mid-word. */
+  @media only screen and (max-width: 420px) {
+    .contact__row {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 10px;
+
+      & > dt {
+        font-size: 0.85rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text-muted);
+      }
     }
   }
 </style>
