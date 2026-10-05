@@ -3,7 +3,6 @@ import "../styles/normalize.css";
 import "../styles/animations.css";
 import "../styles/styles.css";
 import SEO from "../components/SEO.astro";
-import CommandMenu from "../components/CommandMenu";
 import i18next from "i18next";
 
 interface Props {
@@ -20,8 +19,6 @@ const { title, description } = Astro.props;
     <SEO title={title} description={description} />
   </head>
   <body>
-    <!-- <CommandMenu client:load> -->
     <slot />
-    <!-- </CommandMenu> -->
   </body>
 </html>
