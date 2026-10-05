@@ -1,8 +1,6 @@
 {
   "hero": {
-    "hey": "¡Hola!",
     "title": "Sobre mí",
-    "aboutme1": "Bienvenido/a a mi portfolio.",
     "aboutme2": "Construyo <0>experiencias web</0> centradas en la claridad, el rendimiento y la precisión. Con base en Barcelona y formación en Sistemas Microinformáticos y Redes.",
     "aboutme3": "En este portfolio encontrarás una selección de mis trabajos y mi desarrollo continuo.",
     "projectsText": "Mira",
@@ -18,14 +16,13 @@
   },
   "experience": {
     "title": "Experiencia",
-    "as": "como",
     "currently": "Actualmente"
   },
+  "awards": {
+    "title": "Reconocimientos"
+  },
   "projects": {
-    "title": "Proyectos",
-    "repositoryButton": "Repositorio",
-    "websiteButton": "Web",
-    "viewProject": "Ver proyecto"
+    "title": "Proyectos"
   },
   "contact": {
     "title": "Contacto",
@@ -41,20 +38,13 @@
   "shortcutMenuMessage": "Presiona <0>⌘</0> + <1>K</1> para abrir el menú de comandos 🠖",
   "meta": {
     "home": {
-      "title": "Sebastian JF · Desarrollador front-end",
+      "title": "Sebastian JF · Desarrollador web",
       "description": "Portfolio de Sebastian JF, desarrollador front-end en Barcelona que crea experiencias web rápidas y claras."
     },
     "notFound": {
       "title": "Página no encontrada · Sebastian JF",
       "description": "No se ha podido encontrar esta página."
     }
-  },
-  "a11y": {
-    "skipToContent": "Saltar al contenido",
-    "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú",
-    "mainNav": "Principal",
-    "changeLanguage": "Cambiar idioma"
   },
   "notFound": {
     "code": "404",

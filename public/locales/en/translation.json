@@ -1,8 +1,6 @@
 {
   "hero": {
-    "hey": "Hello!",
     "title": "About me",
-    "aboutme1": "Welcome to my portfolio.",
     "aboutme2": "I build <0>web experiences</0> focused on clarity, performance, and precision. Based in Barcelona, with a background in Microcomputer Systems and Networks.",
     "aboutme3": "In this portfolio, you'll find a selection of my work and ongoing development.",
     "projectsText": "Take a look into",
@@ -18,14 +16,13 @@
   },
   "experience": {
     "title": "Experience",
-    "as": "as",
     "currently": "Currently"
   },
+  "awards": {
+    "title": "Awards"
+  },
   "projects": {
-    "title": "Projects",
-    "repositoryButton": "Repository",
-    "websiteButton": "Website",
-    "viewProject": "View project"
+    "title": "Projects"
   },
   "contact": {
     "title": "Contact",
@@ -41,20 +38,13 @@
   "shortcutMenuMessage": "Press <0>⌘</0> + <1>K</1> to open the command menu 🠖",
   "meta": {
     "home": {
-      "title": "Sebastian JF · Front-end developer",
+      "title": "Sebastian JF · Web developer",
       "description": "Portfolio of Sebastian JF, a front-end developer based in Barcelona building fast, clear web experiences."
     },
     "notFound": {
       "title": "Page not found · Sebastian JF",
       "description": "This page could not be found."
     }
-  },
-  "a11y": {
-    "skipToContent": "Skip to content",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
-    "mainNav": "Main",
-    "changeLanguage": "Change language"
   },
   "notFound": {
     "code": "404",
