@@ -29,14 +29,13 @@
   },
   "contact": {
     "title": "Contacto",
-    "title2": "Ponte en contacto.",
-    "text1": "¡Gracias por visitar mi portfolio! Si tienes una idea de proyecto, una pregunta o simplemente quieres charlar, no dudes en escribirme.",
-    "text2": "Puedes comunicarte a través de",
-    "text3": "si deseas conectarte. Además, estoy disponible en",
-    "text4": "si te resulta más conveniente.",
-    "toCopy": "Haz clic para copiar",
+    "text": "Estoy disponible para trabajar. Si tienes un puesto, un proyecto o simplemente una pregunta, el email es la mejor forma de contactarme.",
+    "email": "Email",
+    "resume": "Currículum",
+    "copy": "Copiar",
+    "copyLabel": "Copiar dirección de email",
     "copied": "Copiado",
-    "copyError": "Error al copiar"
+    "copyError": "No se pudo copiar"
   },
   "footer": "Hecho con <0>Astro</0>, desplegado con <1>Vercel</1>.",
   "shortcutMenuMessage": "Presiona <0>⌘</0> + <1>K</1> para abrir el menú de comandos 🠖",
