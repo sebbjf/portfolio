@@ -181,8 +181,10 @@ import CloseIcon from "../icons/close.astro";
   }
 
   @media only screen and (max-width: 768px) {
+    /* The <nav> stays in the flex row (its list is absolutely positioned), so push the toggle to the end. */
     .header__toggle {
       display: block;
+      order: 1;
     }
 
     .header__list {

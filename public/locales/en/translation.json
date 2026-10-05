@@ -9,7 +9,9 @@
     "projectsButton": "my projects",
     "contactText": "Let's talk,",
     "contactButton": "contact me",
-    "availableForWork": "Available for work"
+    "availableForWork": "Available for work",
+    "role": "Front-end developer",
+    "location": "Barcelona, Spain"
   },
   "skills": {
     "title": "Skills"

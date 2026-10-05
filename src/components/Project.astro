@@ -23,36 +23,31 @@ const { projectData } = Astro.props;
         class="project__thumb"
         src={"/img/projects/" + projectData.image}
         alt=""
-        width={400}
-        height={250}
+        width={640}
+        height={400}
         loading="lazy"
         decoding="async"
       />
     </span>
     <div class="project__body">
-      <h3 class="project__title">{projectData.name}</h3>
+      <div class="project__head">
+        <h3 class="project__title">{projectData.name}</h3>
+        <svg class="project__arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <p class="project__stack">{projectData.built_with.join(", ")}</p>
       <p class="project__description">{projectData.description}</p>
-      <ul class="project__tags">
-        {projectData.built_with.map((tech) => <li>{tech}</li>)}
-      </ul>
     </div>
-    <svg class="project__arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-      <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
   </a>
 </li>
 
 <style>
-  .project {
-    border-bottom: 1px solid var(--border);
-  }
-
   .project__link {
     display: grid;
-    grid-template-columns: 200px minmax(0, 1fr) auto;
-    gap: 28px;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 26px;
     align-items: start;
-    padding: 28px 4px;
     color: inherit;
     border-radius: var(--radius-sm);
   }
@@ -73,56 +68,58 @@ const { projectData } = Astro.props;
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    transition: transform 0.6s var(--ease-out);
+    filter: grayscale(0.35);
+    transition:
+      transform 0.6s var(--ease-out),
+      filter 0.6s var(--ease-out);
+  }
+
+  .project__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
   }
 
   .project__title {
     margin: 0;
-    font-size: 1.6rem;
-    letter-spacing: -0.025em;
-    color: var(--text-strong);
-    transition:
-      color 0.3s var(--ease-out),
-      transform 0.45s var(--ease-out);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.25s var(--ease-out);
+  }
+
+  .project__stack {
+    margin: 0;
+    font-style: italic;
+    color: var(--text);
   }
 
   .project__description {
-    max-width: 52ch;
-    margin: 6px 0 0;
+    margin: 4px 0 0;
     color: var(--text-muted);
   }
 
-  .project__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 14px;
-    margin: 14px 0 0;
-    font-size: 0.85rem;
-    color: var(--text-subtle);
-
-    & > li {
-      text-transform: lowercase;
-    }
-  }
-
   .project__arrow {
-    margin-top: 8px;
+    flex-shrink: 0;
+    align-self: center;
     color: var(--text-subtle);
     transition:
-      color 0.3s var(--ease-out),
-      transform 0.45s var(--ease-out);
+      color 0.25s var(--ease-out),
+      transform 0.4s var(--ease-out);
   }
 
   .project__link:hover,
   .project__link:focus-visible {
     .project__title {
-      color: var(--accent);
-      transform: translateX(6px);
+      text-decoration-color: currentColor;
     }
 
     .project__arrow {
-      color: var(--accent);
-      transform: translate(3px, -3px);
+      color: var(--text-strong);
+      transform: translate(2px, -2px);
     }
 
     .project__media {
@@ -130,31 +127,16 @@ const { projectData } = Astro.props;
     }
 
     .project__thumb {
-      transform: scale(1.05);
+      filter: none;
+      transform: scale(1.04);
     }
-  }
-
-  .project__link:active .project__title {
-    transform: translateX(4px);
   }
 
   @media only screen and (max-width: 768px) {
+    /* Full-width screenshot above the text on small screens. */
     .project__link {
-      grid-template-columns: 112px minmax(0, 1fr);
-      gap: 16px;
-      padding: 22px 0;
-    }
-
-    .project__media {
-      border-radius: var(--radius-sm);
-    }
-
-    .project__title {
-      font-size: 1.35rem;
-    }
-
-    .project__arrow {
-      display: none;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
     }
   }
 </style>

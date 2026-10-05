@@ -89,13 +89,14 @@ import EmailIcon from "../icons/email.astro";
     z-index: 1;
   }
 
+  /* Soft white glow behind the title, matching the light at the top of the page. */
   .contact__title::before {
     content: "";
     position: absolute;
-    inset: -40px 10% -160px;
-    background: radial-gradient(ellipse at center, var(--accent), transparent 70%);
-    filter: blur(60px);
-    opacity: 0.12;
+    inset: -60px 5% -220px;
+    background: radial-gradient(ellipse at center, rgb(255 255 255 / 0.5), transparent 65%);
+    filter: blur(70px);
+    opacity: 0.18;
     z-index: -5;
     pointer-events: none;
   }

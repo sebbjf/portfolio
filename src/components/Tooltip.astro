@@ -34,7 +34,7 @@ const { content, ...props } = Astro.props;
     display: none;
     font-size: 0.875rem;
     color: var(--text-strong);
-    background-color: #252525;
+    background-color: var(--surface-hover);
     border-radius: 6px;
     padding: 6px 8px;
     position: absolute;
@@ -57,6 +57,6 @@ const { content, ...props } = Astro.props;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #252525 transparent transparent transparent;
+    border-color: var(--surface-hover) transparent transparent transparent;
   }
 </style>

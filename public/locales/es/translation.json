@@ -9,7 +9,9 @@
     "projectsButton": "mis proyectos",
     "contactText": "Hablemos,",
     "contactButton": "contáctame",
-    "availableForWork": "Disponible para trabajar"
+    "availableForWork": "Disponible para trabajar",
+    "role": "Desarrollador front-end",
+    "location": "Barcelona, España"
   },
   "skills": {
     "title": "Habilidades"

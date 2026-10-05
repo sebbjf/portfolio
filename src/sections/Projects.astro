@@ -10,7 +10,7 @@ const getProjectDescription = (project, language) => {
 const currentLanguage = i18next.language;
 ---
 
-<section>
+<section aria-labelledby="projects">
   <h2 id="projects">{t("projects.title")}</h2>
   <ol class="projects__list">
     {
@@ -26,6 +26,8 @@ const currentLanguage = i18next.language;
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
 </style>

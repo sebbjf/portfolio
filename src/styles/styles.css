@@ -1,29 +1,29 @@
 :root {
   color-scheme: dark;
 
-  --text: #fff4db;
-  --text-strong: #ffffff;
-  --text-muted: #b8b2a6;
-  --text-subtle: #8a857c;
-  --background: #0f0f0f;
-  --surface: #161616;
-  --surface-hover: #1d1d1d;
-  --border: #2b2b2b;
-  --border-strong: #3d3d3d;
+  --text: #e9e6df;
+  --text-strong: #f7f5f0;
+  --text-muted: #b5b1a8;
+  --text-subtle: #8c887f;
+  --background: #121211;
+  --surface: #1a1a18;
+  --surface-hover: #22221f;
+  --border: #2e2d2a;
+  --border-strong: #4a4843;
 
-  /* Single accent color. Green is reserved for the "available" status. */
-  --accent: #9be4e4;
-  --accent-soft: rgb(155 228 228 / 0.14);
-  --status: #62bd19;
+  /* No accent hue: the accent is just brighter ink. Green marks the "available" status only. */
+  --accent: var(--text-strong);
+  --accent-soft: rgb(247 245 240 / 0.1);
+  --status: #7fbf5a;
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --max-w: 45rem;
-  --gutter: 30px;
+  --max-w: 46rem;
+  --gutter: 24px;
 
   --z-dropdown: 10;
   --z-header: 100;
@@ -90,9 +90,15 @@ body {
 h1,
 h2,
 h3 {
+  color: var(--text-strong);
   line-height: 1.2;
   letter-spacing: -0.015em;
   text-wrap: balance;
+}
+
+h2 {
+  font-size: 1.875rem;
+  margin-bottom: 32px;
 }
 
 p {
@@ -120,18 +126,13 @@ button {
 
 /* Keyboard focus must always be visible. */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--text-strong);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
 
 section {
   margin: 72px 0;
-}
-
-h2 {
-  font-size: 1.875rem;
-  margin-bottom: 32px;
 }
 
 img {
@@ -144,10 +145,8 @@ img {
 }
 
 .highlight {
-  background-color: var(--accent-soft);
   color: var(--text-strong);
-  padding: 0 4px;
-  border-radius: 3px;
+  font-weight: 600;
 }
 
 .skip-link {
@@ -157,7 +156,7 @@ img {
   z-index: calc(var(--z-header) + 1);
   padding: 8px 14px;
   border-radius: var(--radius-md);
-  background: var(--accent);
+  background: var(--text-strong);
   color: var(--background);
   font-weight: bold;
   transform: translateY(-200%);
@@ -168,7 +167,7 @@ img {
 }
 
 ::selection {
-  background-color: var(--accent);
+  background-color: var(--text-strong);
   color: var(--background);
 }
 
@@ -187,7 +186,7 @@ img {
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+  background-color: #5c5a54;
 }
 
 @media only screen and (max-width: 768px) {
