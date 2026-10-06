@@ -1,11 +1,41 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-05T22:28:23.890Z",
+  "generatedAt": "2026-10-06T11:28:28.689Z",
   "title": "Design System: Sebastian JF Portfolio",
   "extensions": {
     "colorMeta": {
-      "bright-ink": {
+      "wine": {
         "role": "primary",
+        "displayName": "Wine",
+        "canonical": "oklch(62.0% 0.1195 9.6)",
+        "tonalRamp": [
+          "#2c0002",
+          "#4e0017",
+          "#701b32",
+          "#943c4f",
+          "#bb5f70",
+          "#e48494",
+          "#ffa9b9",
+          "#ffcddd"
+        ]
+      },
+      "burgundy": {
+        "role": "primary",
+        "displayName": "Burgundy",
+        "canonical": "oklch(45.0% 0.0904 9.7)",
+        "tonalRamp": [
+          "#250004",
+          "#45081a",
+          "#662835",
+          "#884652",
+          "#af6974",
+          "#d68d98",
+          "#ffb2bd",
+          "#ffd6e1"
+        ]
+      },
+      "bright-ink": {
+        "role": "neutral",
         "displayName": "Bright Ink",
         "canonical": "oklch(97.0% 0.0070 88.6)",
         "tonalRamp": [
@@ -272,9 +302,9 @@
       "name": "Skill Tile",
       "kind": "card",
       "refersTo": "skill-tile",
-      "description": "Hairline tile with a monochrome logo above a muted name; on mouse hover the logo reveals its brand color.",
+      "description": "Static hairline tile with a monochrome logo above a muted name; on mouse hover only the logo's brand color is revealed.",
       "html": "<div class=\"ds-skill\" style=\"--brand:#E34F26\"><svg class=\"ds-skill__icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M4 3h16l-1.5 17L12 22l-6.5-2z\"></path></svg><span class=\"ds-skill__name\">HTML5</span></div>",
-      "css": ".ds-skill { display: inline-flex; flex-direction: column; align-items: center; gap: 10px; width: 112px; padding: 18px 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: AtkinsonHyperlegible, system-ui, sans-serif; text-align: center; transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out); } .ds-skill__icon { width: 26px; height: 26px; color: var(--text-strong); opacity: 0.85; transition: color 0.3s var(--ease-out), opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out); } .ds-skill__name { font-size: 0.85rem; line-height: 1.3; color: var(--text-muted); transition: color 0.25s var(--ease-out); } @media (hover: hover) { .ds-skill:hover { background-color: var(--surface-hover); border-color: var(--border-strong); } .ds-skill:hover .ds-skill__icon { color: var(--brand); opacity: 1; transform: translateY(-2px); } .ds-skill:hover .ds-skill__name { color: var(--text); } }"
+      "css": ".ds-skill { display: inline-flex; flex-direction: column; align-items: center; gap: 10px; width: 112px; padding: 18px 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: AtkinsonHyperlegible, system-ui, sans-serif; text-align: center; transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out); } .ds-skill__icon { width: 26px; height: 26px; color: var(--text-strong); opacity: 0.85; transition: color 0.3s var(--ease-out), opacity 0.3s var(--ease-out); } .ds-skill__name { font-size: 0.85rem; line-height: 1.3; color: var(--text-muted); transition: color 0.25s var(--ease-out); } @media (hover: hover) { .ds-skill:hover .ds-skill__icon { color: var(--brand); opacity: 1; } .ds-skill:hover .ds-skill__name { color: var(--text); } }"
     },
     {
       "name": "Availability Status",

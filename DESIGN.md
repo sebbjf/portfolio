@@ -85,7 +85,6 @@ components:
     rounded: "{rounded.md}"
     padding: "18px 6px 14px"
   skill-tile-hover:
-    backgroundColor: "{colors.pressed-paper}"
     textColor: "{colors.warm-ink}"
   project-thumbnail:
     backgroundColor: "{colors.raised-paper}"
@@ -211,7 +210,7 @@ A whole-row link. The screenshot sits in a 16:10 frame with a 6px radius and a H
 A definition list styled as a table: Bright Ink bold labels in an 8rem column, values on the right, rows separated by Hairlines with a Hairline above the first row. Under 420px the label moves above its value.
 
 ### Skill Tile
-A square-ish tile with a 1px Hairline outline and a 6px radius: a 26px logo above the name in Faded Ink (0.85rem). At rest every logo is rendered in the same bright ink, whatever colors its source file uses. On hover (mouse only, never on touch) the tile takes the Pressed Paper tint and a Rule Line border, the name brightens to Warm Ink, and the logo lifts 2px and reveals its brand color. That colour reveal is the one deliberate exception to the Ink-Only Rule: it's earned by the hover, and it only shows logos.
+A square-ish tile with a 1px Hairline outline and a 6px radius: a 26px logo above the name in Faded Ink (0.85rem). At rest every logo is rendered in the same bright ink, whatever colors its source file uses. On hover (mouse only, never on touch) the logo crossfades to its brand color and the name brightens to Warm Ink. Nothing else changes: no tint, border change or lift, because the tiles aren't interactive and must not look clickable. That colour reveal is the one deliberate exception to the Ink-Only Rule: it's earned by the hover, and it only shows logos.
 
 ### Navigation
 A sticky bar with a 20px radius, a translucent dark fill and a 10px backdrop blur, holding the logo, section links and the language menu. It hides while scrolling down and returns when scrolling up or when it receives keyboard focus. Links are Bright Ink with a 4px radius and a faint white tint on hover. Below 768px the links move into a floating panel opened by a menu button.

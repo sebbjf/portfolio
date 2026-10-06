@@ -33,9 +33,6 @@ const { name, icon, color } = Astro.props;
 
     /* Exit: slower than the entrance, so sweeping across the grid leaves a soft trail. */
     --fade: 320ms;
-    transition:
-      background-color var(--fade) var(--ease-out),
-      border-color var(--fade) var(--ease-out);
   }
 
   /* Two copies of the logo share one cell: plain ink on top, brand color underneath.
@@ -44,7 +41,6 @@ const { name, icon, color } = Astro.props;
     display: grid;
     width: 26px;
     height: 26px;
-    transition: transform var(--fade) var(--ease-out);
   }
 
   .skill__icon {
@@ -73,16 +69,11 @@ const { name, icon, color } = Astro.props;
     transition: color var(--fade) var(--ease-out);
   }
 
-  /* Mouse only, so the effect never sticks after a tap. Entrance is quick: 180ms. */
+  /* The tiles aren't interactive, so hover only reveals color: no tint, border change or lift,
+     which would read as "clickable". Mouse only, so it never sticks after a tap. Entrance is quick: 180ms. */
   @media (hover: hover) {
     .skill:hover {
       --fade: 180ms;
-      background-color: var(--surface-hover);
-      border-color: var(--border-strong);
-
-      .skill__logo {
-        transform: translateY(-2px);
-      }
 
       .skill__icon--ink {
         opacity: 0;
@@ -95,13 +86,6 @@ const { name, icon, color } = Astro.props;
       .skill__name {
         color: var(--text);
       }
-    }
-  }
-
-  /* Reduced motion keeps the color reveal but drops the lift. */
-  @media (prefers-reduced-motion: reduce) {
-    .skill:hover .skill__logo {
-      transform: none;
     }
   }
 </style>
