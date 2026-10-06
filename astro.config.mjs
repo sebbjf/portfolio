@@ -3,7 +3,6 @@ import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel/static";
 import astroI18next from "astro-i18next";
 
-import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,7 +21,6 @@ export default defineConfig({
       filter: (page) => !/\/(404|archive|freelance)\/$/.test(new URL(page).pathname),
     }),
     astroI18next(),
-    partytown(),
   ],
   // Static output: every page is prerendered. astro-i18next switches the global
   // language per page with changeLanguage(), which is only safe at build time.

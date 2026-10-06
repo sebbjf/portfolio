@@ -59,18 +59,4 @@ const ogImage = new URL(`/og/og-${i18next.language === "es" ? "es" : "en"}.png`,
 <meta name="author" content="Sebastian Jamito" />
 <meta name="generator" content={Astro.generator} />
 
-<script
-  type="text/partytown"
-  async
-  src="https://www.googletagmanager.com/gtag/js?id=G-R50CY9YR3V"></script>
-<script type="text/partytown">
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
-
-  gtag("config", "G-R50CY9YR3V");
-</script>
-
 <HeadHrefLangs />
