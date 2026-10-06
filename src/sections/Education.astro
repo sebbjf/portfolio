@@ -2,6 +2,7 @@
 import i18next, { t } from "i18next";
 import education from "../consts/education.js";
 import { formatPeriod } from "../utils/formatPeriod.js";
+import "../styles/entries.css";
 
 const currentLanguage = i18next.language;
 
@@ -30,13 +31,6 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
 </section>
 
 <style>
-  .entries {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin: 0;
-  }
-
   /* The logo sits in its own column, so the text keeps the résumé entry's alignment. */
   .entry {
     display: grid;
@@ -66,9 +60,6 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
 
   .entry__title {
     grid-area: title;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
   }
 
   .entry__org {
@@ -79,10 +70,6 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
 
   .entry__date {
     grid-area: date;
-    margin: 0;
-    font-variant-numeric: tabular-nums;
-    color: var(--text);
-    white-space: nowrap;
   }
 
   /* Phones: one column, reading course, institution, then date. */

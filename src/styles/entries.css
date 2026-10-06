@@ -1,0 +1,54 @@
+/* The résumé entry, shared by Experience, Education and Awards: bold title, italic organization,
+   date on the right with tabular numerals, muted description below. Sections import this file. */
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+}
+
+.entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  column-gap: 24px;
+}
+
+.entry__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.entry__org {
+  font-weight: 400;
+}
+
+.entry__link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s var(--ease-out);
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:active {
+    color: var(--text-muted);
+  }
+}
+
+.entry__date {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.entry__description {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+}
