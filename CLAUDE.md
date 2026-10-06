@@ -5,16 +5,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 - `npm run dev`: Astro dev server (`npm run dev:host` exposes it on the LAN)
-- `npm run build`: runs `astro build`, then `scripts/fix-vercel-runtime.mjs` (a no-op while the site is static)
+- `npm run build`: `astro build` (output goes to `.vercel/output/`)
 - `npm run preview`: preview the build
 
 There are no tests and no linter.
 
 ## Architecture
 
-This is a personal portfolio site (sebastianjf.com) built with Astro 4 and deployed to Vercel. It uses `output: "static"` with the `@astrojs/vercel/static` adapter, so every page is prerendered and no serverless functions are deployed.
+This is a personal portfolio site (sebastianjf.com) built with Astro 7 and deployed to Vercel (Node >= 22.12, see `engines` in `package.json`). It uses `output: "static"` with the `@astrojs/vercel` adapter, so every page is prerendered and no serverless functions are deployed.
 
-**Vercel runtime workaround:** `@astrojs/vercel@7` is the last adapter version that supports Astro 4. It only recognizes Node 18 and 20, and for any other version it falls back to `nodejs18.x`, which Vercel rejects. If server output is ever reintroduced, `scripts/fix-vercel-runtime.mjs` rewrites `runtime` in `.vercel/output/functions/**/.vc-config.json` to the Node version used for the build. It exits early when there are no functions.
+**Whitespace:** `compressHTML: true` in `astro.config.mjs` keeps Astro's lossless whitespace handling. Astro 7's default (`"jsx"`) drops line breaks between text and tags, which glues words together in templates that wrap text across lines.
 
 **Pages are composed from sections:** `src/pages/*.astro` assemble the components in `src/sections/` (Header, AboutMe, Skills, Experience, Projects, Contact, Footer) inside `src/layouts/Layout.astro`. Content data (projects, experience, skills) lives in plain JS arrays in `src/consts/`, not in content collections.
 
