@@ -26,6 +26,6 @@ This is a personal portfolio site (sebastianjf.com) built with Astro 4 and deplo
 - UI strings are in `public/locales/{en,es}/translation.json`, including page titles and descriptions (`meta.*`) and accessibility labels (`a11y.*`). Components read them with `t("key")` from `i18next` and build links with `localizePath()` from `astro-i18next`. Don't hardcode user-facing text; strings that client scripts need are passed in through `data-*` attributes (see `Contact.astro` and `Header.astro`).
 - Data in `src/consts/*.js` handles translation inline with an optional `translation.es` object per entry; sections choose between it and the default using `i18next.language`.
 
-**SEO:** `src/components/SEO.astro` derives the canonical URL from `site` in `astro.config.mjs`. Pages that should not be indexed pass `noindex` to `Layout`. The sitemap `filter` in `astro.config.mjs` excludes 404 and placeholder pages.
+**SEO:** `src/components/SEO.astro` derives the canonical URL from `site` in `astro.config.mjs`. Pages that should not be indexed pass `noindex` to `Layout`. The sitemap `filter` in `astro.config.mjs` excludes the 404 pages.
 
 **Redirects:** `/resume` and `/es/resume` redirect to PDFs in `public/files/` through `vercel.json`.

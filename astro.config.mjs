@@ -17,8 +17,8 @@ export default defineConfig({
   site: "https://sebastianjf.com",
   integrations: [
     sitemap({
-      // Keep error pages and unfinished placeholder pages out of search engines.
-      filter: (page) => !/\/(404|archive|freelance)\/$/.test(new URL(page).pathname),
+      // Keep the error pages out of search engines.
+      filter: (page) => !/\/404\/$/.test(new URL(page).pathname),
     }),
     astroI18next(),
   ],
