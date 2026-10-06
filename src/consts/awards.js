@@ -4,6 +4,7 @@ const awards = [
     event: "Programame Terrassa",
     url: "https://programame.com/",
     date: "2026",
+    firstPlace: true,
     description: "Algorithmic programming competition (Java).",
     translation: {
       es: {

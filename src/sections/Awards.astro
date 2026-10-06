@@ -1,6 +1,7 @@
 ---
 import i18next, { t } from "i18next";
 import awards from "../consts/awards.js";
+import TrophyIcon from "../icons/trophy.astro";
 import "../styles/entries.css";
 
 const currentLanguage = i18next.language;
@@ -16,6 +17,7 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
         <li class="entry">
           <div class="entry__head">
             <h3 class="entry__title">
+              {a.firstPlace && <TrophyIcon class="trophy" aria-hidden="true" />}
               {localize(a, "title")},
               <em class="entry__org">
                 {a.url ? (
@@ -35,3 +37,15 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
     }
   </ul>
 </section>
+
+<style>
+  /* Inline with the title; the title already says "First Place", so the icon is decorative. */
+  .trophy {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.12em;
+    vertical-align: -0.125em;
+    color: var(--trophy);
+  }
+</style>
