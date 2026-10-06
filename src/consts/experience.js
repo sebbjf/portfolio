@@ -24,6 +24,7 @@ const experience = [
     endDate: null,
     translation: {
       es: {
+        position: "Asistente Informático (Prácticas)",
         description:
           "Experiencia Erasmus+. Tareas como soporte y mantenimiento de equipos informáticos, gestión de servidores y desarrollo web.",
       },
