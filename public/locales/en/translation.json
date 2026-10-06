@@ -1,11 +1,11 @@
 {
   "hero": {
     "title": "About me",
-    "aboutme2": "I build <0>web experiences</0> focused on clarity, performance, and precision. Based in Barcelona, with a background in Microcomputer Systems and Networks.",
-    "projectsText": "Take a look at",
+    "about": "Web Application Development student at Institut TIC de Barcelona. I design interfaces and build them with <0>Astro and React</0>. Right now I'm strengthening my backend skills and getting into machine learning. Before that, I trained and worked in IT support.",
+    "projectsText": "See",
     "projectsButton": "my projects",
-    "contactText": "Let's talk,",
-    "contactButton": "contact me",
+    "contactText": "or",
+    "contactButton": "get in touch",
     "availableForWork": "Available for work",
     "role": "Web developer",
     "location": "Barcelona, Spain",
@@ -41,7 +41,7 @@
   "meta": {
     "home": {
       "title": "Sebastian Jamito · Web developer",
-      "description": "Portfolio of Sebastian Jamito, a web developer based in Barcelona building fast, clear web experiences."
+      "description": "Web Application Development student in Barcelona. I design interfaces, build them with Astro and React, and I'm getting into backend and machine learning."
     },
     "notFound": {
       "title": "Page not found · Sebastian Jamito",

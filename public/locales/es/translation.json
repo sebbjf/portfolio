@@ -1,11 +1,11 @@
 {
   "hero": {
     "title": "Sobre mí",
-    "aboutme2": "Construyo <0>experiencias web</0> centradas en la claridad, el rendimiento y la precisión. Con base en Barcelona y formación en Sistemas Microinformáticos y Redes.",
+    "about": "Estudiante de Desarrollo de Aplicaciones Web en el Institut TIC de Barcelona. Diseño interfaces y las desarrollo con <0>Astro y React</0>. Ahora mismo estoy reforzando mis conocimientos de backend y adentrándome en el machine learning. Antes, me formé y trabajé en soporte informático.",
     "projectsText": "Mira",
     "projectsButton": "mis proyectos",
-    "contactText": "Hablemos,",
-    "contactButton": "contáctame",
+    "contactText": "o",
+    "contactButton": "escríbeme",
     "availableForWork": "Disponible para trabajar",
     "role": "Desarrollador web",
     "location": "Barcelona, España",
@@ -41,7 +41,7 @@
   "meta": {
     "home": {
       "title": "Sebastian Jamito · Desarrollador web",
-      "description": "Portfolio de Sebastian Jamito, desarrollador web en Barcelona que crea experiencias web rápidas y claras."
+      "description": "Estudiante de Desarrollo de Aplicaciones Web en Barcelona. Diseño interfaces, las creo con Astro y React y me estoy iniciando en backend y machine learning."
     },
     "notFound": {
       "title": "Página no encontrada · Sebastian Jamito",
