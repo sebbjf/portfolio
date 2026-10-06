@@ -1,12 +1,11 @@
 ---
-import { changeLanguage, t } from "i18next";
-import { localizePath } from "astro-i18next";
+import { useTranslations, localizePath } from "../utils/i18n";
 import Layout from "../layouts/Layout.astro";
 import AuraLight from "../components/AuraLight.astro";
 import Header from "../sections/Header.astro";
 import Footer from "../sections/Footer.astro";
 
-changeLanguage("en");
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Layout title={t("meta.notFound.title")} description={t("meta.notFound.description")} noindex>
@@ -16,7 +15,7 @@ changeLanguage("en");
     <main id="main" class="not-found">
       <h1 class="not-found__code accent">{t("notFound.code")}</h1>
       <p class="not-found__text">{t("notFound.text")}</p>
-      <a class="not-found__back" href={localizePath("/")}>← {t("notFound.back")}</a>
+      <a class="not-found__back" href={localizePath("/", Astro.currentLocale)}>← {t("notFound.back")}</a>
     </main>
     <Footer />
   </div>

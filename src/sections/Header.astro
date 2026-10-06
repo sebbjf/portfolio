@@ -1,13 +1,14 @@
 ---
-import { t } from "i18next";
-import { localizePath } from "astro-i18next";
+import { useTranslations, localizePath } from "../utils/i18n";
 import LanguageSelector from "../components/LanguageSelector.astro";
 import MenuIcon from "../icons/hamburguer-menu.astro";
 import CloseIcon from "../icons/close.astro";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <header class="header__container" id="header">
-  <a href={localizePath("/")} class="header__title" aria-label="Sebastian Jamito">
+  <a href={localizePath("/", Astro.currentLocale)} class="header__title" aria-label="Sebastian Jamito">
     <img class="header__logo" src="/img/logo/seb-white.png" alt="" width="32" height="32" />
   </a>
   <button
@@ -25,10 +26,10 @@ import CloseIcon from "../icons/close.astro";
   </button>
   <nav aria-label={t("a11y.mainNav")}>
     <ul class="header__list" id="header-navbar">
-      <li><a class="header__anchor" href={localizePath("/#")}>{t("hero.title")}</a></li>
-      <li><a class="header__anchor" href={localizePath("/#experience")}>{t("experience.title")}</a></li>
-      <li><a class="header__anchor" href={localizePath("/#projects")}>{t("projects.title")}</a></li>
-      <li><a class="header__anchor" href={localizePath("/#contact")}>{t("contact.title")}</a></li>
+      <li><a class="header__anchor" href={localizePath("/#", Astro.currentLocale)}>{t("hero.title")}</a></li>
+      <li><a class="header__anchor" href={localizePath("/#experience", Astro.currentLocale)}>{t("experience.title")}</a></li>
+      <li><a class="header__anchor" href={localizePath("/#projects", Astro.currentLocale)}>{t("projects.title")}</a></li>
+      <li><a class="header__anchor" href={localizePath("/#contact", Astro.currentLocale)}>{t("contact.title")}</a></li>
       <li><LanguageSelector /></li>
     </ul>
   </nav>

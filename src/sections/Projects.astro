@@ -1,13 +1,15 @@
 ---
-import i18next, { t } from "i18next";
+import { useTranslations } from "../utils/i18n";
 import Project from "../components/Project.astro";
 import projects from "../consts/projects";
+
+const t = useTranslations(Astro.currentLocale);
 
 const getProjectDescription = (project, language) => {
   return project.translation && project.translation[language] ? project.translation[language].description : project.description;
 };
 
-const currentLanguage = i18next.language;
+const currentLanguage = Astro.currentLocale;
 ---
 
 <section aria-labelledby="projects">

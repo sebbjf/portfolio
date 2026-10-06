@@ -1,0 +1,25 @@
+---
+import { parse } from "node-html-parser";
+import { useTranslations } from "../utils/i18n";
+
+interface Props {
+  i18nKey: string;
+}
+
+// Renders a translation that contains markup. Each <n>text</n> in the string is
+// replaced by the slot's nth element with its content set to that text, so the
+// element keeps its attributes (href, class...) in every language.
+const { i18nKey } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+const slot = parse(await Astro.slots.render("default"));
+const elements = slot.childNodes.filter((node) => node.nodeType === 1);
+
+const html = t(i18nKey).replace(/<(\d+)>(.*?)<\/\1>/g, (_, index, text) => {
+  const element = elements[Number(index)];
+  if (!element) return text;
+  element.set_content(text);
+  return element.toString();
+});
+---
+
+<Fragment set:html={html} />

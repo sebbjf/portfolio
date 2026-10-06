@@ -8,7 +8,7 @@ My personal site, in English and Spanish.
 
 [**sebastianjf.com**](https://sebastianjf.com)
 
-![Astro](https://img.shields.io/badge/Astro-4-0d0d0d?style=flat-square&logo=astro&logoColor=white)
+![Astro](https://img.shields.io/badge/Astro-7-0d0d0d?style=flat-square&logo=astro&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-static-0d0d0d?style=flat-square&logo=vercel&logoColor=white)
 ![i18n](https://img.shields.io/badge/i18n-en%20%C2%B7%20es-0d0d0d?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-0d0d0d?style=flat-square)
