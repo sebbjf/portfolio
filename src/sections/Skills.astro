@@ -1,7 +1,9 @@
 ---
-import { t } from "i18next";
+import { useTranslations } from "../utils/i18n";
 import skills from "../consts/skills.js";
 import Skill from "../components/Skill.astro";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <section aria-labelledby="skills">
