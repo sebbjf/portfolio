@@ -1,10 +1,12 @@
 ---
-import i18next, { t } from "i18next";
+import { useTranslations } from "../utils/i18n";
 import awards from "../consts/awards.js";
 import TrophyIcon from "../icons/trophy.astro";
 import "../styles/entries.css";
 
-const currentLanguage = i18next.language;
+const t = useTranslations(Astro.currentLocale);
+
+const currentLanguage = Astro.currentLocale;
 
 const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[key]) || a[key];
 ---

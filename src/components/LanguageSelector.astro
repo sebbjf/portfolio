@@ -1,8 +1,9 @@
 ---
-import i18next, { t } from "i18next";
-import { localizePath } from "astro-i18next";
+import { useTranslations, localizePath } from "../utils/i18n";
 import LanguageIcon from "../icons/language.astro";
 import ArrowDown from "../icons/arrow-down.astro";
+
+const t = useTranslations(Astro.currentLocale);
 
 const { pathname } = Astro.url;
 const languages = [
@@ -31,7 +32,7 @@ const languages = [
             href={localizePath(pathname, code)}
             hreflang={code}
             lang={code}
-            aria-current={i18next.language === code ? "true" : undefined}
+            aria-current={Astro.currentLocale === code ? "true" : undefined}
           >
             {label}
           </a>

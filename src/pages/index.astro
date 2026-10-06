@@ -1,5 +1,5 @@
 ---
-import { changeLanguage, t } from "i18next";
+import { useTranslations } from "../utils/i18n";
 import Layout from "../layouts/Layout.astro";
 import AuraLight from "../components/AuraLight.astro";
 import AboutMe from "../sections/AboutMe.astro";
@@ -12,7 +12,7 @@ import Awards from "../sections/Awards.astro";
 import Projects from "../sections/Projects.astro";
 import Contact from "../sections/Contact.astro";
 
-changeLanguage("en");
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Layout title={t("meta.home.title")} description={t("meta.home.description")}>

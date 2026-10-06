@@ -1,9 +1,11 @@
 ---
-import { t } from "i18next";
-import { Trans } from "astro-i18next/components";
+import Trans from "../components/Trans.astro";
+import { useTranslations } from "../utils/i18n";
 import GithubIcon from "../icons/github.astro";
 // import LinkedinIcon from "../icons/linkedin.astro";
 import EmailIcon from "../icons/email.astro";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <header class="hero" id="aboutme">

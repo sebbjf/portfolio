@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel/static";
-import astroI18next from "astro-i18next";
 
 
 // https://astro.build/config
@@ -20,10 +19,15 @@ export default defineConfig({
       // Keep the error pages out of search engines.
       filter: (page) => !/\/404\/$/.test(new URL(page).pathname),
     }),
-    astroI18next(),
   ],
-  // Static output: every page is prerendered. astro-i18next switches the global
-  // language per page with changeLanguage(), which is only safe at build time.
+  // English has no prefix and Spanish lives under /es/. Astro.currentLocale comes
+  // from the URL, so components get the right language without global state.
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    routing: { prefixDefaultLocale: false },
+  },
+  // Static output: every page is prerendered and no serverless functions are deployed.
   output: "static",
   adapter: vercel({
     webAnalytics: {

@@ -8,14 +8,12 @@
     "start": "astro dev",
     "build": "astro build && node scripts/fix-vercel-runtime.mjs",
     "preview": "astro preview",
-    "astro": "astro",
-    "i18n": "npx astro-i18next generate"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.1.2",
     "@astrojs/vercel": "^7.7.1",
     "astro": "^4.4.15",
-    "astro-i18next": "^1.0.0-beta.21",
     "node-html-parser": "^7.0.1"
   },
   "devDependencies": {

@@ -1,6 +1,5 @@
 ---
-import { HeadHrefLangs } from "astro-i18next/components";
-import i18next from "i18next";
+import { locales, localizePath } from "../utils/i18n";
 
 interface Props {
   title: string;
@@ -10,9 +9,9 @@ interface Props {
 
 const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const locale = i18next.language === "es" ? "es_ES" : "en_US";
+const locale = Astro.currentLocale === "es" ? "es_ES" : "en_US";
 // Link-preview card (1200x630), one per language: name, role and domain on the site's dark page.
-const ogImage = new URL(`/og/og-${i18next.language === "es" ? "es" : "en"}.png`, Astro.site);
+const ogImage = new URL(`/og/og-${Astro.currentLocale === "es" ? "es" : "en"}.png`, Astro.site);
 ---
 
 <meta charset="UTF-8" />
@@ -59,4 +58,8 @@ const ogImage = new URL(`/og/og-${i18next.language === "es" ? "es" : "en"}.png`,
 <meta name="author" content="Sebastian Jamito" />
 <meta name="generator" content={Astro.generator} />
 
-<HeadHrefLangs />
+{
+  locales.map((code) => (
+    <link rel="alternate" hreflang={code} href={new URL(localizePath(Astro.url.pathname, code), Astro.site)} />
+  ))
+}
