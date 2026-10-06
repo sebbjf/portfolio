@@ -14,6 +14,21 @@ interface Props {
 }
 
 const { projectData } = Astro.props;
+
+// Screenshots live in src/assets so Astro can resize them and convert them to WebP at build time.
+const screenshots = import.meta.glob<{ default: ImageMetadata }>("../assets/projects/*", { eager: true });
+const screenshot = screenshots[`../assets/projects/${projectData.image}`]?.default;
+if (!screenshot) throw new Error(`Project image "${projectData.image}" not found in src/assets/projects/`);
+
+// The 16:10 frame crops a wider screenshot (object-fit: cover), so the image is drawn wider than
+// its frame: frame width × 0.625 × the image's aspect ratio. Telling the browser the real drawn
+// width (280px frame on desktop, full content width on phones) keeps it from picking a file
+// that is too small on scaled displays.
+const overflow = Math.max(1, 0.625 * (screenshot.width / screenshot.height));
+const sizes = `(max-width: 768px) calc((100vw - 48px) * ${overflow.toFixed(3)}), ${Math.ceil(280 * overflow)}px`;
+
+// Never upscale: smaller originals ship at their own width.
+const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screenshot.width).concat(screenshot.width))];
 ---
 
 <li class="project">
@@ -21,10 +36,12 @@ const { projectData } = Astro.props;
     <span class="project__media">
       <Image
         class="project__thumb"
-        src={"/img/projects/" + projectData.image}
+        src={screenshot}
         alt=""
-        width={640}
-        height={400}
+        widths={widths}
+        sizes={sizes}
+        format="webp"
+        quality={85}
         loading="lazy"
         decoding="async"
       />
