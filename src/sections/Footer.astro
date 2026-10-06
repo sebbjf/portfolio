@@ -46,6 +46,16 @@ import { Trans } from "astro-i18next/components";
   .footer__link {
     color: var(--accent);
     text-decoration: underline;
+    text-decoration-color: var(--border-strong);
     text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s var(--ease-out);
+
+    &:hover {
+      text-decoration-color: currentColor;
+    }
+
+    &:active {
+      color: var(--text-muted);
+    }
   }
 </style>
