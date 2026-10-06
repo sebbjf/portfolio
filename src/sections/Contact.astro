@@ -15,7 +15,7 @@ const channels = [
   <h2 id="contact">{t("contact.title")}</h2>
   <p class="contact__text">{t("contact.text")}</p>
   <dl class="contact__list">
-    <div class="contact__row">
+    <div class="contact__row" id="contact-email-row">
       <dt>{t("contact.email")}</dt>
       <dd>
         <a class="contact__link" href={`mailto:${email}`}>{email}</a>
@@ -65,6 +65,31 @@ const channels = [
       $status.textContent = "";
     }, 2000);
   };
+
+  // Arriving from "get in touch" or "available for work": once the scroll settles, the email row
+  // glows once so the eye lands on how to reach me. Skipped with reduced motion.
+  const $emailRow = document.getElementById("contact-email-row");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const flashEmail = () => {
+    if (reduceMotion.matches) return;
+    $emailRow.classList.remove("contact__row--flash");
+    void $emailRow.offsetWidth; // restart the animation if it is already running
+    $emailRow.classList.add("contact__row--flash");
+  };
+
+  document.querySelectorAll("a[data-flash-contact]").forEach((link) => {
+    link.addEventListener("click", () => {
+      let done = false;
+      const run = () => {
+        if (done) return;
+        done = true;
+        flashEmail();
+      };
+      window.addEventListener("scrollend", run, { once: true });
+      setTimeout(run, 1000); // no scrollend support, or already at Contact
+    });
+  });
 
   $copy.addEventListener("click", () => {
     navigator.clipboard
@@ -122,6 +147,50 @@ const channels = [
 
     &:active {
       color: var(--text-muted);
+    }
+  }
+
+  /* Arriving from "get in touch": a soft band appears behind the email row, holds, and fades, while the
+     address brightens. Only opacity changes; borders and layout stay put. */
+  .contact__row--flash {
+    position: relative;
+    isolation: isolate;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 4px -10px;
+      z-index: -1;
+      border-radius: var(--radius-md);
+      background-color: var(--tint-active);
+      animation: contact-glow 1.6s both;
+    }
+
+    & .contact__link {
+      animation: contact-ink 1.6s var(--ease-out);
+    }
+  }
+
+  @keyframes contact-glow {
+    0% {
+      opacity: 0;
+      animation-timing-function: var(--ease-out);
+    }
+    15%,
+    65% {
+      opacity: 1;
+      animation-timing-function: ease-in-out;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes contact-ink {
+    20%,
+    65% {
+      color: var(--text-strong);
+      text-decoration-color: currentColor;
     }
   }
 

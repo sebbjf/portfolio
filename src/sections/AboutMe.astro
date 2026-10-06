@@ -45,7 +45,7 @@ import EmailIcon from "../icons/email.astro";
       <span class="hero__time" id="hero-local-time" role="tooltip"></span>
     </li>
   </ul>
-  <a class="hero__status" href="#contact">
+  <a class="hero__status" href="#contact" data-flash-contact>
     <span class="hero__status-dot" aria-hidden="true"></span>
     {t("hero.availableForWork")}
   </a>
@@ -96,7 +96,12 @@ import EmailIcon from "../icons/email.astro";
     </p>
     <p>
       {t("hero.projectsText")} <a class="profile__link" href="#projects">{t("hero.projectsButton")}</a>
-      {t("hero.contactText")} <a class="profile__link" href="#contact">{t("hero.contactButton")}</a>.
+      {t("hero.contactText")}
+      <a class="profile__link profile__cta" href="#contact" data-flash-contact
+        >{t("hero.contactButton")}<svg class="profile__arrow" viewBox="5 0 14 24" aria-hidden="true"
+          ><path d="M12 5v14M6 13l6 6 6-6"></path></svg
+        ></a
+      >
     </p>
   </div>
 </section>
@@ -295,5 +300,37 @@ import EmailIcon from "../icons/email.astro";
     &:hover {
       text-decoration-color: currentColor;
     }
+
+    &:active {
+      color: var(--text-muted);
+    }
+  }
+
+  /* "Get in touch": the arrow points where the link goes, and nudges that way on hover. */
+  .profile__cta {
+    white-space: nowrap;
+  }
+
+  .profile__arrow {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.85em;
+    margin-left: 4px;
+    vertical-align: -0.1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    color: var(--text-subtle);
+    transition:
+      transform 0.25s var(--ease-out),
+      color 0.25s var(--ease-out);
+  }
+
+  .profile__cta:hover .profile__arrow,
+  .profile__cta:focus-visible .profile__arrow {
+    color: currentColor;
+    transform: translateY(3px);
   }
 </style>
