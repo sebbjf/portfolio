@@ -56,11 +56,11 @@ const languages = [
 
     &:hover,
     &[aria-expanded="true"] {
-      background-color: rgb(255 255 255 / 0.08);
+      background-color: var(--tint-hover);
     }
 
     &:active {
-      background-color: rgb(255 255 255 / 0.12);
+      background-color: var(--tint-active);
     }
   }
 
@@ -75,7 +75,7 @@ const languages = [
     background-color: var(--surface);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-md);
-    box-shadow: 0 12px 32px rgb(0 0 0 / 0.45);
+    box-shadow: var(--shadow-float);
 
     /* Grows out of the button it belongs to. It closes faster than it opens, and stays
        hidden from focus and clicks (visibility) once the fade-out ends. */

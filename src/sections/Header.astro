@@ -112,9 +112,9 @@ import CloseIcon from "../icons/close.astro";
     z-index: var(--z-header);
     margin-top: 15px;
     padding: 10px 16px;
-    border: 1px solid rgb(255 255 255 / 0.06);
+    border: 1px solid var(--chrome-border);
     border-radius: 20px;
-    background-color: rgb(22 22 22 / 0.6);
+    background-color: var(--chrome-bg);
     white-space: nowrap;
     transition: transform 0.5s var(--ease-out);
 
@@ -159,11 +159,11 @@ import CloseIcon from "../icons/close.astro";
     transition: background-color 0.2s var(--ease-out);
 
     &:hover {
-      background-color: rgb(255 255 255 / 0.08);
+      background-color: var(--tint-hover);
     }
 
     &:active {
-      background-color: rgb(255 255 255 / 0.12);
+      background-color: var(--tint-active);
     }
   }
 
@@ -221,9 +221,9 @@ import CloseIcon from "../icons/close.astro";
       gap: 2px;
       padding: 12px;
       box-sizing: border-box;
-      border: 1px solid rgb(255 255 255 / 0.06);
+      border: 1px solid var(--chrome-border);
       border-radius: 20px;
-      background-color: rgb(19 19 19 / 0.92);
+      background-color: var(--chrome-panel);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       visibility: hidden;

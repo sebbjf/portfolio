@@ -16,6 +16,16 @@
   --accent-soft: rgb(247 245 240 / 0.1);
   --status: #7fbf5a;
 
+  /* Floating chrome (header, mobile menu, language menu) sits on translucent glass, and its
+     controls are tinted with white rather than with a surface color. */
+  --chrome-bg: rgb(22 22 22 / 0.6);
+  --chrome-panel: rgb(19 19 19 / 0.92);
+  --chrome-border: rgb(255 255 255 / 0.06);
+  --tint-hover: rgb(255 255 255 / 0.08);
+  --tint-active: rgb(255 255 255 / 0.12);
+  --shadow-float: 0 12px 32px rgb(0 0 0 / 0.45);
+  --glow: rgb(255 255 255 / 0.16);
+
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
