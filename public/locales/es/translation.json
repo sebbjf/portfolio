@@ -8,7 +8,8 @@
     "contactButton": "contáctame",
     "availableForWork": "Disponible para trabajar",
     "role": "Desarrollador web",
-    "location": "Barcelona, España"
+    "location": "Barcelona, España",
+    "localTime": "Hora local: {time}"
   },
   "skills": {
     "title": "Habilidades"

@@ -8,7 +8,8 @@
     "contactButton": "contact me",
     "availableForWork": "Available for work",
     "role": "Web developer",
-    "location": "Barcelona, Spain"
+    "location": "Barcelona, Spain",
+    "localTime": "Local time: {time}"
   },
   "skills": {
     "title": "Skills"

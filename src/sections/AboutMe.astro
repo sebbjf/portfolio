@@ -28,11 +28,21 @@ import EmailIcon from "../icons/email.astro";
         sebastian-jf
       </a>
     </li> */}
-    <li>
-      <svg class="hero__icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"></path>
-      </svg>
-      {t("hero.location")}
+    <li class="hero__place" id="hero-place">
+      {/* A toggletip: hover, focus or tap shows the current time in Barcelona. */}
+      <button
+        class="hero__location"
+        id="hero-location"
+        type="button"
+        aria-describedby="hero-local-time"
+        data-template={t("hero.localTime")}
+      >
+        <svg class="hero__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"></path>
+        </svg>
+        {t("hero.location")}
+      </button>
+      <span class="hero__time" id="hero-local-time" role="tooltip"></span>
     </li>
   </ul>
   <a class="hero__status" href="#contact">
@@ -40,6 +50,41 @@ import EmailIcon from "../icons/email.astro";
     {t("hero.availableForWork")}
   </a>
 </header>
+
+<script>
+  const $place = document.getElementById("hero-place");
+  const $location = document.getElementById("hero-location");
+  const $time = document.getElementById("hero-local-time");
+
+  // Always Madrid time, in the clock style of the page language (2:32 PM / 14:32).
+  const clock = new Intl.DateTimeFormat(document.documentElement.lang, {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "Europe/Madrid",
+  });
+  const update = () => {
+    $time.textContent = $location.dataset.template.replace("{time}", clock.format(new Date()));
+  };
+
+  update();
+  setInterval(update, 20_000);
+
+  // Hover and keyboard focus are handled in CSS; a tap (or click) toggles it, for touch screens.
+  const setOpen = (open: boolean) => $place.classList.toggle("hero__place--open", open);
+
+  $location.addEventListener("click", (event) => {
+    event.stopPropagation();
+    update();
+    setOpen(!$place.classList.contains("hero__place--open"));
+  });
+  $location.addEventListener("pointerenter", update);
+  $location.addEventListener("focus", update);
+
+  document.addEventListener("click", () => setOpen(false));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+</script>
 
 <section>
   <div class="profile">
@@ -107,6 +152,73 @@ import EmailIcon from "../icons/email.astro";
     }
   }
 
+  /* The location is not a link: a dotted underline says "there's more here" instead. */
+  .hero__place {
+    position: relative;
+  }
+
+  .hero__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text);
+    text-decoration: underline dotted;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    border-radius: var(--radius-sm);
+    transition: text-decoration-color 0.2s var(--ease-out);
+
+    &:hover {
+      text-decoration-color: currentColor;
+    }
+
+    &:active {
+      color: var(--text-muted);
+    }
+  }
+
+  .hero__time {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    z-index: var(--z-dropdown);
+    padding: 6px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    box-shadow: var(--shadow-float);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-strong);
+    white-space: nowrap;
+    pointer-events: none;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50%, -4px);
+    transition:
+      opacity 120ms var(--ease-out),
+      transform 120ms var(--ease-out),
+      visibility 0s linear 120ms;
+  }
+
+  /* Without JavaScript there is no time to show. */
+  .hero__time:empty {
+    display: none;
+  }
+
+  .hero__place:hover .hero__time,
+  .hero__location:focus-visible + .hero__time,
+  .hero__place--open .hero__time {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, 0);
+    transition:
+      opacity 160ms var(--ease-out),
+      transform 160ms var(--ease-out),
+      visibility 0s;
+  }
+
   .hero__icon {
     width: 15px;
     height: 15px;
@@ -153,7 +265,8 @@ import EmailIcon from "../icons/email.astro";
     .hero__contact {
       row-gap: 0;
 
-      & a {
+      & a,
+      & .hero__location {
         min-height: var(--tap);
       }
     }
