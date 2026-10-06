@@ -52,3 +52,10 @@
   margin: 2px 0 0;
   color: var(--text-muted);
 }
+
+/* Phones stack title, organization and date, so each entry is taller and needs more air between. */
+@media only screen and (max-width: 768px) {
+  .entries {
+    gap: 28px;
+  }
+}

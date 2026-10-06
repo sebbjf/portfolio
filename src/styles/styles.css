@@ -202,7 +202,12 @@ img {
     padding: var(--gutter);
   }
 
+  section {
+    margin: 56px 0;
+  }
+
   h2 {
+    margin-bottom: 24px;
     font-size: 1.5rem;
   }
 
