@@ -39,11 +39,11 @@
   "footer": "Hecho con <0>Astro</0>, desplegado con <1>Vercel</1>.",
   "meta": {
     "home": {
-      "title": "Sebastian JF · Desarrollador web",
-      "description": "Portfolio de Sebastian JF, desarrollador front-end en Barcelona que crea experiencias web rápidas y claras."
+      "title": "Sebastian Jamito · Desarrollador web",
+      "description": "Portfolio de Sebastian Jamito, desarrollador web en Barcelona que crea experiencias web rápidas y claras."
     },
     "notFound": {
-      "title": "Página no encontrada · Sebastian JF",
+      "title": "Página no encontrada · Sebastian Jamito",
       "description": "No se ha podido encontrar esta página."
     }
   },

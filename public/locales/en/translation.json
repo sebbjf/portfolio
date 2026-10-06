@@ -39,11 +39,11 @@
   "footer": "Made with <0>Astro</0>, deployed with <1>Vercel</1>.",
   "meta": {
     "home": {
-      "title": "Sebastian JF · Web developer",
-      "description": "Portfolio of Sebastian JF, a front-end developer based in Barcelona building fast, clear web experiences."
+      "title": "Sebastian Jamito · Web developer",
+      "description": "Portfolio of Sebastian Jamito, a web developer based in Barcelona building fast, clear web experiences."
     },
     "notFound": {
-      "title": "Page not found · Sebastian JF",
+      "title": "Page not found · Sebastian Jamito",
       "description": "This page could not be found."
     }
   },
