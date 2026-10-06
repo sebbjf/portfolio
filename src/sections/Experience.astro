@@ -1,20 +1,11 @@
 ---
 import i18next, { t } from "i18next";
 import experience from "../consts/experience.js";
+import { formatPeriod } from "../utils/formatPeriod.js";
 
 const currentLanguage = i18next.language;
 
 const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
-
-// "2025-01" -> "January 2025" / "enero 2025", like the printed résumé.
-const formatDate = (date) => {
-  if (date === "present") return t("experience.currently");
-  const [year, month] = date.split("-").map(Number);
-  const monthName = new Intl.DateTimeFormat(currentLanguage, { month: "long", timeZone: "UTC" }).format(
-    new Date(Date.UTC(year, month - 1)),
-  );
-  return `${monthName} ${year}`;
-};
 ---
 
 <section aria-labelledby="experience">
@@ -29,7 +20,7 @@ const formatDate = (date) => {
               <em class="entry__org">{e.name}</em>
             </h3>
             <p class="entry__date">
-              {formatDate(e.startDate) + (e.endDate ? " – " + formatDate(e.endDate) : "")}
+              {formatPeriod(e.startDate, e.endDate, currentLanguage, t("experience.currently"))}
             </p>
           </div>
           <p class="entry__description">{localize(e, "description")}</p>
