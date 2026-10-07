@@ -124,8 +124,7 @@ const t = useTranslations(Astro.currentLocale);
       content: "";
       position: absolute;
       inset: 0;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
       z-index: -1;
       border-radius: inherit;
     }
@@ -226,7 +225,6 @@ const t = useTranslations(Astro.currentLocale);
       border-radius: 20px;
       background-color: var(--chrome-panel);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       visibility: hidden;
       opacity: 0;
       transform: translateY(-8px);
