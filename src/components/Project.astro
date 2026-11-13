@@ -58,7 +58,6 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
           <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
       </div>
-      <p class="project__stack">{projectData.built_with.join(", ")}</p>
       <p class="project__description">{projectData.description}</p>
     </div>
   </a>
@@ -71,14 +70,20 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
     border-radius: var(--radius-sm);
   }
 
+  /* A soft, borderless frame in full color: the screenshot is the hero of the card. The frame stays
+     put, like every other surface on the page. Hover does what it does everywhere else: whatever is
+     muted wakes up (here the screenshot brightens) and the one thing that moves springs (the image
+     eases in a little closer, the arrow nudges). */
   .project__media {
     display: block;
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: 14px;
     background-color: var(--surface);
-    transition: border-color 0.3s var(--ease-out);
+    box-shadow:
+      inset 0 0 0 1px var(--chrome-border),
+      0 8px 20px -10px rgb(0 0 0 / 0.55);
+    transition: transform 0.45s var(--ease-spring);
   }
 
   .project__thumb {
@@ -87,18 +92,19 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    filter: grayscale(0.35);
+    filter: brightness(0.85);
     transition:
       transform 0.7s var(--ease-spring),
-      filter 0.6s var(--ease-out);
+      filter 0.3s var(--ease-out);
   }
 
+  /* The title and the arrow share one line; the arrow sits at the end. */
   .project__head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 16px;
-    margin-top: 14px;
+    margin-top: 16px;
   }
 
   .project__title {
@@ -111,14 +117,8 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
     transition: text-decoration-color 0.25s var(--ease-out);
   }
 
-  .project__stack {
-    margin: 0;
-    font-style: italic;
-    color: var(--text);
-  }
-
   .project__description {
-    margin: 4px 0 0;
+    margin: 6px 0 0;
     color: var(--text-muted);
     transition: color 0.25s var(--ease-out);
   }
@@ -142,22 +142,24 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
       transform: translate(2px, -2px);
     }
 
-    .project__media {
-      border-color: var(--border-strong);
+    .project__description {
+      color: var(--text);
     }
 
     .project__thumb {
       filter: none;
     }
-
-    .project__description {
-      color: var(--text);
-    }
   }
 
-  .project__link:active .project__thumb {
-    filter: none;
-    transform: scale(1.02);
+  .project__link:active .project__media {
+    transform: scale(0.985);
+  }
+
+  /* Touch screens never trigger the hover reveal, so show the screenshots at full brightness. */
+  @media (hover: none) {
+    .project__thumb {
+      filter: none;
+    }
   }
 
   /* Only devices that can hover get the hover reveal; on touch it would stick after a tap. */
@@ -172,25 +174,14 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
         transform: translate(2px, -2px);
       }
 
-      .project__media {
-        border-color: var(--border-strong);
+      .project__description {
+        color: var(--text);
       }
 
       .project__thumb {
         filter: none;
         transform: scale(1.04);
       }
-
-      .project__description {
-        color: var(--text);
-      }
-    }
-  }
-
-  /* Touch screens never trigger the hover reveal, so show the screenshots in full color. */
-  @media (hover: none) {
-    .project__thumb {
-      filter: none;
     }
   }
 </style>
