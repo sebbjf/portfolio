@@ -21,17 +21,17 @@ import Trans from "../components/Trans.astro";
       >.
       </Trans>
     </div>
-    <div class="footer__right">© {new Date().getFullYear()} | @sebbjf</div>
+    <div class="footer__right">© {new Date().getFullYear()} · @sebbjf</div>
   </div>
 </footer>
 
 <style>
+  /* A quiet bar closing the page, with no rule: the credit on the left and the year on the right. */
   .footer__container {
-    margin-top: 45px;
-    border-top: 1px solid var(--border-strong);
-    padding: 16px 0 24px;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    margin-top: 96px;
+    padding: 0 0 40px;
+    color: var(--text-subtle);
+    font-size: 0.85rem;
     font-style: italic;
   }
 
@@ -43,19 +43,23 @@ import Trans from "../components/Trans.astro";
     justify-content: space-between;
   }
 
+  /* Muted until hovered, like the links in Contact. */
   .footer__link {
-    color: var(--accent);
+    color: var(--text-muted);
     text-decoration: underline;
     text-decoration-color: var(--border-strong);
     text-underline-offset: 3px;
-    transition: text-decoration-color 0.2s var(--ease-out);
+    transition:
+      color 0.2s var(--ease-out),
+      text-decoration-color 0.2s var(--ease-out);
 
     &:hover {
+      color: var(--text-strong);
       text-decoration-color: currentColor;
     }
 
     &:active {
-      color: var(--text-muted);
+      color: var(--text);
     }
   }
 </style>
