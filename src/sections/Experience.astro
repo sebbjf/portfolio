@@ -12,11 +12,11 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
 ---
 
 <section aria-labelledby="experience">
-  <h2 id="experience">{t("experience.title")}</h2>
+  <h2 id="experience" data-reveal>{t("experience.title")}</h2>
   <ul class="entries">
     {
-      experience.map((e) => (
-        <li class="entry">
+      experience.map((e, i) => (
+        <li class="entry" data-reveal style={`--i: ${i}`}>
           <div class="entry__head">
             <h3 class="entry__title">
               {localize(e, "position")},

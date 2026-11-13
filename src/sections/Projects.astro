@@ -13,11 +13,11 @@ const currentLanguage = Astro.currentLocale;
 ---
 
 <section aria-labelledby="projects">
-  <h2 id="projects">{t("projects.title")}</h2>
+  <h2 id="projects" data-reveal>{t("projects.title")}</h2>
   <ol class="projects__list">
     {
-      projects.map((projectData) => (
-        <Project projectData={{ ...projectData, description: getProjectDescription(projectData, currentLanguage) }} />
+      projects.map((projectData, i) => (
+        <Project index={i} projectData={{ ...projectData, description: getProjectDescription(projectData, currentLanguage) }} />
       ))
     }
   </ol>

@@ -11,9 +11,10 @@ interface Project {
 
 interface Props {
   projectData: Project;
+  index: number;
 }
 
-const { projectData } = Astro.props;
+const { projectData, index } = Astro.props;
 
 // Screenshots live in src/assets so Astro can resize them and convert them to WebP at build time.
 const screenshots = import.meta.glob<{ default: ImageMetadata }>("../assets/projects/*", { eager: true });
@@ -31,7 +32,7 @@ const sizes = `(max-width: 768px) calc((100vw - 48px) * ${overflow.toFixed(3)}),
 const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screenshot.width).concat(screenshot.width))];
 ---
 
-<li class="project">
+<li class="project" data-reveal style={`--i: ${index}`}>
   <a class="project__link" href={projectData.url} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
     <span class="project__media">
       <Image

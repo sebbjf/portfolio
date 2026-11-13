@@ -156,7 +156,9 @@ const t = useTranslations(Astro.currentLocale);
     padding: 4px 10px;
     border-radius: var(--radius-sm);
     color: var(--text-strong);
-    transition: background-color 0.2s var(--ease-out);
+    transition:
+      background-color 0.2s var(--ease-out),
+      scale 0.14s var(--ease-out);
 
     &:hover {
       background-color: var(--tint-hover);
@@ -164,6 +166,7 @@ const t = useTranslations(Astro.currentLocale);
 
     &:active {
       background-color: var(--tint-active);
+      scale: 0.97;
     }
   }
 

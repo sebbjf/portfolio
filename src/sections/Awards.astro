@@ -12,11 +12,11 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
 ---
 
 <section aria-labelledby="awards">
-  <h2 id="awards">{t("awards.title")}</h2>
+  <h2 id="awards" data-reveal>{t("awards.title")}</h2>
   <ul class="entries">
     {
-      awards.map((a) => (
-        <li class="entry">
+      awards.map((a, i) => (
+        <li class="entry" data-reveal style={`--i: ${i}`}>
           <div class="entry__head">
             <h3 class="entry__title">
               {a.firstPlace && <TrophyIcon class="trophy" aria-hidden="true" />}

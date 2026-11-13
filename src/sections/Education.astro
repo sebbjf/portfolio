@@ -12,11 +12,11 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
 ---
 
 <section aria-labelledby="education">
-  <h2 id="education">{t("education.title")}</h2>
+  <h2 id="education" data-reveal>{t("education.title")}</h2>
   <ul class="entries">
     {
-      education.map((e) => (
-        <li class="entry">
+      education.map((e, i) => (
+        <li class="entry" data-reveal style={`--i: ${i}`}>
           {/* Decorative: the institution's name is right next to it. */}
           <img class="entry__logo" src={e.logo} alt="" width="40" height="40" loading="lazy" decoding="async" />
           <div class="entry__body">
