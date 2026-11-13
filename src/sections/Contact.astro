@@ -12,10 +12,13 @@ const channels = [
 ];
 ---
 
-<section class="contact" aria-labelledby="contact" data-reveal>
-  <h2 id="contact" class="contact__title">{t("contact.title")}</h2>  <p class="contact__text">{t("contact.text")}</p>
-  <div class="contact__email" id="contact-email">
-    <a class="contact__mail" href={`mailto:${email}`}>{email}</a>
+<section class="contact" aria-labelledby="contact">
+  <h2 id="contact" class="contact__title" data-reveal>{t("contact.title")}</h2>
+  <p class="contact__text" data-reveal style="--i: 1">{t("contact.text")}</p>
+  <div class="contact__email" id="contact-email" data-reveal style="--i: 2">
+    <a class="contact__mail" href={`mailto:${email}`} aria-label={email}>
+      {[...email].map((char, n) => <span class="contact__char" style={`--n: ${n}`} aria-hidden="true">{char}</span>)}
+    </a>
     <button
       class="contact__copy"
       id="email-copy"
@@ -30,7 +33,7 @@ const channels = [
     </button>
     <span class="visually-hidden" id="email-copy-status" role="status"></span>
   </div>
-  <ul class="contact__links">
+  <ul class="contact__links" data-reveal style="--i: 3">
     {
       channels.map(({ label, href }) => (
         <li>
@@ -75,15 +78,19 @@ const channels = [
     }, 2000);
   };
 
-  // Arriving from "get in touch" or "available for work": once the scroll settles, the email
-  // glows once so the eye lands on how to reach me. Skipped with reduced motion.
-  const $email = document.getElementById("contact-email");
+  // The page's signature: the letters of the address hop in a wave. It plays on hover (CSS), when a
+  // copy succeeds, and on arriving from "get in touch" or "available for work" once the scroll
+  // settles, so the eye lands on how to reach me. Skipped with reduced motion.
+  const $mail = document.querySelector(".contact__mail");
+  let waveTimeout: ReturnType<typeof setTimeout>;
 
-  const flashEmail = () => {
+  const waveEmail = () => {
     if (reduceMotion.matches) return;
-    $email.classList.remove("contact__email--flash");
-    void $email.offsetWidth; // restart the animation if it is already running
-    $email.classList.add("contact__email--flash");
+    $mail.classList.remove("contact__mail--wave");
+    void ($mail as HTMLElement).offsetWidth; // restart the animation if it is already running
+    $mail.classList.add("contact__mail--wave");
+    clearTimeout(waveTimeout);
+    waveTimeout = setTimeout(() => $mail.classList.remove("contact__mail--wave"), 1600);
   };
 
   document.querySelectorAll("a[data-flash-contact]").forEach((link) => {
@@ -92,7 +99,7 @@ const channels = [
       const run = () => {
         if (done) return;
         done = true;
-        flashEmail();
+        waveEmail();
       };
       window.addEventListener("scrollend", run, { once: true });
       setTimeout(run, 1000); // no scrollend support, or already at Contact
@@ -102,25 +109,32 @@ const channels = [
   $copy.addEventListener("click", () => {
     navigator.clipboard
       .writeText(email)
-      .then(() => showResult(copied))
+      .then(() => {
+        showResult(copied);
+        waveEmail();
+      })
       .catch(() => showResult(copyError));
   });
 </script>
 
 <style>
-  /* Extra air above sets the closing call to action apart without a frame. */
+  /* Extra air above sets the closing call to action apart without a frame, and it is centered like
+     the top of the page. The pieces arrive one after another as the section scrolls in. */
   .contact {
     margin-top: 112px;
+    text-align: center;
   }
 
   .contact__title {
     margin: 0 0 12px;
   }
 
+  /* A step up in size and brightness: this is the sentence the section is for. */
   .contact__text {
-    max-width: 34rem;
-    margin: 0 0 24px;
-    color: var(--text-muted);
+    max-width: 32rem;
+    margin: 0 auto 32px;
+    font-size: 1.15rem;
+    color: var(--text);
   }
 
   .contact__email {
@@ -129,32 +143,57 @@ const channels = [
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px 16px;
+    justify-content: center;
+    gap: 6px 10px;
+  }
+
+  /* A faint underline at rest that brightens on hover, like the other links on the page. */
+  .contact__mail,
+  .contact__link {
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--border-strong);
+    transition:
+      border-color 0.25s var(--ease-out),
+      color 0.2s var(--ease-out);
+
+    &:hover {
+      border-color: currentColor;
+    }
+
+    &:active {
+      color: var(--text);
+    }
   }
 
   .contact__mail {
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-strong);
     overflow-wrap: anywhere;
-    text-decoration: underline;
-    text-decoration-color: var(--border-strong);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
-
-    &:hover {
-      text-decoration-color: currentColor;
-    }
 
     &:active {
       color: var(--text-muted);
     }
   }
 
+  /* On hover the letters hop up in a quick wave, left to right, each on the page's spring, and
+     settle back when the cursor leaves. */
+  .contact__char {
+    display: inline-block;
+    white-space: pre;
+    transition: translate 0.5s var(--ease-spring);
+    transition-delay: calc(var(--n) * 18ms);
+  }
+
+  .contact__mail:hover .contact__char {
+    translate: 0 -3px;
+  }
+
+  /* Borderless: muted text that wakes up on a soft wash, like the links in the header. */
   .contact__copy {
     white-space: nowrap;
-    padding: 2px 10px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-sm);
+    padding: 4px 10px;
+    border-radius: var(--radius-md);
     font-size: 0.85rem;
     font-style: italic;
     color: var(--text-muted);
@@ -164,77 +203,53 @@ const channels = [
       scale 0.14s var(--ease-out);
 
     &:hover {
-      background-color: var(--surface-hover);
+      background-color: var(--tint-hover);
       color: var(--text-strong);
     }
 
     &:active {
+      background-color: var(--tint-active);
       scale: 0.97;
     }
   }
 
-  /* Arriving from "get in touch": a soft band appears behind the address, holds, and fades, while
-     the underline brightens. Only opacity and color change; layout stays put. */
-  .contact__email--flash {
-    &::before {
-      content: "";
-      position: absolute;
-      inset: -6px -12px;
-      z-index: -1;
-      border-radius: var(--radius-md);
-      background-color: var(--tint-active);
-      animation: contact-glow 1.6s both;
-    }
-
-    & .contact__mail {
-      animation: contact-ink 1.6s var(--ease-out);
-    }
-  }
-
-  @keyframes contact-glow {
+  @keyframes contact-hop {
     0% {
-      opacity: 0;
-      animation-timing-function: var(--ease-out);
+      translate: 0 0;
     }
-    15%,
-    65% {
-      opacity: 1;
-      animation-timing-function: ease-in-out;
+    30% {
+      translate: 0 -6px;
+    }
+    55% {
+      translate: 0 1.5px;
+    }
+    78% {
+      translate: 0 -1px;
     }
     100% {
-      opacity: 0;
+      translate: 0 0;
     }
   }
 
-  @keyframes contact-ink {
-    20%,
-    65% {
-      text-decoration-color: currentColor;
-    }
+  /* The wave, triggered from the script: each letter hops a beat after the one before it. */
+  .contact__mail--wave .contact__char {
+    animation: contact-hop 0.8s ease-out;
+    animation-delay: calc(var(--n) * 30ms);
   }
 
   .contact__links {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 4px 24px;
-    margin: 12px 0 0;
+    margin: 18px 0 0;
   }
 
-  /* Muted until hovered, like the links in the header. */
   .contact__link {
     color: var(--text-muted);
-    text-decoration: underline;
-    text-decoration-color: var(--border-strong);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
 
     &:hover {
       color: var(--text-strong);
-      text-decoration-color: currentColor;
-    }
-
-    &:active {
-      color: var(--text);
     }
   }
 
@@ -258,8 +273,9 @@ const channels = [
 
   /* Touch: links and the copy button reach the minimum tap size. */
   @media (pointer: coarse) {
-    .contact__link {
-      display: inline-flex;
+    /* The row is tall, not the link, so the underline stays under the text. */
+    .contact__links li {
+      display: flex;
       align-items: center;
       min-height: var(--tap);
     }
