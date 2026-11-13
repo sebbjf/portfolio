@@ -6,49 +6,42 @@ const t = useTranslations(Astro.currentLocale);
 const email = "hi@sebastianjf.com";
 
 const channels = [
-  // { label: "LinkedIn", value: "in/sebastian-jf", href: "https://www.linkedin.com/in/sebastian-jf/", external: true },
-  { label: "GitHub", value: "sebbjf", href: "https://github.com/sebbjf/", external: true },
-  { label: t("contact.resume"), value: "PDF", href: localizePath("/resume", Astro.currentLocale), external: true },
+  // { label: "LinkedIn", href: "https://www.linkedin.com/in/sebastian-jf/" },
+  { label: "GitHub", href: "https://github.com/sebbjf/" },
+  { label: t("contact.resume"), href: localizePath("/resume", Astro.currentLocale) },
 ];
 ---
 
-<section aria-labelledby="contact" data-reveal>
-  <h2 id="contact">{t("contact.title")}</h2>
-  <p class="contact__text">{t("contact.text")}</p>
-  <dl class="contact__list">
-    <div class="contact__row" id="contact-email-row">
-      <dt>{t("contact.email")}</dt>
-      <dd>
-        <a class="contact__link" href={`mailto:${email}`}>{email}</a>
-        <button
-          class="contact__copy"
-          id="email-copy"
-          type="button"
-          aria-label={t("contact.copyLabel")}
-          data-email={email}
-          data-copy={t("contact.copy")}
-          data-copied={t("contact.copied")}
-          data-copy-error={t("contact.copyError")}
-        >
-          {t("contact.copy")}
-        </button>
-        <span class="contact__status" id="email-copy-status" role="status"></span>
-      </dd>
-    </div>
+<section class="contact" aria-labelledby="contact" data-reveal>
+  <h2 id="contact" class="contact__title">{t("contact.title")}</h2>  <p class="contact__text">{t("contact.text")}</p>
+  <div class="contact__email" id="contact-email">
+    <a class="contact__mail" href={`mailto:${email}`}>{email}</a>
+    <button
+      class="contact__copy"
+      id="email-copy"
+      type="button"
+      aria-label={t("contact.copyLabel")}
+      data-email={email}
+      data-copy={t("contact.copy")}
+      data-copied={t("contact.copied")}
+      data-copy-error={t("contact.copyError")}
+    >
+      {t("contact.copy")}
+    </button>
+    <span class="visually-hidden" id="email-copy-status" role="status"></span>
+  </div>
+  <ul class="contact__links">
     {
-      channels.map(({ label, value, href, external }) => (
-        <div class="contact__row">
-          <dt>{label}</dt>
-          <dd>
-            <a class="contact__link" href={href} {...(external && { target: "_blank", rel: "noopener noreferrer", "aria-describedby": "new-tab-hint" })}>
-              {value}
-              <span class="contact__arrow" aria-hidden="true">↗</span>
-            </a>
-          </dd>
-        </div>
+      channels.map(({ label, href }) => (
+        <li>
+          <a class="contact__link" href={href} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
+            {label}
+            <span class="contact__arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
       ))
     }
-  </dl>
+  </ul>
 </section>
 
 <script>
@@ -67,16 +60,16 @@ const channels = [
     }, 2000);
   };
 
-  // Arriving from "get in touch" or "available for work": once the scroll settles, the email row
+  // Arriving from "get in touch" or "available for work": once the scroll settles, the email
   // glows once so the eye lands on how to reach me. Skipped with reduced motion.
-  const $emailRow = document.getElementById("contact-email-row");
+  const $email = document.getElementById("contact-email");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   const flashEmail = () => {
     if (reduceMotion.matches) return;
-    $emailRow.classList.remove("contact__row--flash");
-    void $emailRow.offsetWidth; // restart the animation if it is already running
-    $emailRow.classList.add("contact__row--flash");
+    $email.classList.remove("contact__email--flash");
+    void $email.offsetWidth; // restart the animation if it is already running
+    $email.classList.add("contact__email--flash");
   };
 
   document.querySelectorAll("a[data-flash-contact]").forEach((link) => {
@@ -101,40 +94,33 @@ const channels = [
 </script>
 
 <style>
+  /* Extra air above sets the closing call to action apart without a frame. */
+  .contact {
+    margin-top: 112px;
+  }
+
+  .contact__title {
+    margin: 0 0 12px;
+  }
+
   .contact__text {
+    max-width: 34rem;
     margin: 0 0 24px;
+    color: var(--text-muted);
   }
 
-  .contact__list {
-    margin: 0;
-    border-top: 1px solid var(--border);
+  .contact__email {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
   }
 
-  .contact__row {
-    display: grid;
-    grid-template-columns: 8rem 1fr;
-    align-items: baseline;
-    column-gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-
-    & > dt {
-      font-weight: 700;
-      color: var(--text-strong);
-    }
-
-    & > dd {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 4px 14px;
-      margin: 0;
-      min-width: 0;
-    }
-  }
-
-  .contact__link {
-    color: var(--text);
+  .contact__mail {
+    font-weight: 700;
+    color: var(--text-strong);
     overflow-wrap: anywhere;
     text-decoration: underline;
     text-decoration-color: var(--border-strong);
@@ -142,7 +128,6 @@ const channels = [
     transition: text-decoration-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
 
     &:hover {
-      color: var(--text-strong);
       text-decoration-color: currentColor;
     }
 
@@ -151,23 +136,42 @@ const channels = [
     }
   }
 
-  /* Arriving from "get in touch": a soft band appears behind the email row, holds, and fades, while the
-     address brightens. Only opacity changes; borders and layout stay put. */
-  .contact__row--flash {
-    position: relative;
-    isolation: isolate;
+  .contact__copy {
+    padding: 2px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    transition:
+      background-color 0.2s var(--ease-out),
+      color 0.2s var(--ease-out),
+      scale 0.14s var(--ease-out);
 
+    &:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-strong);
+    }
+
+    &:active {
+      scale: 0.97;
+    }
+  }
+
+  /* Arriving from "get in touch": a soft band appears behind the address, holds, and fades, while
+     the underline brightens. Only opacity and color change; layout stays put. */
+  .contact__email--flash {
     &::before {
       content: "";
       position: absolute;
-      inset: 4px -10px;
+      inset: -6px -12px;
       z-index: -1;
       border-radius: var(--radius-md);
       background-color: var(--tint-active);
       animation: contact-glow 1.6s both;
     }
 
-    & .contact__link {
+    & .contact__mail {
       animation: contact-ink 1.6s var(--ease-out);
     }
   }
@@ -190,8 +194,31 @@ const channels = [
   @keyframes contact-ink {
     20%,
     65% {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    margin: 12px 0 0;
+  }
+
+  .contact__link {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
+
+    &:hover {
       color: var(--text-strong);
       text-decoration-color: currentColor;
+    }
+
+    &:active {
+      color: var(--text-muted);
     }
   }
 
@@ -207,48 +234,14 @@ const channels = [
     transform: translate(2px, -2px);
   }
 
-  .contact__copy {
-    padding: 1px 8px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    font-style: italic;
-    color: var(--text-muted);
-    transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
-
-    &:hover {
-      background-color: var(--surface-hover);
-      color: var(--text-strong);
-    }
-
-    &:active {
-      transform: translateY(1px);
+  @media only screen and (max-width: 768px) {
+    .contact {
+      margin-top: 80px;
     }
   }
 
-  /* The button text already changes visibly; this region only announces it to screen readers. */
-  .contact__status {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  /* Touch: the row keeps its height, but the link and the copy button fill it. */
+  /* Touch: links and the copy button reach the minimum tap size. */
   @media (pointer: coarse) {
-    .contact__row {
-      padding: 0;
-      min-height: calc(var(--tap) + 8px);
-      align-items: center;
-    }
-
-    .contact__row > dd {
-      align-items: center;
-      column-gap: 8px;
-    }
-
     .contact__link {
       display: inline-flex;
       align-items: center;
@@ -266,27 +259,6 @@ const channels = [
         content: "";
         position: absolute;
         inset: calc((var(--tap) - 36px) / -2) 0;
-      }
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    .contact__row {
-      grid-template-columns: 6.5rem 1fr;
-    }
-  }
-
-  /* Narrow phones: the label sits above its value so the email address never wraps mid-word. */
-  @media only screen and (max-width: 420px) {
-    .contact__row {
-      grid-template-columns: minmax(0, 1fr);
-      padding-top: 10px;
-
-      & > dt {
-        font-size: 0.85rem;
-        font-weight: 400;
-        font-style: italic;
-        color: var(--text-muted);
       }
     }
   }
