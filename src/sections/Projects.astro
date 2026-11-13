@@ -28,8 +28,15 @@ const currentLanguage = Astro.currentLocale;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px 28px;
+  }
+
+  @media only screen and (max-width: 560px) {
+    .projects__list {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 36px;
+    }
   }
 </style>
