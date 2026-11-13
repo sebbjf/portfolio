@@ -19,6 +19,11 @@
   "devDependencies": {
     "@types/node": "^20.14.9"
   },
+  "overrides": {
+    "@vercel/routing-utils": {
+      "path-to-regexp": "^6.3.0"
+    }
+  },
   "engines": {
     "node": ">=22.12.0"
   }
