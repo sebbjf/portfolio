@@ -8,7 +8,7 @@ const t = useTranslations(Astro.currentLocale);
 
 <section aria-labelledby="skills" data-reveal>
   <h2 id="skills">{t("skills.title")}</h2>
-  <ul class="skills__grid">
+  <ul class="skills__list" id="skills-list">
     {
       skills.map((s) => (
         <li>
@@ -19,25 +19,72 @@ const t = useTranslations(Astro.currentLocale);
   </ul>
 </section>
 
+<script>
+  // Dock magnification: icons swell by their distance to the cursor, the nearest the most.
+  const $list = document.getElementById("skills-list");
+  const items = [...$list.children] as HTMLElement[];
+  const dock = window.matchMedia("(hover: hover) and (min-width: 769px)");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const MAX_GROWTH = 0.5; // the icon under the cursor is 1.5× its size
+  const RANGE = 170; // px from the cursor at which an icon stops growing
+
+  let frame = 0;
+  $list.addEventListener("pointermove", (event) => {
+    if (!dock.matches || reduceMotion.matches) return;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      $list.classList.add("skills__list--active");
+      for (const item of items) {
+        const { left, width } = item.getBoundingClientRect();
+        const distance = Math.abs(event.clientX - (left + width / 2));
+        // A cosine bell: smooth at the peak and at the edge of the range.
+        const growth = distance < RANGE ? (MAX_GROWTH * (1 + Math.cos((Math.PI * distance) / RANGE))) / 2 : 0;
+        item.style.setProperty("--s", (1 + growth).toFixed(3));
+      }
+    });
+  });
+
+  $list.addEventListener("pointerleave", () => {
+    cancelAnimationFrame(frame);
+    $list.classList.remove("skills__list--active");
+    for (const item of items) item.style.removeProperty("--s");
+  });
+</script>
+
 <style>
-  /* 12 skills fill even rows at every width: 6 × 2, then 4 × 3, then 3 × 4. */
-  .skills__grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 10px;
+  /* Touch and narrow screens: every skill visible at once, flowing like words in a sentence, each
+     a small icon beside its name. No grid, no scrolling, nothing hidden. */
+  .skills__list {
+    --tile: 22px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
     margin: 0;
   }
 
-  @media (max-width: 768px) {
-    .skills__grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
+  /* Dock: one row spanning the content width, edges aligned with the text (space-between, so the
+     gaps give way as icons grow and the row never widens). Icons grow upwards into the heading's
+     margin, so at rest they sit at the usual distance and nothing below moves; the names stay put
+     on a shared baseline. While the cursor moves the size follows it closely; once it leaves, the
+     icons spring back. */
+  @media (hover: hover) and (min-width: 769px) {
+    .skills__list {
+      --tile: 52px;
+      --dock-t: 0.5s var(--ease-spring);
 
-  @media (max-width: 480px) {
-    .skills__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 0;
+      /* the largest icon + the gap + one line of name */
+      height: calc(var(--tile) * 1.5 + 6px + 0.75rem * 1.3);
+      margin-top: calc(var(--tile) * -0.5);
+    }
+
+    .skills__list--active {
+      --dock-t: 0.14s var(--ease-out);
     }
   }
 </style>

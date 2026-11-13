@@ -8,6 +8,15 @@
         "value": "atkinsonhyperlegible",
         "createdAt": "2026-10-05T21:00:16.157Z",
         "reason": "user confirmed: asked to revert the site font to Atkinson Hyperlegible; DESIGN.md is an apple.com analysis, not this site's system"
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "src/components/Skill.astro"
+        ],
+        "createdAt": "2026-11-13T17:50:44.871Z",
+        "reason": "Claude's decision: dock magnification animates the tile width on purpose so neighbours reflow apart; transform scale cannot push siblings, and it is 12 small items"
       }
     ]
   }

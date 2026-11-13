@@ -50,12 +50,27 @@ const channels = [
   const { email, copy, copied, copyError } = $copy.dataset;
   let resetTimeout: ReturnType<typeof setTimeout>;
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const spring = getComputedStyle(document.documentElement).getPropertyValue("--ease-spring");
+
+  // The button morphs to the width of its new label instead of jumping.
+  const setLabel = (label: string) => {
+    const from = $copy.offsetWidth;
+    $copy.textContent = label;
+    const to = $copy.offsetWidth;
+    if (reduceMotion.matches || from === to) return;
+    // Clipped only while it moves: the touch hit area (::after) reaches outside the button.
+    $copy.style.overflow = "hidden";
+    $copy.animate([{ width: `${from}px` }, { width: `${to}px` }], { duration: 450, easing: spring }).onfinish = () =>
+      $copy.style.removeProperty("overflow");
+  };
+
   const showResult = (message: string) => {
-    $copy.textContent = message;
+    setLabel(message);
     $status.textContent = message;
     clearTimeout(resetTimeout);
     resetTimeout = setTimeout(() => {
-      $copy.textContent = copy;
+      setLabel(copy);
       $status.textContent = "";
     }, 2000);
   };
@@ -63,7 +78,6 @@ const channels = [
   // Arriving from "get in touch" or "available for work": once the scroll settles, the email
   // glows once so the eye lands on how to reach me. Skipped with reduced motion.
   const $email = document.getElementById("contact-email");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   const flashEmail = () => {
     if (reduceMotion.matches) return;
@@ -137,6 +151,7 @@ const channels = [
   }
 
   .contact__copy {
+    white-space: nowrap;
     padding: 2px 10px;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
@@ -205,8 +220,9 @@ const channels = [
     margin: 12px 0 0;
   }
 
+  /* Muted until hovered, like the links in the header. */
   .contact__link {
-    color: var(--text);
+    color: var(--text-muted);
     text-decoration: underline;
     text-decoration-color: var(--border-strong);
     text-underline-offset: 3px;
@@ -218,7 +234,7 @@ const channels = [
     }
 
     &:active {
-      color: var(--text-muted);
+      color: var(--text);
     }
   }
 
@@ -226,7 +242,7 @@ const channels = [
     display: inline-block;
     margin-left: 2px;
     color: var(--text-subtle);
-    transition: transform 0.2s var(--ease-out), color 0.2s var(--ease-out);
+    transition: transform 0.45s var(--ease-spring), color 0.2s var(--ease-out);
   }
 
   .contact__link:hover .contact__arrow {

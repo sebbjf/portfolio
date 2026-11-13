@@ -20,33 +20,31 @@ const { name, icon, color } = Astro.props;
 
 <style>
   .skill {
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 18px 6px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    text-align: center;
+    gap: 8px;
 
-    /* Exit: slower than the entrance, so sweeping across the grid leaves a soft trail. */
+    /* Exit: slower than the entrance, so sweeping across the row leaves a soft trail. */
     --fade: 320ms;
+  }
+
+  /* Phones and touch: a bare icon beside its name, nothing else. --tile is the icon's size and, in
+     the dock (below), --s magnifies it; its height follows the width. */
+  .skill__logo {
+    display: grid;
+    place-items: center;
+    width: calc(var(--tile, 36px) * var(--s, 1));
+    aspect-ratio: 1;
+    transition: width var(--dock-t, 0.5s var(--ease-spring));
   }
 
   /* Two copies of the logo share one cell: plain ink on top, brand color underneath.
      Crossfading their opacity avoids the muddy gray an animated filter passes through. */
-  .skill__logo {
-    display: grid;
-    width: 26px;
-    height: 26px;
-  }
-
   .skill__icon {
     grid-area: 1 / 1;
-    width: 100%;
-    height: 100%;
+    width: var(--icon, 100%);
+    height: var(--icon, 100%);
     transition: opacity var(--fade) var(--ease-out);
   }
 
@@ -62,18 +60,57 @@ const { name, icon, color } = Astro.props;
   }
 
   .skill__name {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     line-height: 1.3;
     color: var(--text-muted);
-    overflow-wrap: anywhere;
+    white-space: nowrap;
     transition: color var(--fade) var(--ease-out);
   }
 
-  /* The tiles aren't interactive, so hover only reveals color: no tint, border change or lift,
-     which would read as "clickable". Mouse only, so it never sticks after a tap. Entrance is quick: 180ms. */
-  @media (hover: hover) {
+  /* Dock (mouse, wide screens): each icon sits on an app-icon tile, a soft top-lit gradient with a
+     hairline and a faint shadow, so it reads as a small object rather than a flat box. Hover
+     reveals the brand color, with a faint wash of it underneath. The hover is mouse only, so it
+     never sticks after a tap. Entrance is quick: 180ms. */
+  @media (hover: hover) and (min-width: 769px) {
+    .skill {
+      --icon: 50%;
+      flex-direction: column;
+      gap: 6px;
+      text-align: center;
+    }
+
+    /* Quiet labels under the tiles: smaller and dimmer, so they read as captions, not a second row. */
+    .skill__name {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+    }
+
+    .skill__logo {
+      border-radius: 28%;
+      background: linear-gradient(180deg, var(--surface-hover), var(--surface));
+      box-shadow:
+        inset 0 0 0 1px var(--chrome-border),
+        inset 0 1px 0 rgb(255 255 255 / 0.06),
+        0 6px 12px -6px rgb(0 0 0 / 0.6);
+      transition:
+        width var(--dock-t, 0.5s var(--ease-spring)),
+        box-shadow 0.4s var(--ease-out),
+        scale 0.14s var(--ease-out);
+    }
+
+    .skill:active .skill__logo {
+      scale: 0.95;
+    }
+
     .skill:hover {
       --fade: 180ms;
+
+      .skill__logo {
+        box-shadow:
+          inset 0 0 0 1px var(--chrome-border),
+          inset 0 1px 0 rgb(255 255 255 / 0.06),
+          0 10px 22px -8px color-mix(in srgb, var(--brand) 40%, transparent);
+      }
 
       .skill__icon--ink {
         opacity: 0;
@@ -84,7 +121,7 @@ const { name, icon, color } = Astro.props;
       }
 
       .skill__name {
-        color: var(--text);
+        color: var(--text-strong);
       }
     }
   }
