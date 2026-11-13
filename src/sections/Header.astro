@@ -56,6 +56,14 @@ const t = useTranslations(Astro.currentLocale);
     .map((anchor) => ({ anchor, target: document.getElementById(new URL(anchor.href).hash.slice(1) || "aboutme") }))
     .filter(({ target }) => target);
 
+  const setCurrent = (current: HTMLAnchorElement) => {
+    headerAnchors.forEach((anchor) => {
+      if (anchor === current) anchor.setAttribute("aria-current", "location");
+      else anchor.removeAttribute("aria-current");
+    });
+    moveIndicator();
+  };
+
   const markCurrent = () => {
     if (!sections.length) return;
     const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
@@ -64,15 +72,40 @@ const t = useTranslations(Astro.currentLocale);
       if (section.target.getBoundingClientRect().top <= window.innerHeight * 0.4) current = section;
     }
     if (atBottom) current = sections[sections.length - 1];
-    sections.forEach(({ anchor }) => {
-      if (anchor === current.anchor) anchor.setAttribute("aria-current", "location");
-      else anchor.removeAttribute("aria-current");
-    });
-    moveIndicator();
+    setCurrent(current.anchor);
   };
 
+  // Clicking a link: the highlight goes straight to it in one move, instead of hopping through the
+  // sections the smooth scroll passes. Scrolling is ignored until it settles (no scroll event for
+  // 140ms; 600ms if the page does not move at all), then the real position is checked once.
+  let navigating = false;
+  let settleTimer: ReturnType<typeof setTimeout>;
+
+  const settle = (ms: number) => {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      navigating = false;
+      markCurrent();
+    }, ms);
+  };
+
+  headerAnchors.forEach((anchor) =>
+    anchor.addEventListener("click", () => {
+      navigating = true;
+      setCurrent(anchor);
+      settle(600);
+    }),
+  );
+
   markCurrent();
-  window.addEventListener("scroll", markCurrent, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (navigating) settle(140);
+      else markCurrent();
+    },
+    { passive: true },
+  );
   // Placed without animation first (and once the font has loaded), then it glides.
   document.fonts.ready.then(() => {
     moveIndicator();
