@@ -20,7 +20,7 @@
 
   /* Floating chrome (header, mobile menu, language menu) sits on translucent glass, and its
      controls are tinted with white rather than with a surface color. */
-  --chrome-bg: rgb(22 22 22 / 0.6);
+  --chrome-bg: rgb(22 22 22 / 0.74);
   --chrome-panel: rgb(19 19 19 / 0.92);
   --chrome-border: rgb(255 255 255 / 0.06);
   --tint-hover: rgb(255 255 255 / 0.08);

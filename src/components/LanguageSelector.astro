@@ -1,11 +1,11 @@
 ---
 import { useTranslations, localizePath } from "../utils/i18n";
-import LanguageIcon from "../icons/language.astro";
 import ArrowDown from "../icons/arrow-down.astro";
 
 const t = useTranslations(Astro.currentLocale);
 
 const { pathname } = Astro.url;
+const current = (Astro.currentLocale ?? "en").toUpperCase();
 const languages = [
   { code: "en", label: "English" },
   { code: "es", label: "Español" },
@@ -17,11 +17,11 @@ const languages = [
     class="lang__button"
     id="lang-button"
     type="button"
-    aria-label={t("a11y.changeLanguage")}
+    aria-label={`${t("a11y.changeLanguage")} (${current})`}
     aria-expanded="false"
     aria-controls="lang-menu"
   >
-    <LanguageIcon />
+    <span class="lang__code" aria-hidden="true">{current}</span>
     <ArrowDown />
   </button>
   <ul class="lang__options" id="lang-menu">
@@ -50,6 +50,7 @@ const languages = [
   .lang__button {
     display: flex;
     align-items: center;
+    gap: 5px;
     padding: 4px 6px;
     color: var(--text-strong);
     border-radius: var(--radius-sm);
@@ -63,6 +64,13 @@ const languages = [
     &:active {
       background-color: var(--tint-active);
     }
+  }
+
+  /* The active language at a glance, without opening the menu. */
+  .lang__code {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
 
   .lang__options {
@@ -137,14 +145,19 @@ const languages = [
     }
   }
 
-  /* On phones the header pill is tight: the icon alone says "language". */
+  /* On phones the header pill is tight: the code alone says which language, and the chevron
+     steps aside. */
   @media only screen and (max-width: 768px) {
     .lang__button {
       padding-inline: 8px;
 
-      & > :global(svg:last-child) {
+      & > :global(svg) {
         display: none;
       }
+    }
+
+    .lang__code {
+      font-size: 0.85rem;
     }
   }
 </style>
