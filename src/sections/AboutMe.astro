@@ -37,14 +37,34 @@ const t = useTranslations(Astro.currentLocale);
         id="hero-location"
         type="button"
         aria-describedby="hero-local-time"
-        data-template={t("hero.localTime")}
       >
         <svg class="hero__icon" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"></path>
         </svg>
         {t("hero.location")}
       </button>
-      <span class="hero__time" id="hero-local-time" role="tooltip"></span>
+      <span
+        class="hero__time"
+        id="hero-local-time"
+        role="tooltip"
+        data-ahead={t("hero.timeAhead")}
+        data-behind={t("hero.timeBehind")}
+        data-same={t("hero.timeSame")}
+      >
+        <svg class="clock" viewBox="0 0 40 40" aria-hidden="true">
+          <circle class="clock__face" cx="20" cy="20" r="19"></circle>
+          {[0, 90, 180, 270].map((deg) => <line class="clock__tick" x1="20" y1="3" x2="20" y2="6.5" transform={`rotate(${deg} 20 20)`} />)}
+          <line class="clock__hand clock__hand--hour" id="clock-hour" x1="20" y1="20" x2="20" y2="11"></line>
+          <line class="clock__hand clock__hand--minute" id="clock-minute" x1="20" y1="20" x2="20" y2="6.5"></line>
+          <line class="clock__hand clock__hand--second" id="clock-second" x1="20" y1="23" x2="20" y2="5"></line>
+          <circle class="clock__pin" cx="20" cy="20" r="1.6"></circle>
+        </svg>
+        <span class="clock__info">
+          <span class="clock__zone">{t("hero.location").split(",")[0]} · <span id="clock-abbr"></span></span>
+          <span class="clock__time"><span id="clock-time"></span> <span class="clock__period" id="clock-period"></span></span>
+        </span>
+        <span class="clock__meta"><span id="clock-diff"></span><span id="clock-offset"></span></span>
+      </span>
     </li>
   </ul>
   <a class="hero__status" href="#contact" data-flash-contact>
@@ -58,18 +78,66 @@ const t = useTranslations(Astro.currentLocale);
   const $location = document.getElementById("hero-location");
   const $time = document.getElementById("hero-local-time");
 
-  // Always Madrid time, in the clock style of the page language (2:32 PM / 14:32).
+  // Always Barcelona time, in the clock style of the page language (6:24:07 PM / 18:24:07).
+  const timeZone = "Europe/Madrid";
   const clock = new Intl.DateTimeFormat(document.documentElement.lang, {
     hour: "numeric",
     minute: "2-digit",
-    timeZone: "Europe/Madrid",
+    second: "2-digit",
+    timeZone,
   });
-  const update = () => {
-    $time.textContent = $location.dataset.template.replace("{time}", clock.format(new Date()));
+  const parts = (options: Intl.DateTimeFormatOptions, locale = "en-US") =>
+    Object.fromEntries(
+      new Intl.DateTimeFormat(locale, { timeZone, ...options }).formatToParts(new Date()).map((p) => [p.type, p.value]),
+    );
+
+  const $hour = document.getElementById("clock-hour");
+  const $minute = document.getElementById("clock-minute");
+  const $second = document.getElementById("clock-second");
+  const $clockTime = document.getElementById("clock-time");
+  const $period = document.getElementById("clock-period");
+  const $abbr = document.getElementById("clock-abbr");
+  const $diff = document.getElementById("clock-diff");
+  const $offset = document.getElementById("clock-offset");
+
+  // "GMT+1" / "GMT+5:30" / "GMT" -> minutes east of UTC.
+  const offsetMinutes = (gmt: string) => {
+    const [, sign, h, m] = gmt.match(/([+-])(\d+)(?::(\d+))?/) ?? [, "+", "0", "0"];
+    return (sign === "-" ? -1 : 1) * (Number(h) * 60 + Number(m ?? 0));
   };
 
+  const update = () => {
+    const { hour, minute, second } = parts({ hour: "numeric", minute: "numeric", second: "numeric", hourCycle: "h23" });
+    const [h, m, s] = [hour, minute, second].map(Number);
+    $hour.setAttribute("transform", `rotate(${(h % 12) * 30 + m * 0.5} 20 20)`);
+    $minute.setAttribute("transform", `rotate(${m * 6 + s * 0.1} 20 20)`);
+    $second.setAttribute("transform", `rotate(${s * 6} 20 20)`);
+    // "6:24:07" big, "PM" small (24-hour locales have no day period).
+    const formatted = clock.formatToParts(new Date());
+    $clockTime.textContent = formatted
+      .filter((p) => p.type !== "dayPeriod")
+      .map((p) => p.value)
+      .join("")
+      .trim();
+    $period.textContent = formatted.find((p) => p.type === "dayPeriod")?.value ?? "";
+
+    // CET / CEST, and UTC+1 / UTC+2.
+    $abbr.textContent = parts({ timeZoneName: "short" }, "en-GB").timeZoneName;
+    const gmt = parts({ timeZoneName: "shortOffset" }).timeZoneName;
+    $offset.textContent = gmt.replace("GMT", "UTC");
+
+    // How far Barcelona is from the visitor's own clock.
+    const diff = offsetMinutes(gmt) + new Date().getTimezoneOffset();
+    const abs = Math.abs(diff);
+    const span = `${Math.floor(abs / 60)}h${abs % 60 ? ` ${abs % 60}m` : ""}`;
+    const { ahead, behind, same } = $time.dataset;
+    $diff.textContent = diff === 0 ? same : (diff > 0 ? ahead : behind).replace("{diff}", span);
+  };
+
+  // The card only ticks while it is showing.
+  const isShowing = () => getComputedStyle($time).visibility === "visible";
   update();
-  setInterval(update, 20_000);
+  setInterval(() => isShowing() && update(), 1000);
 
   // Hover and keyboard focus are handled in CSS; a tap (or click) toggles it, for touch screens.
   const setOpen = (open: boolean) => $place.classList.toggle("hero__place--open", open);
@@ -110,7 +178,7 @@ const t = useTranslations(Astro.currentLocale);
 
 <style>
   .hero {
-    padding: 56px 0 8px;
+    padding: 112px 0 8px;
     text-align: center;
   }
 
@@ -184,34 +252,111 @@ const t = useTranslations(Astro.currentLocale);
     }
   }
 
+  /* Local time card: an analog clock beside the zone and the time, the offset underneath. */
   .hero__time {
     position: absolute;
     top: calc(100% + 8px);
     left: 50%;
     z-index: var(--z-dropdown);
-    padding: 6px 10px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-md);
-    background-color: var(--surface);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px 14px;
+    width: 248px;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border: 1px solid var(--chrome-border);
+    border-radius: 12px;
+    /* The same glass as the header pill. */
+    background-color: var(--chrome-panel);
+    backdrop-filter: blur(12px);
     box-shadow: var(--shadow-float);
-    font-size: 0.85rem;
-    font-variant-numeric: tabular-nums;
-    color: var(--text-strong);
+    font-size: 0.8rem;
+    line-height: 1.3;
+    text-align: left;
+    color: var(--text-muted);
     white-space: nowrap;
     pointer-events: none;
 
+    /* Grows out of the location with a spring. */
     visibility: hidden;
     opacity: 0;
-    transform: translate(-50%, -4px);
+    filter: blur(4px);
+    transform: translate(-50%, -6px) scale(0.9);
+    transform-origin: top center;
     transition:
       opacity 120ms var(--ease-out),
-      transform 120ms var(--ease-out),
-      visibility 0s linear 120ms;
+      filter 120ms var(--ease-out),
+      transform 150ms var(--ease-out),
+      visibility 0s linear 150ms;
   }
 
   /* Without JavaScript there is no time to show. */
-  .hero__time:empty {
+  :global(html:not(.js)) .hero__time {
     display: none;
+  }
+
+  .clock {
+    width: 46px;
+    height: 46px;
+  }
+
+  .clock__face {
+    fill: var(--background);
+    stroke: var(--border-strong);
+  }
+
+  .clock__tick {
+    stroke: var(--text-muted);
+  }
+
+  .clock__hand {
+    stroke: var(--text-strong);
+    stroke-linecap: round;
+  }
+
+  .clock__hand--hour {
+    stroke-width: 2.2;
+  }
+
+  .clock__hand--minute {
+    stroke-width: 1.5;
+  }
+
+  .clock__hand--second {
+    stroke: var(--text-subtle);
+    stroke-width: 0.8;
+  }
+
+  .clock__pin {
+    fill: var(--text-strong);
+  }
+
+  .clock__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .clock__time {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    color: var(--text-strong);
+  }
+
+  .clock__period {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--text-muted);
+  }
+
+  .clock__meta {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .hero__place:hover .hero__time,
@@ -219,10 +364,12 @@ const t = useTranslations(Astro.currentLocale);
   .hero__place--open .hero__time {
     visibility: visible;
     opacity: 1;
+    filter: none;
     transform: translate(-50%, 0);
     transition:
-      opacity 160ms var(--ease-out),
-      transform 160ms var(--ease-out),
+      opacity 180ms var(--ease-out),
+      filter 240ms var(--ease-out),
+      transform 500ms var(--ease-spring),
       visibility 0s;
   }
 
@@ -326,7 +473,7 @@ const t = useTranslations(Astro.currentLocale);
     stroke-linejoin: round;
     color: var(--text-subtle);
     transition:
-      transform 0.25s var(--ease-out),
+      transform 0.45s var(--ease-spring),
       color 0.25s var(--ease-out);
   }
 

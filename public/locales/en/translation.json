@@ -9,7 +9,9 @@
     "availableForWork": "Available for work",
     "role": "Web developer",
     "location": "Barcelona, Spain",
-    "localTime": "Local time: {time}"
+    "timeAhead": "{diff} ahead of you",
+    "timeBehind": "{diff} behind you",
+    "timeSame": "Same time as you"
   },
   "skills": {
     "title": "Skills"
@@ -49,8 +51,6 @@
   },
   "a11y": {
     "skipToContent": "Skip to content",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
     "mainNav": "Main",
     "changeLanguage": "Change language",
     "newTab": "(opens in a new tab)"

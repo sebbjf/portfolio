@@ -73,8 +73,10 @@ const languages = [
     min-width: 140px;
     margin: 0;
     padding: 6px;
-    background-color: var(--surface);
-    border: 1px solid var(--border-strong);
+    /* The same glass as the header pill. */
+    background-color: var(--chrome-panel);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--chrome-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-float);
 
@@ -82,10 +84,12 @@ const languages = [
        hidden from focus and clicks (visibility) once the fade-out ends. */
     visibility: hidden;
     opacity: 0;
-    transform: scale(0.96);
+    filter: blur(3px);
+    transform: scale(0.9);
     transform-origin: top right;
     transition:
       opacity 120ms var(--ease-out),
+      filter 120ms var(--ease-out),
       transform 120ms var(--ease-out),
       visibility 0s linear 120ms;
   }
@@ -94,10 +98,12 @@ const languages = [
   .lang__options.lang__show {
     visibility: inherit;
     opacity: 1;
+    filter: none;
     transform: none;
     transition:
       opacity 180ms var(--ease-out),
-      transform 180ms var(--ease-out),
+      filter 220ms var(--ease-out),
+      transform 450ms var(--ease-spring),
       visibility 0s;
   }
 
@@ -110,7 +116,7 @@ const languages = [
 
     &:hover,
     &:active {
-      background-color: var(--surface-hover);
+      background-color: var(--tint-hover);
     }
 
     &[aria-current="true"] {
@@ -131,16 +137,14 @@ const languages = [
     }
   }
 
+  /* On phones the header pill is tight: the icon alone says "language". */
   @media only screen and (max-width: 768px) {
-    /* Centered under the button in the mobile menu, so it grows from the top center. */
-    .lang__options {
-      right: 50%;
-      transform: translateX(50%) scale(0.96);
-      transform-origin: top center;
-    }
+    .lang__button {
+      padding-inline: 8px;
 
-    .lang__options.lang__show {
-      transform: translateX(50%);
+      & > :global(svg:last-child) {
+        display: none;
+      }
     }
   }
 </style>

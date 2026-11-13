@@ -9,7 +9,9 @@
     "availableForWork": "Disponible para trabajar",
     "role": "Desarrollador web",
     "location": "Barcelona, España",
-    "localTime": "Hora local: {time}"
+    "timeAhead": "{diff} más que tú",
+    "timeBehind": "{diff} menos que tú",
+    "timeSame": "Misma hora que tú"
   },
   "skills": {
     "title": "Tecnologías"
@@ -49,8 +51,6 @@
   },
   "a11y": {
     "skipToContent": "Saltar al contenido",
-    "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú",
     "mainNav": "Principal",
     "changeLanguage": "Cambiar idioma",
     "newTab": "(se abre en una pestaña nueva)"
