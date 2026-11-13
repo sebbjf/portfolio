@@ -12,17 +12,17 @@
     "localTime": "Hora local: {time}"
   },
   "skills": {
-    "title": "Habilidades"
+    "title": "Tecnologías"
   },
   "experience": {
     "title": "Experiencia",
-    "currently": "Actualmente"
+    "currently": "actualidad"
   },
   "education": {
-    "title": "Educación"
+    "title": "Formación"
   },
   "awards": {
-    "title": "Reconocimientos"
+    "title": "Premios"
   },
   "projects": {
     "title": "Proyectos"
@@ -40,7 +40,7 @@
   "meta": {
     "home": {
       "title": "Sebastian Jamito · Desarrollador web",
-      "description": "Estudiante de Desarrollo de Aplicaciones Web en Barcelona. Diseño interfaces, las creo con Astro y React y me estoy iniciando en backend y machine learning."
+      "description": "Estudiante de Desarrollo de Aplicaciones Web en Barcelona. Diseño interfaces, las desarrollo con Astro y React y me estoy iniciando en backend y machine learning."
     },
     "notFound": {
       "title": "Página no encontrada · Sebastian Jamito",

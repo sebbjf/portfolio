@@ -1,14 +1,14 @@
 const awards = [
   {
-    title: "First Place – Programame Catalonia Regional",
-    event: "Programame Terrassa",
+    title: "First place in the Catalonia regional round",
+    event: "ProgramaMe",
     url: "https://programame.com/",
     date: "2026",
     firstPlace: true,
     description: "Algorithmic programming competition (Java).",
     translation: {
       es: {
-        title: "Primer puesto – Programame Regional de Cataluña",
+        title: "Primer puesto en la fase regional de Cataluña",
         description: "Competición de programación algorítmica (Java).",
       },
     },

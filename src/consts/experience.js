@@ -4,12 +4,12 @@ const experience = [
   {
     name: "Institut Baix Empordà",
     position: "IT Technician (Internship)",
-    description: "Resolving technical issues for teaching staff and students, writing documentation and inventory tasks.",
+    description: "Solved technical issues for teachers and students, wrote documentation and kept the inventory.",
     startDate: "2025-01",
     endDate: "2025-04",
     translation: {
       es: {
-        position: "Técnico Informático (Prácticas)",
+        position: "Técnico informático (prácticas)",
         description:
           "Resolución de incidencias técnicas para profesorado y alumnado, redacción de documentación y tareas de inventario.",
       },
@@ -17,16 +17,14 @@ const experience = [
   },
   {
     name: "IFIXIT NOW",
-    position: "IT Assistant (Internship)",
-    description:
-      "Erasmus+ Experience. Tasks such as support and maintenance of computer equipment, Server management and Web development.",
+    position: "IT Technician (Erasmus+)",
+    description: "Erasmus+ internship in Greece. Built and managed WordPress websites, maintained systems and supported users.",
     startDate: "2024-05",
     endDate: null,
     translation: {
       es: {
-        position: "Asistente Informático (Prácticas)",
-        description:
-          "Experiencia Erasmus+. Tareas como soporte y mantenimiento de equipos informáticos, gestión de servidores y desarrollo web.",
+        position: "Técnico informático (Erasmus+)",
+        description: "Prácticas Erasmus+ en Grecia. Desarrollo y gestión de webs con WordPress, mantenimiento de sistemas y soporte a usuarios.",
       },
     },
   },
