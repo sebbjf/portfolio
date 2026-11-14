@@ -67,10 +67,9 @@ const { name, icon, color } = Astro.props;
     transition: color var(--fade) var(--ease-out);
   }
 
-  /* Dock (mouse, wide screens): each icon sits on an app-icon tile, a soft top-lit gradient with a
-     hairline and a faint shadow, so it reads as a small object rather than a flat box. Hover
-     reveals the brand color, with a faint wash of it underneath. The hover is mouse only, so it
-     never sticks after a tap. Entrance is quick: 180ms. */
+  /* Dock (mouse, wide screens): each icon sits in an outlined tile, flat like the rest of the
+     page: a hairline and nothing else. Hover reveals the brand color on the outline and the icon.
+     The hover is mouse only, so it never sticks after a tap. Entrance is quick: 180ms. */
   @media (hover: hover) and (min-width: 769px) {
     .skill {
       --icon: 50%;
@@ -79,22 +78,30 @@ const { name, icon, color } = Astro.props;
       text-align: center;
     }
 
-    /* Quiet labels under the tiles: smaller and dimmer, so they read as captions, not a second row. */
+    /* The tiles carry the icon alone; the name shows under a tile on hover. It stays in the DOM for
+       screen readers, and phones keep every name visible. */
     .skill__name {
+      position: absolute;
+      top: 100%;
+      margin-top: 8px;
       font-size: 0.75rem;
-      color: var(--text-subtle);
+      opacity: 0;
+      transform: translateY(-3px);
+      transition:
+        opacity var(--fade) var(--ease-out),
+        transform var(--fade) var(--ease-out),
+        color var(--fade) var(--ease-out);
     }
 
     .skill__logo {
-      border-radius: 28%;
-      background: linear-gradient(180deg, var(--surface-hover), var(--surface));
+      border-radius: 22%;
+      background-color: var(--surface);
       box-shadow:
-        inset 0 0 0 1px var(--chrome-border),
-        inset 0 1px 0 rgb(255 255 255 / 0.06),
-        0 6px 12px -6px rgb(0 0 0 / 0.6);
+        inset 0 0 0 1px var(--border-strong),
+        inset 0 1px 0 rgb(255 255 255 / 0.06);
       transition:
         width var(--dock-t, 0.5s var(--ease-spring)),
-        box-shadow 0.4s var(--ease-out),
+        box-shadow var(--fade) var(--ease-out),
         scale 0.14s var(--ease-out);
     }
 
@@ -107,9 +114,8 @@ const { name, icon, color } = Astro.props;
 
       .skill__logo {
         box-shadow:
-          inset 0 0 0 1px var(--chrome-border),
-          inset 0 1px 0 rgb(255 255 255 / 0.06),
-          0 10px 22px -8px color-mix(in srgb, var(--brand) 40%, transparent);
+          inset 0 0 0 1px var(--brand),
+          inset 0 1px 0 rgb(255 255 255 / 0.06);
       }
 
       .skill__icon--ink {
@@ -121,6 +127,8 @@ const { name, icon, color } = Astro.props;
       }
 
       .skill__name {
+        opacity: 1;
+        transform: none;
         color: var(--text-strong);
       }
     }

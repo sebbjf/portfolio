@@ -53,33 +53,34 @@ const t = useTranslations(Astro.currentLocale);
 </script>
 
 <style>
-  /* Touch and narrow screens: every skill visible at once, flowing like words in a sentence, each
-     a small icon beside its name. No grid, no scrolling, nothing hidden. */
+  /* Touch and narrow screens: every skill visible at once in an aligned grid, each a small icon
+     beside its name. No scrolling, nothing hidden. */
   .skills__list {
-    --tile: 22px;
+    --tile: 24px;
 
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+    gap: 16px 12px;
     margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  /* Dock: one row spanning the content width, edges aligned with the text (space-between, so the
-     gaps give way as icons grow and the row never widens). Icons grow upwards into the heading's
-     margin, so at rest they sit at the usual distance and nothing below moves; the names stay put
-     on a shared baseline. While the cursor moves the size follows it closely; once it leaves, the
-     icons spring back. */
+  /* Dock: one row spanning the content width, edges aligned with the text. Icons grow upwards into the heading's
+     margin, so at rest they sit at the usual distance and nothing below moves. While the cursor
+     moves the size follows it closely; once it leaves, the icons spring back. */
   @media (hover: hover) and (min-width: 769px) {
     .skills__list {
       --tile: 52px;
       --dock-t: 0.5s var(--ease-spring);
 
+      display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;
       align-items: flex-end;
-      gap: 0;
-      /* the largest icon + the gap + one line of name */
-      height: calc(var(--tile) * 1.5 + 6px + 0.75rem * 1.3);
+      gap: 12px;
+      /* the largest icon */
+      height: calc(var(--tile) * 1.5);
       margin-top: calc(var(--tile) * -0.5);
     }
 
