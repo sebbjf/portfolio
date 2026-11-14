@@ -6,15 +6,17 @@ const t = useTranslations(Astro.currentLocale);
 ---
 
 <header class="hero" id="aboutme">
-  <div class="hero__row">
+  <div class="hero__row hero__row--top">
     <div class="hero__id">
       <h1 class="hero__name">Sebastian Jamito</h1>
       <span class="hero__sep" aria-hidden="true">/</span>
-      <a class="hero__link" href="mailto:hi@sebastianjf.com">{t("hero.email")}</a>
-      <span class="hero__sep" aria-hidden="true">/</span>
-      <a class="hero__link" href="https://github.com/sebbjf/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">github</a>
-      <span class="hero__sep" aria-hidden="true">/</span>
-      <a class="hero__link" href={localizePath("/resume", Astro.currentLocale)} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">{t("contact.resume")}</a>
+      <div class="hero__links">
+        <a class="hero__link" href="mailto:hi@sebastianjf.com">{t("hero.email")}</a>
+        <span class="hero__sep" aria-hidden="true">/</span>
+        <a class="hero__link" href="https://github.com/sebbjf/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">github</a>
+        <span class="hero__sep" aria-hidden="true">/</span>
+        <a class="hero__link" href={localizePath("/resume", Astro.currentLocale)} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">{t("contact.resume")}</a>
+      </div>
     </div>
     <span class="hero__clock" id="hero-clock" aria-hidden="true"></span>
   </div>
@@ -173,10 +175,37 @@ const t = useTranslations(Astro.currentLocale);
     }
   }
 
-  /* Phones: the slashes would dangle at the end of a wrapped line, so the links just sit apart. */
+  /* On a wide screen the links flow on the name's line. */
+  .hero__links {
+    display: contents;
+  }
+
+  /* Phones: the name and the clock share the first line, the links sit apart on the next (no
+     slashes to dangle at a line break), then role and place, then availability. */
   @media only screen and (max-width: 768px) {
+    .hero__row--top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+    }
+
     .hero__id {
-      column-gap: 18px;
+      display: contents;
+    }
+
+    .hero__name {
+      grid-area: 1 / 1;
+    }
+
+    .hero__clock {
+      grid-area: 1 / 2;
+    }
+
+    .hero__links {
+      display: flex;
+      flex-wrap: wrap;
+      grid-area: 2 / 1 / 3 / -1;
+      gap: 0 18px;
     }
 
     .hero__id .hero__sep {
@@ -185,11 +214,6 @@ const t = useTranslations(Astro.currentLocale);
   }
 
   @media (pointer: coarse) {
-    /* Rows of links stay visually tight, but each one is a full-height target. */
-    .hero__id {
-      row-gap: 0;
-    }
-
     .hero__link,
     .hero__status {
       display: inline-flex;
