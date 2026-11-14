@@ -16,7 +16,7 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
   <ul class="entries">
     {
       awards.map((a, i) => (
-        <li class:list={["entry", { "entry--trophy": a.firstPlace }]} data-reveal style={`--i: ${i}`}>
+        <li class="entry" data-reveal style={`--i: ${i}`}>
           <div class="entry__head">
             <h3 class="entry__title">
               {a.firstPlace && <TrophyIcon class="trophy" aria-hidden="true" />}
@@ -43,12 +43,6 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
 <style>
   .entry__org {
     margin: 0;
-  }
-
-  /* The trophy shifts the title text right; indent the lines below by the same amount so they align with it. */
-  .entry--trophy .entry__org,
-  .entry--trophy .entry__description {
-    padding-left: 1.12em;
   }
 
   /* Inline with the title; the title already says "First Place", so the icon is decorative. */
