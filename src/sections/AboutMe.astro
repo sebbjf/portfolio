@@ -135,7 +135,10 @@ const t = useTranslations(Astro.currentLocale);
 
   .hero__role {
     margin: 0;
-    font-style: italic;
+  }
+
+  .hero__meta .hero__sep {
+    color: var(--text-subtle);
   }
 
   .hero__role,
@@ -224,6 +227,7 @@ const t = useTranslations(Astro.currentLocale);
 
   .profile > p {
     margin: 0 0 0.7em;
+    color: var(--text-muted);
 
     &:last-child {
       margin-bottom: 0;
