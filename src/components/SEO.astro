@@ -24,7 +24,6 @@ const ogImage = new URL(`/og/og-${Astro.currentLocale === "es" ? "es" : "en"}.pn
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
 <link rel="sitemap" href="/sitemap-index.xml" />
-<!-- Both weights render above the fold: Regular for body text, Bold for the name in the hero. -->
 <link
   rel="preload"
   href="/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.woff2"

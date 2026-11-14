@@ -19,12 +19,10 @@ const { title, description, noindex = false } = Astro.props;
 <html lang={Astro.currentLocale}>
   <head>
     <SEO title={title} description={description} noindex={noindex} />
-    <!-- Runs before first paint so [data-reveal] content starts hidden instead of flashing. -->
     <script is:inline>document.documentElement.classList.add("js");</script>
   </head>
   <body>
     <a class="skip-link" href="#main">{t("a11y.skipToContent")}</a>
-    <!-- Announced after the name of every link that opens a new tab (aria-describedby). -->
     <span id="new-tab-hint" class="visually-hidden">{t("a11y.newTab")}</span>
     <slot />
     <script>
