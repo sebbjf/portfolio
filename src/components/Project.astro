@@ -64,6 +64,15 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
 </li>
 
 <style>
+  /* The cards come in faster than the rest of the page's scroll reveal. */
+  :global(.js) .project[data-reveal] {
+    transition:
+      opacity 0.35s var(--ease-out),
+      filter 0.35s var(--ease-out),
+      translate 0.5s var(--ease-spring);
+    transition-delay: calc(min(var(--i, 0), 6) * 25ms);
+  }
+
   .project__link {
     display: block;
     color: inherit;

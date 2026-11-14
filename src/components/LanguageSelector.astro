@@ -51,9 +51,10 @@ const languages = [
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 4px 6px;
+    padding: 5px 10px;
     color: var(--text-strong);
-    border-radius: var(--radius-sm);
+    /* A pill, like the links beside it. */
+    border-radius: 999px;
     transition: background-color 0.2s var(--ease-out);
 
     &:hover,
@@ -156,8 +157,9 @@ const languages = [
       }
     }
 
+    /* The same size as the links beside it. */
     .lang__code {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
   }
 </style>
