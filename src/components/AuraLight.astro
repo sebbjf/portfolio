@@ -11,4 +11,13 @@
     pointer-events: none;
     background-image: radial-gradient(ellipse 70% 75% at 50% -20%, var(--glow), transparent 70%);
   }
+
+  /* Phones: 100dvh is tall and narrow, so the percent ellipse becomes a streak. Fix the height instead. */
+  @media (max-width: 768px) {
+    .aura-light {
+      height: 80vw;
+      min-height: 340px;
+      background-image: radial-gradient(ellipse 110% 100% at 50% -25%, rgb(255 255 255 / 0.17), transparent 70%);
+    }
+  }
 </style>

@@ -27,8 +27,8 @@ if (!screenshot) throw new Error(`Project image "${projectData.image}" not found
 // phones) keeps it from picking a file that is too small on scaled displays.
 const overflow = Math.max(1, 0.625 * (screenshot.width / screenshot.height)).toFixed(3);
 const sizes = [
-  `(max-width: 560px) calc((100vw - 48px) * ${overflow})`,
-  `(max-width: 768px) calc((100vw - 76px) / 2 * ${overflow})`,
+  `(max-width: 560px) calc((100vw - 40px) * ${overflow})`,
+  `(max-width: 768px) calc((100vw - 68px) / 2 * ${overflow})`,
   `${Math.ceil(354 * overflow)}px`,
 ].join(", ");
 
