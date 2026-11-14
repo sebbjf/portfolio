@@ -26,7 +26,8 @@
   --tint-hover: rgb(255 255 255 / 0.08);
   --tint-active: rgb(255 255 255 / 0.12);
   --shadow-float: 0 12px 32px rgb(0 0 0 / 0.45);
-  --glow: rgb(255 255 255 / 0.16);
+  /* Warm ink, same hue as --text-strong, so the light belongs to the palette. */
+  --glow: rgb(247 245 240 / 0.16);
 
   --radius-sm: 4px;
   --radius-md: 6px;

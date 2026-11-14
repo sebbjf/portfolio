@@ -9,15 +9,27 @@
     height: 100dvh;
     z-index: -2;
     pointer-events: none;
-    background-image: radial-gradient(ellipse 70% 75% at 50% -20%, var(--glow), transparent 70%);
+    /* Three stops: a bright core at the top edge, a mid falloff, then a long tail so it never shows a rim. */
+    background-image: radial-gradient(
+      ellipse 85% 80% at 50% -6%,
+      var(--glow),
+      color-mix(in srgb, var(--glow) 38%, transparent) 38%,
+      color-mix(in srgb, var(--glow) 10%, transparent) 68%,
+      transparent 100%
+    );
   }
 
   /* Phones: 100dvh is tall and narrow, so the percent ellipse becomes a streak. Fix the height instead. */
   @media (max-width: 768px) {
     .aura-light {
-      height: 80vw;
-      min-height: 340px;
-      background-image: radial-gradient(ellipse 110% 100% at 50% -25%, rgb(255 255 255 / 0.17), transparent 70%);
+      height: 90vw;
+      min-height: 380px;
+      background-image: radial-gradient(
+        ellipse 120% 100% at 50% -15%,
+        var(--glow),
+        color-mix(in srgb, var(--glow) 38%, transparent) 40%,
+        transparent 100%
+      );
     }
   }
 </style>
