@@ -64,15 +64,6 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
 </li>
 
 <style>
-  /* The cards come in faster than the rest of the page's scroll reveal. */
-  :global(.js) .project[data-reveal] {
-    transition:
-      opacity 0.35s var(--ease-out),
-      filter 0.35s var(--ease-out),
-      translate 0.5s var(--ease-spring);
-    transition-delay: calc(min(var(--i, 0), 6) * 25ms);
-  }
-
   .project__link {
     display: block;
     color: inherit;
@@ -81,8 +72,8 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
 
   /* A soft, borderless frame in full color: the screenshot is the hero of the card. The frame stays
      put, like every other surface on the page. Hover does what it does everywhere else: whatever is
-     muted wakes up (here the screenshot brightens) and the one thing that moves springs (the image
-     eases in a little closer, the arrow nudges). */
+     muted wakes up (here the screenshot brightens) and the one thing that moves springs (the
+     arrow nudges). */
   .project__media {
     display: block;
     aspect-ratio: 16 / 10;
@@ -102,9 +93,7 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
     object-fit: cover;
     object-position: top center;
     filter: brightness(0.85);
-    transition:
-      transform 0.7s var(--ease-spring),
-      filter 0.3s var(--ease-out);
+    transition: filter 0.3s var(--ease-out);
   }
 
   /* The title and the arrow share one line; the arrow sits at the end. */
@@ -189,7 +178,6 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
 
       .project__thumb {
         filter: none;
-        transform: scale(1.04);
       }
     }
   }

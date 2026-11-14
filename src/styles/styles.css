@@ -177,20 +177,29 @@ img {
   font-weight: 500;
 }
 
+/* Same glass pill as the header; it slides in on the page's spring when it takes focus. */
 .skip-link {
   position: absolute;
   top: 12px;
   left: 12px;
   z-index: calc(var(--z-header) + 1);
-  padding: 8px 14px;
-  border-radius: var(--radius-md);
-  background: var(--text-strong);
-  color: var(--background);
-  font-weight: bold;
+  padding: 8px 16px;
+  border: 1px solid var(--chrome-border);
+  border-radius: 999px;
+  background-color: var(--chrome-panel);
+  box-shadow: var(--shadow-float);
+  color: var(--text-strong);
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0;
   transform: translateY(-200%);
+  transition:
+    transform 0.45s var(--ease-spring),
+    opacity 0.2s var(--ease-out);
 }
 
 .skip-link:focus {
+  opacity: 1;
   transform: none;
 }
 

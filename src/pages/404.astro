@@ -13,9 +13,13 @@ const t = useTranslations(Astro.currentLocale);
   <div class="content">
     <Header />
     <main id="main" class="not-found">
-      <h1 class="not-found__code accent">{t("notFound.code")}</h1>
-      <p class="not-found__text">{t("notFound.text")}</p>
-      <a class="not-found__back" href={localizePath("/", Astro.currentLocale)}>← {t("notFound.back")}</a>
+      <h1 class="not-found__code accent" data-reveal>{t("notFound.code")}</h1>
+      <p class="not-found__text" data-reveal style="--i: 1">{t("notFound.text")}</p>
+      <div data-reveal style="--i: 2">
+        <a class="not-found__back" href={localizePath("/", Astro.currentLocale)}
+        ><span class="not-found__arrow" aria-hidden="true">←</span> {t("notFound.back")}</a
+      >
+      </div>
     </main>
     <Footer />
   </div>
@@ -44,24 +48,38 @@ const t = useTranslations(Astro.currentLocale);
     color: var(--text-muted);
   }
 
+  /* A plain underlined link like the rest of the page; the arrow springs toward where it goes. */
   .not-found__back {
     display: inline-flex;
     align-items: center;
     min-height: var(--tap);
-    box-sizing: border-box;
     margin-top: 16px;
-    padding: 8px 16px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-md);
-    transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+    color: var(--text-strong);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s var(--ease-out);
 
     &:hover {
-      background-color: var(--surface-hover);
-      border-color: var(--accent);
+      text-decoration-color: currentColor;
     }
 
     &:active {
-      transform: translateY(1px);
+      color: var(--text-muted);
     }
+  }
+
+  .not-found__arrow {
+    display: inline-block;
+    margin-right: 6px;
+    color: var(--text-subtle);
+    transition:
+      transform 0.45s var(--ease-spring),
+      color 0.2s var(--ease-out);
+  }
+
+  .not-found__back:hover .not-found__arrow {
+    color: currentColor;
+    transform: translateX(-3px);
   }
 </style>
