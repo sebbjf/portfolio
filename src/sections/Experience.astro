@@ -18,17 +18,21 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
       experience.map((e, i) => (
         <li class="entry" data-reveal style={`--i: ${i}`}>
           <div class="entry__head">
-            <h3 class="entry__title">
-              {localize(e, "position")},
-              <em class="entry__org">{e.name}</em>
-            </h3>
+            <h3 class="entry__title">{localize(e, "position")}</h3>
             <p class="entry__date">
               {formatPeriod(e.startDate, e.endDate, currentLanguage, t("experience.currently"))}
             </p>
           </div>
-          <p class="entry__description">{localize(e, "description")}</p>
+          <p class="entry__org">{e.name}</p>
         </li>
       ))
     }
   </ul>
 </section>
+
+<style>
+  .entry__org {
+    margin: 0;
+  }
+</style>
+
