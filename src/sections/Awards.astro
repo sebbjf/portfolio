@@ -16,23 +16,23 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
   <ul class="entries">
     {
       awards.map((a, i) => (
-        <li class="entry" data-reveal style={`--i: ${i}`}>
+        <li class:list={["entry", { "entry--trophy": a.firstPlace }]} data-reveal style={`--i: ${i}`}>
           <div class="entry__head">
             <h3 class="entry__title">
               {a.firstPlace && <TrophyIcon class="trophy" aria-hidden="true" />}
-              {localize(a, "title")},
-              <em class="entry__org">
-                {a.url ? (
-                  <a class="entry__link" href={a.url} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
-                    {a.event}
-                  </a>
-                ) : (
-                  a.event
-                )}
-              </em>
+              {localize(a, "title")}
             </h3>
             <p class="entry__date">{a.date}</p>
           </div>
+          <p class="entry__org">
+            {a.url ? (
+              <a class="entry__link" href={a.url} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
+                {a.event}
+              </a>
+            ) : (
+              a.event
+            )}
+          </p>
           <p class="entry__description">{localize(a, "description")}</p>
         </li>
       ))
@@ -41,6 +41,16 @@ const localize = (a, key) => (a.translation && a.translation[currentLanguage]?.[
 </section>
 
 <style>
+  .entry__org {
+    margin: 0;
+  }
+
+  /* The trophy shifts the title text right; indent the lines below by the same amount so they align with it. */
+  .entry--trophy .entry__org,
+  .entry--trophy .entry__description {
+    padding-left: 1.12em;
+  }
+
   /* Inline with the title; the title already says "First Place", so the icon is decorative. */
   .trophy {
     display: inline-block;
