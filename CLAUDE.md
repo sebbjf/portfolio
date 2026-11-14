@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build`: `astro build` (output goes to `.vercel/output/`)
 - `npm run preview`: preview the build
 
-There are no tests and no linter.
+There are no tests and no linter. `mapa.md` lists where everything lives; read it first.
 
 ## Architecture
 
@@ -16,9 +16,15 @@ This is a personal portfolio site (sebastianjf.com) built with Astro 7 and deplo
 
 **Whitespace:** `compressHTML: true` in `astro.config.mjs` keeps Astro's lossless whitespace handling. Astro 7's default (`"jsx"`) drops line breaks between text and tags, which glues words together in templates that wrap text across lines.
 
-**Pages are composed from sections:** `src/pages/*.astro` assemble the components in `src/sections/` (Header, AboutMe, Skills, Experience, Projects, Contact, Footer) inside `src/layouts/Layout.astro`. Content data (projects, experience, skills) lives in plain JS arrays in `src/consts/`, not in content collections.
+**Pages are composed from sections:** `src/pages/*.astro` assemble the components in `src/sections/` (Header, AboutMe, Skills, Experience, Education, Awards, Projects, Contact, Footer) inside `src/layouts/Layout.astro`. Content data (projects, experience, skills) lives in plain JS arrays in `src/consts/`, not in content collections.
 
-**Styling:** plain CSS with the Atkinson Hyperlegible font (`public/fonts/`). The palette is monochrome warm ink on near-black with no accent hue (`--accent` is bright ink); green (`--status`) is used only for the "available for work" dot, and gold (`--trophy`) only for the first-place trophy in Awards. The hero, Experience and Projects borrow the printed résumé's layout (`public/files/resume.pdf`): centered name with an italic role and contact row, and entries with a bold title, italic organization and the date on the right. Design tokens (colors, radii, easing, z-index) are defined on `:root` in `src/styles/styles.css`, and each component uses scoped `<style>` blocks that reference them. There is no accent hue (`--accent` is bright ink); green (`--status`) is used only for the "available for work" dot. Interactive elements need a hover state, an `:active` state and the global `:focus-visible` ring, and motion must respect the `prefers-reduced-motion` rule in `styles.css`.
+**Styling:** plain CSS. The font is Geist (variable, latin subset, `public/fonts/Geist/`), preloaded in `SEO.astro`; Atkinson Hyperlegible (`public/fonts/Atkinson_Hyperlegible/`) stays only as a fallback. Geist has no italic, so italics (role, organization) are synthesized by the browser. The page is flat: the root size is 15px (`font-size: 93.75%` on `html`), the name, section titles and entry titles are weight 500, and hierarchy comes from weight and color, not size. The content column is 640px (`--max-w`). The palette is monochrome warm ink on near-black with no accent hue (`--accent` is bright ink); green (`--status`) is used only for the "available for work" dot, and gold (`--trophy`) only for the first-place trophy in Awards. Design tokens (colors, radii, easing, z-index, `--max-w`) are defined on `:root` in `src/styles/styles.css`, and each component uses scoped `<style>` blocks that reference them. Interactive elements need a hover state, an `:active` state and the global `:focus-visible` ring, and motion must respect the `prefers-reduced-motion` rule in `styles.css`.
+
+**Spacing:** sections are 72px apart (56px on phones) through the global `section` margin; a section title sits 16px above its content; the intro under the hero is 32px below it; Contact has extra air (96px above, 88px below). Change these in `styles.css` (and `Contact.astro`), not per section.
+
+**Hero (`src/sections/AboutMe.astro`):** left aligned. First row: name, then email / github / résumé links separated by slashes, with the Barcelona time (`#hero-clock`, always CET/CEST) on the right. Second row: role, place, and the availability link. On phones (max-width 768px) it becomes a grid: name and clock on one line, links on the next without slashes, then role and place, then availability. The intro paragraph lives in the `.about` section below it, 32px away. The analog clock tooltip was removed; do not bring it back unless asked. Entries in Experience, Education and Awards share `src/styles/entries.css` (title weight 500, italic organization, date on the right). Project cards reveal faster than the rest (`Project.astro`).
+
+**Scroll reveal:** elements with `data-reveal` fade in when they enter the viewport (`Layout.astro` sets `data-in`; the transition is in `styles.css`). `--i` staggers rows.
 
 **i18n (Astro's built-in `i18n` routing):** the locales are `en` (default, no prefix) and `es` (under `/es/`), configured in `astro.config.mjs`. Components get the language from `Astro.currentLocale`, which Astro derives from the URL.
 - Each page exists twice: `src/pages/foo.astro` and `src/pages/es/foo.astro`. The two files are identical apart from relative import paths, so change both when you edit a page.
