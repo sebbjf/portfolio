@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "About me",
-    "about": "Web Application Development student at Institut TIC de Barcelona. I design interfaces and build them with <0>Astro and React</0>. Right now I'm strengthening my backend skills and getting into machine learning. Before that, I trained and worked in IT support.",
+    "about": "I'm studying Web Application Development at Institut TIC de Barcelona. I design interfaces and build them with <0>Astro and React</0>. Right now I'm learning backend and machine learning. Before this, I worked in IT support.",
     "projectsText": "See",
     "projectsButton": "my projects",
     "contactText": "or",
