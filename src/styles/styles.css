@@ -114,8 +114,10 @@ h3 {
 }
 
 h2 {
-  font-size: 1.875rem;
-  margin-bottom: 32px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 24px;
 }
 
 p {
@@ -148,7 +150,7 @@ button {
 }
 
 section {
-  margin: 96px 0;
+  margin: 64px 0;
 }
 
 img {
@@ -215,12 +217,12 @@ img {
   }
 
   section {
-    margin: 72px 0;
+    margin: 48px 0;
   }
 
   h2 {
-    margin-bottom: 24px;
-    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-size: 1.15rem;
   }
 
   h3 {

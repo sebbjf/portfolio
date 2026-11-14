@@ -1,162 +1,52 @@
 ---
 import Trans from "../components/Trans.astro";
-import { useTranslations } from "../utils/i18n";
-import GithubIcon from "../icons/github.astro";
-// import LinkedinIcon from "../icons/linkedin.astro";
-import EmailIcon from "../icons/email.astro";
+import { useTranslations, localizePath } from "../utils/i18n";
 
 const t = useTranslations(Astro.currentLocale);
 ---
 
 <header class="hero" id="aboutme">
-  <h1 class="hero__name">Sebastian Jamito</h1>
-  <p class="hero__role">{t("hero.role")}</p>
-  <ul class="hero__contact">
-    <li>
-      <a href="mailto:hi@sebastianjf.com">
-        <EmailIcon class:list={"hero__icon"} aria-hidden="true" />
-        hi@sebastianjf.com
-      </a>
-    </li>
-    <li>
-      <a href="https://github.com/sebbjf/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
-        <GithubIcon class:list={"hero__icon"} viewBox="0 0 30 30" aria-hidden="true" />
-        sebbjf
-      </a>
-    </li>
-    {/* <li>
-      <a href="https://www.linkedin.com/in/sebastian-jf/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">
-        <LinkedinIcon class:list={"hero__icon"} aria-hidden="true" />
-        sebastian-jf
-      </a>
-    </li> */}
-    <li class="hero__place" id="hero-place">
-      {/* A toggletip: hover, focus or tap shows the current time in Barcelona. */}
-      <button
-        class="hero__location"
-        id="hero-location"
-        type="button"
-        aria-describedby="hero-local-time"
-      >
-        <svg class="hero__icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"></path>
-        </svg>
-        {t("hero.location")}
-      </button>
-      <span
-        class="hero__time"
-        id="hero-local-time"
-        role="tooltip"
-        data-ahead={t("hero.timeAhead")}
-        data-behind={t("hero.timeBehind")}
-        data-same={t("hero.timeSame")}
-      >
-        <svg class="clock" viewBox="0 0 40 40" aria-hidden="true">
-          <circle class="clock__face" cx="20" cy="20" r="19"></circle>
-          {[0, 90, 180, 270].map((deg) => <line class="clock__tick" x1="20" y1="3" x2="20" y2="6.5" transform={`rotate(${deg} 20 20)`} />)}
-          <line class="clock__hand clock__hand--hour" id="clock-hour" x1="20" y1="20" x2="20" y2="11"></line>
-          <line class="clock__hand clock__hand--minute" id="clock-minute" x1="20" y1="20" x2="20" y2="6.5"></line>
-          <line class="clock__hand clock__hand--second" id="clock-second" x1="20" y1="23" x2="20" y2="5"></line>
-          <circle class="clock__pin" cx="20" cy="20" r="1.6"></circle>
-        </svg>
-        <span class="clock__info">
-          <span class="clock__zone">{t("hero.location").split(",")[0]} · <span id="clock-abbr"></span></span>
-          <span class="clock__time"><span id="clock-time"></span> <span class="clock__period" id="clock-period"></span></span>
-        </span>
-        <span class="clock__meta"><span id="clock-diff"></span><span id="clock-offset"></span></span>
-      </span>
-    </li>
-  </ul>
-  <a class="hero__status" href="#contact" data-flash-contact>
-    <span class="hero__status-dot" aria-hidden="true"></span>
-    {t("hero.availableForWork")}
-  </a>
+  <div class="hero__row">
+    <div class="hero__id">
+      <h1 class="hero__name">Sebastian Jamito</h1>
+      <span class="hero__sep" aria-hidden="true">/</span>
+      <a class="hero__link" href="mailto:hi@sebastianjf.com">{t("hero.email")}</a>
+      <span class="hero__sep" aria-hidden="true">/</span>
+      <a class="hero__link" href="https://github.com/sebbjf/" target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">github</a>
+      <span class="hero__sep" aria-hidden="true">/</span>
+      <a class="hero__link" href={localizePath("/resume", Astro.currentLocale)} target="_blank" rel="noopener noreferrer" aria-describedby="new-tab-hint">{t("contact.resume")}</a>
+    </div>
+    <span class="hero__clock" id="hero-clock" aria-hidden="true"></span>
+  </div>
+  <div class="hero__row hero__row--sub">
+    <div class="hero__meta">
+      <p class="hero__role">{t("hero.role")}</p>
+      <span class="hero__sep" aria-hidden="true">·</span>
+      <span class="hero__place">{t("hero.location")}</span>
+    </div>
+    <a class="hero__status" href="#contact" data-flash-contact>
+      <span class="hero__status-dot" aria-hidden="true"></span>
+      {t("hero.availableForWork")}
+    </a>
+  </div>
 </header>
 
 <script>
-  const $place = document.getElementById("hero-place");
-  const $location = document.getElementById("hero-location");
-  const $time = document.getElementById("hero-local-time");
-
-  // Always Barcelona time, in the clock style of the page language (6:24:07 PM / 18:24:07).
+  // Barcelona time next to the name ("10:42 AM CET"), in the clock style of the page language.
   const timeZone = "Europe/Madrid";
-  const clock = new Intl.DateTimeFormat(document.documentElement.lang, {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    timeZone,
-  });
-  const parts = (options: Intl.DateTimeFormatOptions, locale = "en-US") =>
-    Object.fromEntries(
-      new Intl.DateTimeFormat(locale, { timeZone, ...options }).formatToParts(new Date()).map((p) => [p.type, p.value]),
-    );
-
-  const $hour = document.getElementById("clock-hour");
-  const $minute = document.getElementById("clock-minute");
-  const $second = document.getElementById("clock-second");
-  const $clockTime = document.getElementById("clock-time");
-  const $period = document.getElementById("clock-period");
-  const $abbr = document.getElementById("clock-abbr");
-  const $diff = document.getElementById("clock-diff");
-  const $offset = document.getElementById("clock-offset");
-
-  // "GMT+1" / "GMT+5:30" / "GMT" -> minutes east of UTC.
-  const offsetMinutes = (gmt: string) => {
-    const [, sign, h, m] = gmt.match(/([+-])(\d+)(?::(\d+))?/) ?? [, "+", "0", "0"];
-    return (sign === "-" ? -1 : 1) * (Number(h) * 60 + Number(m ?? 0));
-  };
-
+  const $clock = document.getElementById("hero-clock");
+  const clock = new Intl.DateTimeFormat(document.documentElement.lang, { hour: "numeric", minute: "2-digit", timeZone });
+  // CET / CEST in every language (the page's own locale would print GMT+1).
+  const zone = new Intl.DateTimeFormat("en-GB", { timeZone, timeZoneName: "short" });
   const update = () => {
-    const { hour, minute, second } = parts({ hour: "numeric", minute: "numeric", second: "numeric", hourCycle: "h23" });
-    const [h, m, s] = [hour, minute, second].map(Number);
-    $hour.setAttribute("transform", `rotate(${(h % 12) * 30 + m * 0.5} 20 20)`);
-    $minute.setAttribute("transform", `rotate(${m * 6 + s * 0.1} 20 20)`);
-    $second.setAttribute("transform", `rotate(${s * 6} 20 20)`);
-    // "6:24:07" big, "PM" small (24-hour locales have no day period).
-    const formatted = clock.formatToParts(new Date());
-    $clockTime.textContent = formatted
-      .filter((p) => p.type !== "dayPeriod")
-      .map((p) => p.value)
-      .join("")
-      .trim();
-    $period.textContent = formatted.find((p) => p.type === "dayPeriod")?.value ?? "";
-
-    // CET / CEST, and UTC+1 / UTC+2.
-    $abbr.textContent = parts({ timeZoneName: "short" }, "en-GB").timeZoneName;
-    const gmt = parts({ timeZoneName: "shortOffset" }).timeZoneName;
-    $offset.textContent = gmt.replace("GMT", "UTC");
-
-    // How far Barcelona is from the visitor's own clock.
-    const diff = offsetMinutes(gmt) + new Date().getTimezoneOffset();
-    const abs = Math.abs(diff);
-    const span = `${Math.floor(abs / 60)}h${abs % 60 ? ` ${abs % 60}m` : ""}`;
-    const { ahead, behind, same } = $time.dataset;
-    $diff.textContent = diff === 0 ? same : (diff > 0 ? ahead : behind).replace("{diff}", span);
+    const abbr = zone.formatToParts(new Date()).find((p) => p.type === "timeZoneName")?.value ?? "";
+    $clock.textContent = `${clock.format(new Date())} ${abbr}`;
   };
-
-  // The card only ticks while it is showing.
-  const isShowing = () => getComputedStyle($time).visibility === "visible";
   update();
-  setInterval(() => isShowing() && update(), 1000);
-
-  // Hover and keyboard focus are handled in CSS; a tap (or click) toggles it, for touch screens.
-  const setOpen = (open: boolean) => $place.classList.toggle("hero__place--open", open);
-
-  $location.addEventListener("click", (event) => {
-    event.stopPropagation();
-    update();
-    setOpen(!$place.classList.contains("hero__place--open"));
-  });
-  $location.addEventListener("pointerenter", update);
-  $location.addEventListener("focus", update);
-
-  document.addEventListener("click", () => setOpen(false));
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setOpen(false);
-  });
+  setInterval(update, 1000);
 </script>
 
-<section>
+<section class="about">
   <div class="profile">
     <p>
       <Trans i18nKey="hero.about">
@@ -179,68 +69,40 @@ const t = useTranslations(Astro.currentLocale);
 <style>
   .hero {
     padding: 112px 0 8px;
-    text-align: center;
   }
 
-  .hero__name {
-    margin: 0;
-    font-size: clamp(2rem, 1.4rem + 2.4vw, 2.6rem);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  .hero__role {
-    margin: 6px 0 0;
-    font-size: 1.35rem;
-    font-style: italic;
-    color: var(--text);
-  }
-
-  .hero__contact {
+  /* Name and links on one line, the clock on the right; below, role and place, availability on the right. */
+  .hero__row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px 22px;
-    margin: 18px 0 0;
-
-    & > li,
-    & a {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--text);
-    }
-
-    & a {
-      text-decoration: underline;
-      text-decoration-color: var(--border-strong);
-      text-underline-offset: 3px;
-      transition: text-decoration-color 0.2s var(--ease-out);
-
-      &:hover {
-        text-decoration-color: currentColor;
-      }
-
-      &:active {
-        color: var(--text-muted);
-      }
-    }
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
   }
 
-  /* The location is not a link: a dotted underline says "there's more here" instead. */
-  .hero__place {
-    position: relative;
-  }
-
-  .hero__location {
-    display: inline-flex;
+  .hero__row--sub {
     align-items: center;
-    gap: 7px;
+    margin-top: 6px;
+  }
+
+  .hero__id,
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 10px;
+  }
+
+  .hero__sep {
+    color: var(--border-strong);
+  }
+
+  .hero__link {
     color: var(--text);
-    text-decoration: underline dotted;
+    text-transform: lowercase;
+    text-decoration: underline;
     text-decoration-color: var(--border-strong);
     text-underline-offset: 3px;
-    border-radius: var(--radius-sm);
     transition: text-decoration-color 0.2s var(--ease-out);
 
     &:hover {
@@ -252,138 +114,39 @@ const t = useTranslations(Astro.currentLocale);
     }
   }
 
-  /* Local time card: an analog clock beside the zone and the time, the offset underneath. */
-  .hero__time {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    z-index: var(--z-dropdown);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 12px 14px;
-    width: 248px;
-    box-sizing: border-box;
-    padding: 14px 16px;
-    border: 1px solid var(--chrome-border);
-    border-radius: 12px;
-    /* The same glass as the header pill. */
-    background-color: var(--chrome-panel);
-    backdrop-filter: blur(12px);
-    box-shadow: var(--shadow-float);
-    font-size: 0.8rem;
-    line-height: 1.3;
-    text-align: left;
+  .hero__clock {
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
     color: var(--text-muted);
     white-space: nowrap;
-    pointer-events: none;
-
-    /* Grows out of the location with a spring. */
-    visibility: hidden;
-    opacity: 0;
-    filter: blur(4px);
-    transform: translate(-50%, -6px) scale(0.9);
-    transform-origin: top center;
-    transition:
-      opacity 90ms var(--ease-out),
-      filter 90ms var(--ease-out),
-      transform 110ms var(--ease-out),
-      visibility 0s linear 110ms;
   }
 
-  /* Without JavaScript there is no time to show. */
-  :global(html:not(.js)) .hero__time {
-    display: none;
+  /* Sits close under the hero: the intro belongs to the name above it. */
+  .about {
+    margin-top: 32px;
   }
 
-  .clock {
-    width: 46px;
-    height: 46px;
-  }
-
-  .clock__face {
-    fill: var(--background);
-    stroke: var(--border-strong);
-  }
-
-  .clock__tick {
-    stroke: var(--text-muted);
-  }
-
-  .clock__hand {
-    stroke: var(--text-strong);
-    stroke-linecap: round;
-  }
-
-  .clock__hand--hour {
-    stroke-width: 2.2;
-  }
-
-  .clock__hand--minute {
-    stroke-width: 1.5;
-  }
-
-  .clock__hand--second {
-    stroke: var(--text-subtle);
-    stroke-width: 0.8;
-  }
-
-  .clock__pin {
-    fill: var(--text-strong);
-  }
-
-  .clock__info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .clock__time {
-    font-size: 1.5rem;
+  .hero__name {
+    margin: 0;
+    font-size: 1.65rem;
     font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    line-height: 1.1;
-    color: var(--text-strong);
+    letter-spacing: -0.01em;
   }
 
-  .clock__period {
-    font-size: 0.8rem;
-    font-weight: normal;
+  .hero__role {
+    margin: 0;
+    font-style: italic;
+  }
+
+  .hero__role,
+  .hero__place {
     color: var(--text-muted);
-  }
-
-  .clock__meta {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .hero__place:hover .hero__time,
-  .hero__location:focus-visible + .hero__time,
-  .hero__place--open .hero__time {
-    visibility: visible;
-    opacity: 1;
-    filter: none;
-    transform: translate(-50%, 0);
-    transition:
-      opacity 100ms var(--ease-out),
-      filter 140ms var(--ease-out),
-      transform 300ms var(--ease-spring),
-      visibility 0s;
-  }
-
-  .hero__icon {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
   }
 
   .hero__status {
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    margin-top: 16px;
     font-size: 0.9rem;
     color: var(--text-muted);
 
@@ -413,20 +176,28 @@ const t = useTranslations(Astro.currentLocale);
     }
   }
 
-  @media (pointer: coarse) {
-    /* Rows of links stay visually tight, but each one is a full-height target. */
-    .hero__contact {
-      row-gap: 0;
-
-      & a,
-      & .hero__location {
-        min-height: var(--tap);
-      }
+  /* Phones: the slashes would dangle at the end of a wrapped line, so the links just sit apart. */
+  @media only screen and (max-width: 768px) {
+    .hero__id {
+      column-gap: 18px;
     }
 
+    .hero__id .hero__sep {
+      display: none;
+    }
+  }
+
+  @media (pointer: coarse) {
+    /* Rows of links stay visually tight, but each one is a full-height target. */
+    .hero__id {
+      row-gap: 0;
+    }
+
+    .hero__link,
     .hero__status {
+      display: inline-flex;
+      align-items: center;
       min-height: var(--tap);
-      margin-top: 4px;
     }
   }
 

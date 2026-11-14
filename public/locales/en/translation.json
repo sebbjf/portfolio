@@ -8,10 +8,8 @@
     "contactButton": "get in touch",
     "availableForWork": "Available for work",
     "role": "Web developer",
-    "location": "Barcelona, Spain",
-    "timeAhead": "{diff} ahead of you",
-    "timeBehind": "{diff} behind you",
-    "timeSame": "Same time as you"
+    "email": "Email",
+    "location": "Barcelona, Spain"
   },
   "skills": {
     "title": "Skills"

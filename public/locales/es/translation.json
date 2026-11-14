@@ -8,10 +8,8 @@
     "contactButton": "escríbeme",
     "availableForWork": "Disponible para trabajar",
     "role": "Desarrollador web",
-    "location": "Barcelona, España",
-    "timeAhead": "{diff} más que tú",
-    "timeBehind": "{diff} menos que tú",
-    "timeSame": "Misma hora que tú"
+    "email": "Correo",
+    "location": "Barcelona, España"
   },
   "skills": {
     "title": "Tecnologías"
