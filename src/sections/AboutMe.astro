@@ -96,7 +96,7 @@ const t = useTranslations(Astro.currentLocale);
   }
 
   .hero__sep {
-    color: var(--border-strong);
+    color: var(--text-subtle);
   }
 
   .hero__link {
@@ -124,7 +124,7 @@ const t = useTranslations(Astro.currentLocale);
 
   /* Sits close under the hero: the intro belongs to the name above it. */
   .about {
-    margin-top: 32px;
+    margin-top: 24px;
   }
 
   .hero__name {
@@ -137,10 +137,6 @@ const t = useTranslations(Astro.currentLocale);
     margin: 0;
   }
 
-  .hero__meta .hero__sep {
-    color: var(--text-subtle);
-  }
-
   .hero__role,
   .hero__place {
     color: var(--text-muted);
@@ -150,7 +146,7 @@ const t = useTranslations(Astro.currentLocale);
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    color: var(--text-muted);
+    color: var(--text);
 
     &:hover {
       color: var(--text-strong);
@@ -235,7 +231,7 @@ const t = useTranslations(Astro.currentLocale);
   }
 
   .profile__link {
-    color: var(--text-strong);
+    color: var(--text);
     text-decoration: underline;
     text-decoration-color: var(--border-strong);
     text-underline-offset: 3px;
