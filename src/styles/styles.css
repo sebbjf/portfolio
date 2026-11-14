@@ -36,7 +36,7 @@
   /* A soft spring (slight overshoot) for things that move or grow into place. */
   --ease-spring: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.9%, 1);
 
-  --max-w: 40rem;
+  --max-w: 640px;
   --gutter: 24px;
   /* Minimum hit area for touch input (WCAG 2.5.5). */
   --tap: 44px;
@@ -77,8 +77,18 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist/geist-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
-  font-family: "AtkinsonHyperlegible", system-ui, sans-serif;
+  font-family: "Geist", "AtkinsonHyperlegible", system-ui, sans-serif;
+  /* 15px: the page is one flat size, hierarchy comes from weight and colour. */
+  font-size: 93.75%;
   line-height: 1.6;
   scroll-behavior: smooth;
   /* Headings land below the header pill fixed to the top. */
@@ -114,8 +124,8 @@ h3 {
 }
 
 h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   letter-spacing: 0;
   margin-bottom: 24px;
 }
@@ -164,7 +174,7 @@ img {
 
 .highlight {
   color: var(--text-strong);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .skip-link {
@@ -222,7 +232,6 @@ img {
 
   h2 {
     margin-bottom: 20px;
-    font-size: 1.15rem;
   }
 
   h3 {
