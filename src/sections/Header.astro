@@ -234,7 +234,7 @@ const t = useTranslations(Astro.currentLocale);
   /* Phones keep every link in the pill: the logo goes (About me already leads home) and the links tighten. */
   @media only screen and (max-width: 768px) {
     .header__container {
-      top: 12px;
+      top: max(12px, env(safe-area-inset-top));
       padding: 4px;
     }
 

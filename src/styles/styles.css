@@ -83,6 +83,10 @@ html {
   scroll-behavior: smooth;
   /* Headings land below the header pill fixed to the top. */
   scroll-padding-top: 88px;
+  /* Phones in landscape must not inflate text, and taps shouldn't flash grey. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -202,8 +206,12 @@ img {
 }
 
 @media only screen and (max-width: 768px) {
+  /* With viewport-fit=cover the content must clear the notch and the home bar itself. */
   .content {
     padding: var(--gutter);
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
+    padding-right: max(var(--gutter), env(safe-area-inset-right));
+    padding-bottom: max(var(--gutter), env(safe-area-inset-bottom));
   }
 
   section {
