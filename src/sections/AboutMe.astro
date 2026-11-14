@@ -11,7 +11,6 @@ const t = useTranslations(Astro.currentLocale);
 <header class="hero" id="aboutme">
   <h1 class="hero__name">Sebastian Jamito</h1>
   <p class="hero__role">{t("hero.role")}</p>
-  <p class="hero__tagline">{t("hero.tagline")}</p>
   <ul class="hero__contact">
     <li>
       <a href="mailto:hi@sebastianjf.com">
@@ -195,12 +194,6 @@ const t = useTranslations(Astro.currentLocale);
     font-size: 1.35rem;
     font-style: italic;
     color: var(--text);
-  }
-
-  .hero__tagline {
-    margin: 4px 0 0;
-    color: var(--text-muted);
-    text-wrap: balance;
   }
 
   .hero__contact {
