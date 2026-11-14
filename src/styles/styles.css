@@ -36,7 +36,7 @@
   /* A soft spring (slight overshoot) for things that move or grow into place. */
   --ease-spring: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.9%, 1);
 
-  --max-w: 46rem;
+  --max-w: 40rem;
   --gutter: 24px;
   /* Minimum hit area for touch input (WCAG 2.5.5). */
   --tap: 44px;
