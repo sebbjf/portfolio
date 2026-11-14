@@ -17,6 +17,12 @@
         ],
         "createdAt": "2026-11-13T17:50:44.871Z",
         "reason": "Claude's decision: dock magnification animates the tile width on purpose so neighbours reflow apart; transform scale cannot push siblings, and it is 12 small items"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist",
+        "createdAt": "2026-11-14T12:35:17.436Z",
+        "reason": "Geist is the project's chosen typeface, documented in CLAUDE.md and the 8a713ec commit; not decided this session"
       }
     ]
   }
