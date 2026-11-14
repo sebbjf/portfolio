@@ -23,7 +23,11 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
               {formatPeriod(e.startDate, e.endDate, currentLanguage, t("experience.currently"))}
             </p>
           </div>
-          <p class="entry__org">{e.name}</p>
+          <p class="entry__org">
+            {e.name}
+            {localize(e, "location") && <span class="entry__place"> · {localize(e, "location")}</span>}
+          </p>
+          <p class="entry__description">{localize(e, "description")}</p>
         </li>
       ))
     }
@@ -33,6 +37,9 @@ const localize = (e, key) => e.translation?.[currentLanguage]?.[key] ?? e[key];
 <style>
   .entry__org {
     margin: 0;
+  }
+  .entry__place {
+    color: var(--text-muted);
   }
 </style>
 
