@@ -14,6 +14,18 @@ const projects = [
   //   },
   // },
   {
+    name: "Lino",
+    description: "Moodboard that exports your palette and fonts.",
+    built_with: ["React", "TypeScript", "Tailwind"],
+    url: "https://lino-nine.vercel.app/",
+    image: "lino.jpg",
+    translation: {
+      es: {
+        description: "Moodboard que exporta tu paleta y tus fuentes.",
+      },
+    },
+  },
+  {
     name: "wtxted",
     description: "Text editor that runs in the terminal on Unix-like systems.",
     built_with: ["Rust"],
@@ -46,18 +58,6 @@ const projects = [
     translation: {
       es: {
         description: "Web conceptual para un festival de música.",
-      },
-    },
-  },
-  {
-    name: "Morning Cafe",
-    description: "Responsive landing page for a café.",
-    built_with: ["React", "TypeScript", "Tailwind"],
-    url: "https://xxixiio-morning-cafe.netlify.app/",
-    image: "morning-cafe.webp",
-    translation: {
-      es: {
-        description: "Landing page responsive para una cafetería.",
       },
     },
   },
