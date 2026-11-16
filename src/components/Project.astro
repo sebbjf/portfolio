@@ -1,5 +1,7 @@
 ---
 import { Image } from "astro:assets";
+import Svg from "./Svg.astro";
+import skills from "../consts/skills.js";
 
 interface Project {
   name: string;
@@ -15,6 +17,16 @@ interface Props {
 }
 
 const { projectData, index } = Astro.props;
+
+// Stack icons: the ones in Skills, plus a few that only projects use. A name without an icon is skipped.
+const stackIcons = new Map([
+  ...skills.map((s) => [s.name, s.icon] as const),
+  ["TypeScript", "/img/technologies/typescript.svg"],
+  ["Tailwind", "/img/technologies/tailwindcss.svg"],
+  ["Rust", "/img/technologies/rust.svg"],
+  ["Discord.js", "/img/technologies/discord.svg"],
+]);
+const stack = projectData.built_with.filter((name) => stackIcons.has(name));
 
 // Screenshots live in src/assets so Astro can resize them and convert them to WebP at build time.
 const screenshots = import.meta.glob<{ default: ImageMetadata }>("../assets/projects/*", { eager: true });
@@ -54,6 +66,18 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
     <div class="project__body">
       <div class="project__head">
         <h3 class="project__title">{projectData.name}</h3>
+        {
+          stack.length > 0 && (
+            <ul class="project__stack">
+              {stack.map((name) => (
+                <li>
+                  <Svg src={stackIcons.get(name)} class="project__stack-icon" aria-hidden="true" />
+                  <span class="visually-hidden">{name}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
         <svg class="project__arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
           <path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
@@ -106,6 +130,7 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
   }
 
   .project__title {
+    min-width: 0;
     margin: 0;
     font-size: 1rem;
     font-weight: 500;
@@ -119,6 +144,24 @@ const widths = [...new Set([400, 600, 800, 1000, 1400].filter((w) => w < screens
     margin: 6px 0 0;
     color: var(--text-muted);
     transition: color 0.25s var(--ease-out);
+  }
+
+  /* The stack: small, flat, in the quietest ink. It is a detail, not a feature, so it never reacts. */
+  .project__stack {
+    display: flex;
+    align-self: center;
+    gap: 10px;
+    margin: 0 0 0 auto;
+    padding: 0;
+    list-style: none;
+    color: var(--text-subtle);
+  }
+
+  .project__stack-icon {
+    display: block;
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
   }
 
   .project__arrow {
