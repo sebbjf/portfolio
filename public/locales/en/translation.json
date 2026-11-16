@@ -6,7 +6,7 @@
     "projectsButton": "my projects",
     "contactText": "or",
     "contactButton": "get in touch",
-    "availableForWork": "Available for work",
+    "availableForWork": "Open to internships",
     "role": "Web developer",
     "email": "Email",
     "location": "Barcelona"
@@ -29,7 +29,7 @@
   },
   "contact": {
     "title": "Contact",
-    "text": "I’m available for work. If you have a role, a project or just a question, email is the best way to reach me.",
+    "text": "I’m looking for an internship. If you have a role, a project or just a question, email is the best way to reach me.",
     "resume": "CV",
     "copy": "Copy",
     "copyLabel": "Copy email address",

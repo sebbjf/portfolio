@@ -6,7 +6,7 @@
     "projectsButton": "mis proyectos",
     "contactText": "o",
     "contactButton": "escríbeme",
-    "availableForWork": "Disponible para trabajar",
+    "availableForWork": "Busco prácticas",
     "role": "Desarrollador web",
     "email": "Email",
     "location": "Barcelona"
@@ -29,7 +29,7 @@
   },
   "contact": {
     "title": "Contacto",
-    "text": "Estoy disponible para trabajar. Si tienes un puesto, un proyecto o simplemente una pregunta, el email es la mejor forma de contactarme.",
+    "text": "Busco prácticas. Si tienes un puesto, un proyecto o simplemente una pregunta, el email es la mejor forma de contactarme.",
     "resume": "CV",
     "copy": "Copiar",
     "copyLabel": "Copiar dirección de email",
