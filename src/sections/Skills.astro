@@ -53,14 +53,14 @@ const t = useTranslations(Astro.currentLocale);
 </script>
 
 <style>
-  /* Touch and narrow screens: every skill visible at once in an aligned grid, each a small icon
-     beside its name. No scrolling, nothing hidden. */
+  /* Touch and narrow screens: the dock's tiles in a grid, each with its name underneath, since there is
+     no hover to reveal it. Every skill visible at once, nothing hidden. */
   .skills__list {
-    --tile: 24px;
+    --tile: 44px;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-    gap: 16px 12px;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px 8px;
     margin: 0;
     padding: 0;
     list-style: none;

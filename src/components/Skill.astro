@@ -22,20 +22,28 @@ const { name, icon, color } = Astro.props;
   .skill {
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    text-align: center;
 
     /* Exit: slower than the entrance, so sweeping across the row leaves a soft trail. */
     --fade: 320ms;
   }
 
-  /* Phones and touch: a bare icon beside its name, nothing else. --tile is the icon's size and, in
-     the dock (below), --s magnifies it; its height follows the width. */
+  /* The outlined tile, the same on every screen: the name sits underneath it on touch, and under the
+     dock it shows on hover. --tile is its size and, in the dock (below), --s magnifies it; its height
+     follows the width. */
   .skill__logo {
     display: grid;
     place-items: center;
     width: calc(var(--tile, 36px) * var(--s, 1));
     aspect-ratio: 1;
+    border-radius: 22%;
+    background-color: var(--surface);
+    box-shadow:
+      inset 0 0 0 1px var(--border-strong),
+      inset 0 1px 0 rgb(255 255 255 / 0.06);
     transition: width var(--dock-t, 0.5s var(--ease-spring));
   }
 
@@ -43,8 +51,8 @@ const { name, icon, color } = Astro.props;
      Crossfading their opacity avoids the muddy gray an animated filter passes through. */
   .skill__icon {
     grid-area: 1 / 1;
-    width: var(--icon, 100%);
-    height: var(--icon, 100%);
+    width: var(--icon, 50%);
+    height: var(--icon, 50%);
     transition: opacity var(--fade) var(--ease-out);
   }
 
@@ -60,7 +68,7 @@ const { name, icon, color } = Astro.props;
   }
 
   .skill__name {
-    font-size: 0.95rem;
+    font-size: 0.72rem;
     line-height: 1.3;
     color: var(--text-muted);
     white-space: nowrap;
@@ -71,13 +79,6 @@ const { name, icon, color } = Astro.props;
      page: a hairline and nothing else. Hover reveals the brand color on the outline and the icon.
      The hover is mouse only, so it never sticks after a tap. Entrance is quick: 180ms. */
   @media (hover: hover) and (min-width: 769px) {
-    .skill {
-      --icon: 50%;
-      flex-direction: column;
-      gap: 6px;
-      text-align: center;
-    }
-
     /* The tiles carry the icon alone; the name shows under a tile on hover. It stays in the DOM for
        screen readers, and phones keep every name visible. */
     .skill__name {
@@ -94,11 +95,6 @@ const { name, icon, color } = Astro.props;
     }
 
     .skill__logo {
-      border-radius: 22%;
-      background-color: var(--surface);
-      box-shadow:
-        inset 0 0 0 1px var(--border-strong),
-        inset 0 1px 0 rgb(255 255 255 / 0.06);
       transition:
         width var(--dock-t, 0.5s var(--ease-spring)),
         box-shadow var(--fade) var(--ease-out),
