@@ -46,7 +46,7 @@ Portfolio personal (sebastianjf.com): Astro 7, página estática, desplegada en 
 
 - Geist (principal): `public/fonts/Geist/`. Atkinson (respaldo): `public/fonts/Atkinson_Hyperlegible/`. La precarga está en `src/components/SEO.astro`.
 - Logo: `public/img/logo/`. Banderas: `public/img/flags/`. Logos de estudios: `public/img/education/`.
-- Currículum en PDF: `public/files/resume.pdf` (EN) y `public/files/resume-es.pdf` (ES). Las rutas `/resume` y `/es/resume` redirigen ahí desde `vercel.json`.
+- Currículum en PDF: `public/files/resume.pdf` (EN) y `public/files/resume-es.pdf` (ES). Las rutas `/resume` y `/es/resume` redirigen ahí (302) desde `redirects` en `astro.config.mjs`.
 
 ## Configuración
 

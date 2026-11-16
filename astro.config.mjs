@@ -17,6 +17,11 @@ export default defineConfig({
       filter: (page) => !/\/404\/$/.test(new URL(page).pathname),
     }),
   ],
+  // Short links to the résumé PDFs in public/files. 302 so the file can change.
+  redirects: {
+    "/resume": { status: 302, destination: "/files/resume.pdf" },
+    "/es/resume": { status: 302, destination: "/files/resume-es.pdf" },
+  },
   // English has no prefix and Spanish lives under /es/. Astro.currentLocale comes
   // from the URL, so components get the right language without global state.
   i18n: {

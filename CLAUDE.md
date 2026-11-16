@@ -33,7 +33,7 @@ This is a personal portfolio site (sebastianjf.com) built with Astro 7 and deplo
 
 **SEO:** `src/components/SEO.astro` derives the canonical URL from `site` in `astro.config.mjs`. Pages that should not be indexed pass `noindex` to `Layout`. The sitemap `filter` in `astro.config.mjs` excludes the 404 pages.
 
-**Redirects:** `/resume` and `/es/resume` redirect to PDFs in `public/files/` through `vercel.json`.
+**Redirects:** `/resume` and `/es/resume` redirect (302) to the PDFs in `public/files/` through `redirects` in `astro.config.mjs`; the Vercel adapter turns them into routes at build time, so there is no `vercel.json`.
 
 <!-- graphify-rules-start (managed by `graphify init`) -->
 ## Use Graphify before grep
