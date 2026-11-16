@@ -187,7 +187,8 @@ const t = useTranslations(Astro.currentLocale);
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  /* Only very narrow phones stack everything; wider ones keep identity on the left and state on the right. */
+  @media only screen and (max-width: 349px) {
     .hero {
       grid-template-columns: 1fr;
     }
@@ -210,12 +211,17 @@ const t = useTranslations(Astro.currentLocale);
     }
   }
 
+  /* Touch: the tap target grows past the text without growing the row, so the stack keeps its rhythm. */
   @media (pointer: coarse) {
     .hero__link,
     .hero__status {
-      display: inline-flex;
-      align-items: center;
-      min-height: var(--tap);
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: calc((var(--tap) - 1lh) / -2) -6px;
+      }
     }
   }
 
